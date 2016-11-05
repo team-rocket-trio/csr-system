@@ -16,7 +16,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-
+//лучший комментарий в вашей жизни
     public static void main(String[] args) {
         launch(args);
     }
