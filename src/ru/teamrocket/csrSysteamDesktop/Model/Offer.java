@@ -5,16 +5,13 @@
 package ru.teamrocket.csrSysteamDesktop.Model;
 
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-
-import javafx.collections.ArrayChangeListener;
-import ru.teamrocket.csrSysteamDesktop.Model.Characteristic;
+import javafx.beans.property.SimpleListProperty;
 
 public class Offer {
 
@@ -23,7 +20,7 @@ public class Offer {
     private final IntegerProperty monthlyPrice;
     private final StringProperty description;
     private final BooleanProperty status;
-//    private final ObjectProperty<Characteristic[]> characteristic;
+    private final ListProperty<Characteristic> characteristics;
 
 
     public Offer() {
@@ -33,7 +30,9 @@ public class Offer {
         this.description = new SimpleStringProperty("Description");
         this.status = new SimpleBooleanProperty(true);
 
-//        this.characteristic = new SimpleObjectProperty<Characteristic[]>();
+        this.characteristics = new SimpleListProperty<Characteristic>();
+        this.characteristics.add(new Characteristic());
+
 
     }
 
