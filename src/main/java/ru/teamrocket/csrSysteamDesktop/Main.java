@@ -1,6 +1,5 @@
-package ru.teamrocket.csrSysteamDesktop;
+package main.java.ru.teamrocket.csrSysteamDesktop;
 
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

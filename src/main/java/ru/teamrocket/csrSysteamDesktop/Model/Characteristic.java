@@ -1,4 +1,4 @@
-package ru.teamrocket.csrSysteamDesktop.Model;
+package main.java.ru.teamrocket.csrSysteamDesktop.Model;
 
 /**
  * Created by Alexander Shreyner on 05.11.2016.

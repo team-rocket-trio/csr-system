@@ -1,4 +1,4 @@
-package ru.teamrocket.csrSysteamDesktop.Model;
+package main.java.ru.teamrocket.csrSysteamDesktop.Model;
 
 import javafx.beans.property.ObjectProperty;
 
