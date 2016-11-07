@@ -17,6 +17,7 @@ public class RootController implements Initializable {
     private BorderPane borderPane;
 
     //TODO-Alexander: Снять ID borderPane с главного элемента.
+    //TODO-Alexander: Добавить Default BorderPane;
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("location = [" + location + "], resources = [" + resources + "]");
     }
