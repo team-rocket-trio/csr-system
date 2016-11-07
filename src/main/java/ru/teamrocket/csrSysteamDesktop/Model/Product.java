@@ -1,10 +1,7 @@
 package ru.teamrocket.csrSysteamDesktop.Model;
 
-import javafx.beans.property.ObjectProperty;
-
 /**
- * Created by Kate on 06.11.2016.
+ * Created by Alexander on 07.11.2016.
  */
 public class Product {
-
 }

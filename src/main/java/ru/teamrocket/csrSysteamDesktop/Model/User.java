@@ -1,93 +1,61 @@
-/**
- * Created by Alexander Shreyner on 05.11.2016.
- */
-
 package ru.teamrocket.csrSysteamDesktop.Model;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.StringProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.SimpleObjectProperty;
-
+/**
+ * Created by Alexander Shreyner on 07.11.2016.
+ */
 public class User {
 
-    private final StringProperty firstName;
-    private final StringProperty middleName;
-    private final StringProperty lastName;
-    private final IntegerProperty phoneNumber;
-    private final StringProperty address;
+    private String firstName;
+    private String middleName;
+    private String lastName;
+    private Integer phoneNumber;
+    private String address;
 
-//    private final ObjectProperty<T>[] product;
-
-
-    public User() {
-
-        this.firstName = new SimpleStringProperty("Ivan");
-        this.middleName = new SimpleStringProperty("Ivan");
-        this.lastName = new SimpleStringProperty("Ivanov");
-        this.phoneNumber = new SimpleIntegerProperty(123);
-        this.address = new SimpleStringProperty("Street");
+    public User(String firstName, String middleName, String lastName, Integer phoneNumber, String address) {
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
     }
 
     public String getFirstName() {
-        return firstName.get();
-    }
-
-    public StringProperty firstNameProperty() {
         return firstName;
     }
 
     public void setFirstName(String firstName) {
-        this.firstName.set(firstName);
+        this.firstName = firstName;
     }
 
     public String getMiddleName() {
-        return middleName.get();
-    }
-
-    public StringProperty middleNameProperty() {
         return middleName;
     }
 
     public void setMiddleName(String middleName) {
-        this.middleName.set(middleName);
+        this.middleName = middleName;
     }
 
     public String getLastName() {
-        return lastName.get();
-    }
-
-    public StringProperty lastNameProperty() {
         return lastName;
     }
 
     public void setLastName(String lastName) {
-        this.lastName.set(lastName);
+        this.lastName = lastName;
     }
 
-    public int getPhoneNumber() {
-        return phoneNumber.get();
-    }
-
-    public IntegerProperty phoneNumberProperty() {
+    public Integer getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber.set(phoneNumber);
+    public void setPhoneNumber(Integer phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getAddress() {
-        return address.get();
-    }
-
-    public StringProperty addressProperty() {
         return address;
     }
 
     public void setAddress(String address) {
-        this.address.set(address);
+        this.address = address;
     }
 }
