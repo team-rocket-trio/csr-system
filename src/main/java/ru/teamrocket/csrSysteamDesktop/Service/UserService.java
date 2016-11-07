@@ -1,4 +1,4 @@
-package main.java.ru.teamrocket.csrSysteamDesktop.Service;
+package ru.teamrocket.csrSysteamDesktop.Service;
 
 /**
  * Created by Alexander on 06.11.2016.

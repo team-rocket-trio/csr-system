@@ -1,4 +1,4 @@
-package main.java.ru.teamrocket.csrSysteamDesktop;
+package ru.teamrocket.csrSysteamDesktop;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,7 +10,7 @@ public class Main extends ApplicationCSRSystem {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        Parent root = FXMLLoader.load(getClass().getResource("View/layout/RootLayout.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/layout/RootLayout.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.show();
