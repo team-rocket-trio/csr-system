@@ -1,4 +1,4 @@
-package ru.teamrocket.csrSysteamDesktop.Controller;
+package ru.teamrocket.csrsysteamdesktop.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

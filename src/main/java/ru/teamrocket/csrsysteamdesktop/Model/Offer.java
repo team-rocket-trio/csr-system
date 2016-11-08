@@ -1,4 +1,4 @@
-package ru.teamrocket.csrSysteamDesktop.Model;
+package ru.teamrocket.csrsysteamdesktop.Model;
 
 import java.util.List;
 

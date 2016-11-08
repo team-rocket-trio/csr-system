@@ -1,12 +1,10 @@
-package ru.teamrocket.csrSysteamDesktop;
+package ru.teamrocket.csrsysteamdesktop;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import ru.teamrocket.csrSysteamDesktop.Controller.RootController;
 
 public class Main extends ApplicationCSRSystem {
 

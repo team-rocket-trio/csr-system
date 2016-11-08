@@ -1,4 +1,4 @@
-package ru.teamrocket.csrSysteamDesktop;
+package ru.teamrocket.csrsysteamdesktop;
 
 /**
  * Created by Alexander Shreyner on 06.11.2016.

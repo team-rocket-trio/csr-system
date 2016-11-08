@@ -1,4 +1,4 @@
-package ru.teamrocket.csrSysteamDesktop;
+package ru.teamrocket.csrsysteamdesktop;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

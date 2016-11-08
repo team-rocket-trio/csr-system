@@ -2,14 +2,12 @@
  * Created by Alexander Shreyner on 05.11.2016.
  */
 
-package ru.teamrocket.csrSysteamDesktop.Model;
+package ru.teamrocket.csrsysteamdesktop.Model;
 
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.SimpleObjectProperty;
 
 public class UserProperty {
 
