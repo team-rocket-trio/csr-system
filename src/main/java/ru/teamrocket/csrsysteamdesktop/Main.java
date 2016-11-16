@@ -6,6 +6,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import java.io.File;
+
 public class Main extends ApplicationCSRSystem {
 
     @Override
@@ -26,6 +28,13 @@ public class Main extends ApplicationCSRSystem {
 
     //TODO-kotofeyskaya: Лучший комментарий в вашей жизни.
     public static void main(String[] args) {
+
+//        File dataFolder = new File(new File("").getAbsolutePath() + "/data/");
+//
+//        if(!dataFolder.exists()){
+//            dataFolder.mkdir();
+//        }
+
         launchApp(Main.class, args);
     }
 }

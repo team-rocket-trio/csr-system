@@ -8,10 +8,10 @@ public class User {
     private String firstName;
     private String middleName;
     private String lastName;
-    private Integer phoneNumber;
+    private String phoneNumber;
     private String address;
 
-    public User(String firstName, String middleName, String lastName, Integer phoneNumber, String address) {
+    public User(String firstName, String middleName, String lastName, String phoneNumber, String address) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -43,11 +43,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -57,5 +57,16 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "firstName='" + firstName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phoneNumber=" + phoneNumber +
+                ", address='" + address + '\'' +
+                '}';
     }
 }

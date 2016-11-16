@@ -8,8 +8,6 @@ import javafx.application.Application;
 
 abstract class ApplicationCSRSystem extends Application {
 
-    //TODO-Alexander: Добавить глобальный State.
-
     @Override
     public void init() throws Exception {
         super.init();
