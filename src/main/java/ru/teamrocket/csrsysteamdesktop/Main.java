@@ -29,11 +29,12 @@ public class Main extends ApplicationCSRSystem {
     //TODO-kotofeyskaya: Лучший комментарий в вашей жизни.
     public static void main(String[] args) {
 
-//        File dataFolder = new File(new File("").getAbsolutePath() + "/data/");
-//
-//        if(!dataFolder.exists()){
-//            dataFolder.mkdir();
-//        }
+        //TODO-Alexander: Вынести в отдельную функцию
+        File dataFolder = new File(new File("").getAbsolutePath() + "/data/");
+
+        if(!dataFolder.exists()){
+            dataFolder.mkdir();
+        }
 
         launchApp(Main.class, args);
     }
