@@ -2,6 +2,7 @@ package ru.teamrocket.csrsysteamdesktop.Service;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import ru.teamrocket.csrsysteamdesktop.Main;
 import ru.teamrocket.csrsysteamdesktop.Model.User;
 
 import java.io.File;
@@ -19,34 +20,34 @@ import java.util.List;
  */
 public class UserServiceImpl implements UserService {
 
-    private final Path pathFile = Paths.get(new File("").getAbsolutePath() + "/data/Users.json");
-    private final Type listType = new TypeToken<List<User>>(){}.getType();
+    private final Path pathFile = Paths.get(Main.pathData + "/Users.json");
+    private final Type listType = new TypeToken<List<User>>() {}.getType();
     private List<User> userList;
 
 
     public UserServiceImpl() {
         String userFile = readFile();
 
-        if(userFile == null){
+        if (userFile == null) {
             userList = new ArrayList();
-        }else {
+        } else {
             userList = new Gson().fromJson(userFile, listType);
         }
 
     }
 
-    private String readFile(){
-        try{
+    private String readFile() {
+        try {
             return new String(Files.readAllBytes(pathFile));
-        } catch (IOException e ){
+        } catch (IOException e) {
             System.out.println("Create User.json");
             return null;
         }
     }
 
-    private void writeFile(List<User> userList){
+    private void writeFile(List<User> userList) {
 
-        File file  = new File(pathFile.toString());
+        File file = new File(pathFile.toString());
         String content = new Gson().toJson(userList);
 
         try (FileOutputStream fop = new FileOutputStream(file)) {
@@ -59,7 +60,7 @@ public class UserServiceImpl implements UserService {
             fop.write(contentInByte);
             fop.flush();
             fop.close();
-        } catch (IOException e ){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

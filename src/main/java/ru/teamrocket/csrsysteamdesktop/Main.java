@@ -10,6 +10,8 @@ import java.io.File;
 
 public class Main extends ApplicationCSRSystem {
 
+    public static final String pathData = new File("").getAbsolutePath() + "/data/";
+
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -30,7 +32,7 @@ public class Main extends ApplicationCSRSystem {
     public static void main(String[] args) {
 
         //TODO-Alexander: Вынести в отдельную функцию
-        File dataFolder = new File(new File("").getAbsolutePath() + "/data/");
+        File dataFolder = new File(Main.pathData);
 
         if(!dataFolder.exists()){
             dataFolder.mkdir();

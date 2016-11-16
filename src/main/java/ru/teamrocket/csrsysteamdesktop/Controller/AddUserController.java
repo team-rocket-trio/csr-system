@@ -81,13 +81,9 @@ public class AddUserController implements Initializable {
 
     @FXML
     private void handlerCreate(ActionEvent event) {
-        System.out.println("FisrtName: " + firstName.getText() + " ; MiddleName: " + middleName.getText() +
-                " ; LastName: " + lastName.getText() + " ; PhoneNumber: " + phoneNumber.getText() + " ; " +
-                "Address: " + address.getText());
+        Window window = ((Node) event.getTarget()).getScene().getWindow();
 
-        System.out.println("Create User");
-
-        if(inputValidte(((Node) event.getTarget()).getScene().getWindow())){
+        if(inputValidte(window)){
 
             User user = new User(
                     firstName.getText(),
@@ -98,18 +94,17 @@ public class AddUserController implements Initializable {
             );
 
             new UserServiceImpl().save(user);
+            handlerClear();
         }
     }
 
     @FXML
-    private void handlerClear(ActionEvent event) {
+    private void handlerClear() {
         firstName.setText(null);
         middleName.setText(null);
         lastName.setText(null);
         phoneNumber.setText(null);
         address.setText(null);
-
-        System.out.println("Clear text field");
     }
 
 }
