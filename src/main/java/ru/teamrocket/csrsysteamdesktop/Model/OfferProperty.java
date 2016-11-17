@@ -12,6 +12,11 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import org.omg.PortableInterceptor.INACTIVE;
+
+import java.util.List;
 
 public class OfferProperty {
 
@@ -20,8 +25,7 @@ public class OfferProperty {
     private final IntegerProperty monthlyPrice;
     private final StringProperty description;
     private final BooleanProperty status;
-    private final ListProperty<CharacteristicProperty> characteristicProperties;
-
+    private final ListProperty<Characteristic> characteristics;
 
     public OfferProperty(
             String name,
@@ -29,17 +33,25 @@ public class OfferProperty {
             Integer monthlyPrice,
             String description,
             Boolean status,
-            CharacteristicProperty characteristicProperties
+            ObservableList<Characteristic> characteristics
     ) {
         this.name = new SimpleStringProperty(name);
         this.activationPrice = new SimpleIntegerProperty(activationPrice);
         this.monthlyPrice = new SimpleIntegerProperty(monthlyPrice);
         this.description = new SimpleStringProperty(description);
         this.status = new SimpleBooleanProperty(status);
+        this.characteristics = new SimpleListProperty<Characteristic>(characteristics);
+    }
 
-        this.characteristicProperties = new SimpleListProperty<CharacteristicProperty>();
-        this.characteristicProperties.add(characteristicProperties);
+    public Offer composeOffer(){
+        String name = getName();
+        Integer activationPrice = getActivationPrice();
+        Integer monthlyPrice = getMonthlyPrice();
+        String description = getDescription();
+        Boolean status = isStatus();
+        ObservableList<Characteristic> characteristics = FXCollections.observableArrayList(getCharacteristics());
 
+        return new Offer(name, activationPrice, monthlyPrice, description, status, characteristics);
     }
 
     public String getName() {
@@ -101,4 +113,6 @@ public class OfferProperty {
     public void setStatus(boolean status) {
         this.status.set(status);
     }
+
+    public ObservableList<Characteristic> getCharacteristics() {return characteristics;}
 }

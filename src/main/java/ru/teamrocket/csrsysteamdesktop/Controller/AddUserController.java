@@ -35,7 +35,7 @@ public class AddUserController implements Initializable {
 
     }
 
-    private boolean inputValidte(Window window) {
+    private boolean inputValidate(Window window) {
         String errorMessage = "";
 
         if (firstName.getText() == null || firstName.getText().length() == 0){
@@ -83,7 +83,7 @@ public class AddUserController implements Initializable {
     private void handlerCreate(ActionEvent event) {
         Window window = ((Node) event.getTarget()).getScene().getWindow();
 
-        if(inputValidte(window)){
+        if(inputValidate(window)){
 
             User user = new User(
                     firstName.getText(),
