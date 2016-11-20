@@ -16,7 +16,7 @@
             <ToolBar layoutX="14.0" layoutY="14.0" orientation="VERTICAL" prefHeight="310.0" prefWidth="172.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
                     <Button mnemonicParsing="false" onAction="#handlerOnUsers" prefHeight="25.0" prefWidth="190.0" text="Users" />
-                    <Button mnemonicParsing="false" onAction="#handlerOnAddOffer" prefHeight="25.0" prefWidth="190.0" text="Create Offer" />
+                    <Button mnemonicParsing="false" onAction="#handlerOnOffers" prefHeight="25.0" prefWidth="190.0" text="Offers" />
               </items>
             </ToolBar>
          </children>

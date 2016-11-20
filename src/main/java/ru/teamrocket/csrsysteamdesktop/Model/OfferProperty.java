@@ -24,34 +24,28 @@ public class OfferProperty {
     private final IntegerProperty activationPrice;
     private final IntegerProperty monthlyPrice;
     private final StringProperty description;
-    private final BooleanProperty status;
-    private final ListProperty<Characteristic> characteristics;
+    private final SimpleListProperty<Characteristic> characteristics;
 
     public OfferProperty(
             String name,
             Integer activationPrice,
             Integer monthlyPrice,
             String description,
-            Boolean status,
-            ObservableList<Characteristic> characteristics
+            List<Characteristic> characteristics
     ) {
         this.name = new SimpleStringProperty(name);
         this.activationPrice = new SimpleIntegerProperty(activationPrice);
         this.monthlyPrice = new SimpleIntegerProperty(monthlyPrice);
         this.description = new SimpleStringProperty(description);
-        this.status = new SimpleBooleanProperty(status);
-        this.characteristics = new SimpleListProperty<Characteristic>(characteristics);
+        this.characteristics = new SimpleListProperty<Characteristic>((ObservableList<Characteristic>) characteristics);
     }
 
-    public Offer composeOffer(){
-        String name = getName();
-        Integer activationPrice = getActivationPrice();
-        Integer monthlyPrice = getMonthlyPrice();
-        String description = getDescription();
-        Boolean status = isStatus();
-        ObservableList<Characteristic> characteristics = FXCollections.observableArrayList(getCharacteristics());
-
-        return new Offer(name, activationPrice, monthlyPrice, description, status, characteristics);
+    public OfferProperty(Offer offer) {
+        this.name = new SimpleStringProperty(offer.getName());
+        this.activationPrice = new SimpleIntegerProperty(offer.getActivationPrice());
+        this.monthlyPrice = new SimpleIntegerProperty(offer.getMonthlyPrice());
+        this.description = new SimpleStringProperty(offer.getDescription());
+        this.characteristics = new SimpleListProperty<Characteristic>(FXCollections.observableArrayList(offer.getCharacteristics()));
     }
 
     public String getName() {
@@ -100,18 +94,6 @@ public class OfferProperty {
 
     public void setDescription(String description) {
         this.description.set(description);
-    }
-
-    public boolean isStatus() {
-        return status.get();
-    }
-
-    public BooleanProperty statusProperty() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status.set(status);
     }
 
     public ObservableList<Characteristic> getCharacteristics() {return characteristics;}

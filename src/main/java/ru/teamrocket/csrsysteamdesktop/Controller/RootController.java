@@ -21,7 +21,6 @@ public class RootController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("location = [" + location + "], resources = [" + resources + "]");
     }
-
     @FXML
     public void handlerOnAddUser(ActionEvent event) {
 //        setScene("/template/AddUser.fxml");
@@ -43,7 +42,19 @@ public class RootController implements Initializable {
 
     @FXML
     public void handlerOnAddOffer(ActionEvent event) {
-        setScene("/template/AddOffer.fxml");
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/template/AddOffer.fxml"));
+
+            Parent parent = loader.load();
+            borderPane.setCenter(parent);
+
+            AddOfferController addOfferController = loader.getController();
+            addOfferController.setRootController(this);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -58,6 +69,40 @@ public class RootController implements Initializable {
 
             UsersController usersController = loader.getController();
             usersController.setRootController(this);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void handlerOnOffers(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/template/Offers.fxml"));
+
+            Parent parent = loader.load();
+            borderPane.setCenter(parent);
+
+            OffersController offersController = loader.getController();
+            offersController.setRootController(this);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void handlerOnAddCharacteristic(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/template/AddCharacteristic.fxml"));
+
+            Parent parent = loader.load();
+            borderPane.setCenter(parent);
+
+            AddCharacteristicController addCharacteristicController = loader.getController();
+            addCharacteristicController.setRootController(this);
 
         } catch (IOException e) {
             e.printStackTrace();

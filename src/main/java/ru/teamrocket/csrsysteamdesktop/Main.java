@@ -17,8 +17,9 @@ public class Main extends ApplicationCSRSystem {
 
         BorderPane root = FXMLLoader.load(getClass().getResource("/template/layout/RootLayout.fxml"));
 
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.setTitle("CSR");
+        primaryStage.setScene(new Scene(root));
+        primaryStage.setMaximized(true);
         primaryStage.show();
 
     }
@@ -28,7 +29,6 @@ public class Main extends ApplicationCSRSystem {
 
     }
 
-    //TODO-kotofeyskaya: Лучший комментарий в вашей жизни.
     public static void main(String[] args) {
 
         //TODO-Alexander: Вынести в отдельную функцию

@@ -9,10 +9,8 @@ public class Characteristic {
     private String value;
 
     public Characteristic(String name, String value) {
-
         this.name = name;
         this.value = value;
-
     }
 
     public String getName() {
@@ -29,5 +27,10 @@ public class Characteristic {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return  "Name:'" + name + ", Value:'" + value;
     }
 }

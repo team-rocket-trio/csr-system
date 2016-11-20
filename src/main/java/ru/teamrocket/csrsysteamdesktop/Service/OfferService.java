@@ -10,4 +10,6 @@ import java.util.List;
 public interface OfferService {
     void writeFile(List<Offer> offerList);
     String readFile();
+    List<Offer> findAll();
+    void save(Offer user);
 }

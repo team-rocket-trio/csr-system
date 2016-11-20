@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Window;
 import ru.teamrocket.csrsysteamdesktop.Model.Characteristic;
 import ru.teamrocket.csrsysteamdesktop.Model.Offer;
@@ -17,6 +18,7 @@ import ru.teamrocket.csrsysteamdesktop.Service.OfferServiceImpl;
 import ru.teamrocket.csrsysteamdesktop.Service.UserServiceImpl;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -24,20 +26,6 @@ import java.util.ResourceBundle;
  * Created by Alexander on 07.11.2016.
  */
 public class AddOfferController implements Initializable {
-    // TODO-Kate: 17.11.2016  Перенести все закомментированное в другой контроллер
-/*    @FXML
-    private TableView<OfferProperty> offersTable;
-    @FXML
-    private TableColumn<OfferProperty, String> nameCol;
-    @FXML
-    private TableColumn<OfferProperty, String> descriptionCol;
-    @FXML
-    private TableColumn<OfferProperty, Integer> activationPriceCol;
-    @FXML
-    private TableColumn<OfferProperty, Integer> monthlyPriceCol;
-    @FXML
-    private TableColumn<OfferProperty, List<Characteristic>> characteristicsCol;
-    private ObservableList<OfferProperty> offers = FXCollections.observableArrayList();*/
     @FXML
     private TextField nameField;
     @FXML
@@ -47,36 +35,37 @@ public class AddOfferController implements Initializable {
     @FXML
     private TextArea descriptionArea;
     @FXML
-    private TextArea characteristicsArea;
+    private Button addCharacteristicButton;
+    @FXML
+    private ComboBox characteristicsComboBox;
+    @FXML
+    private TextField nameCharField;
+    @FXML
+    private TextField valueCharField;
+
+    private RootController rootController;
 
     public void initialize(URL location, ResourceBundle resources) {
-        /*initData();
-
-        nameCol.setCellValueFactory(new PropertyValueFactory<OfferProperty, String>("name"));
-        descriptionCol.setCellValueFactory(new PropertyValueFactory<OfferProperty, String>("description"));
-        activationPriceCol.setCellValueFactory(new PropertyValueFactory<OfferProperty, Integer>("activationPrice"));
-        monthlyPriceCol.setCellValueFactory(new PropertyValueFactory<OfferProperty, Integer>("monthlyPrice"));
-
-        offersTable.setItems(offers);*/
     }
 
-  /*  private void initData() {
-        Offer offer = new Offer();
-        OfferProperty offerProperty = offer.composeProperty();
-        offers.add(offerProperty);
-        OfferServiceImpl offerService = new OfferServiceImpl();
-        offerService.toJsonFile(offer);
-    }*/
+  public void setRootController(RootController rootController) {
+        this.rootController = rootController;
+    }
+
   @FXML
   private void createAction(ActionEvent event) {
       Window window = ((Node) event.getTarget()).getScene().getWindow();
 
       if(inputValidate(window)){
+          List<Characteristic> characteristics = new ArrayList<>();
+          characteristics.add(new Characteristic(nameCharField.getText(), valueCharField.getText()));
+
           Offer offer = new Offer(
                   nameField.getText(),
                   Integer.parseInt(actPriceField.getText()),
                   Integer.parseInt(monPriceField.getText()),
-                  descriptionArea.getText()
+                  descriptionArea.getText(),
+                  characteristics
           );
           new OfferServiceImpl().save(offer);
           clearAction();
@@ -89,7 +78,6 @@ public class AddOfferController implements Initializable {
         actPriceField.setText(null);
         monPriceField.setText(null);
         descriptionArea.setText(null);
-        characteristicsArea.setText(null);
     }
 
     private boolean inputValidate(Window window) {
@@ -121,10 +109,6 @@ public class AddOfferController implements Initializable {
             errorMessage += "Invalid description.\n";
         }
 
-        if(characteristicsArea.getText() == null){
-            errorMessage += "Invalid characteristics.\n";
-        }
-
         if (errorMessage.length() == 0) {
             return true;
         } else {
@@ -139,5 +123,9 @@ public class AddOfferController implements Initializable {
 
             return false;
         }
+    }
+    @FXML
+    private void addCharacteristicAction(ActionEvent event){
+        rootController.handlerOnAddCharacteristic(event);
     }
 }
