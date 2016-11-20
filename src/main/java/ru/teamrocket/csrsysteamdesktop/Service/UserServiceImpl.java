@@ -45,6 +45,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    //TODO-Alexander: Вынести в Util класс
     private void writeFile(List<User> userList) {
 
         File file = new File(pathFile.toString());

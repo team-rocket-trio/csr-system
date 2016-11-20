@@ -39,6 +39,8 @@ public class OfferServiceImpl implements OfferService{
             return null;
         }
     }
+
+    //TODO-Alexander: Вынести в Util класс
     public void writeFile(List<Offer> offerList) {
         File file = new File(pathFile.toString());
         String content = new Gson().toJson(offerList);
