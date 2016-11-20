@@ -36,7 +36,6 @@ public class OfferServiceImpl implements OfferService{
             return new String(Files.readAllBytes(pathFile));
         } catch (IOException e) {
             System.out.print("Could not read file.");
-            e.printStackTrace();
             return null;
         }
     }
