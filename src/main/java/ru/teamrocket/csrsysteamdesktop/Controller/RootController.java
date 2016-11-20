@@ -23,20 +23,52 @@ public class RootController implements Initializable {
     }
 
     @FXML
-    private void handlerOnAddUser(ActionEvent event){
-        setScene("/AddUser.fxml");
+    public void handlerOnAddUser(ActionEvent event) {
+//        setScene("/template/AddUser.fxml");
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/template/AddUser.fxml"));
+
+            Parent parent = loader.load();
+            borderPane.setCenter(parent);
+
+            AddUserController addUserController = loader.getController();
+            addUserController.setRootController(this);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @FXML
-    private void handlerOnAddOffer(ActionEvent event){
-        setScene("/AddOffer.fxml");
+    public void handlerOnAddOffer(ActionEvent event) {
+        setScene("/template/AddOffer.fxml");
     }
 
-    private void setScene(String nameResurce){
+    @FXML
+    public void handlerOnUsers(ActionEvent event) {
+//        setScene("/template/Users.fxml");
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/template/Users.fxml"));
+
+            Parent parent = loader.load();
+            borderPane.setCenter(parent);
+
+            UsersController usersController = loader.getController();
+            usersController.setRootController(this);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setScene(String nameResurce) {
         try {
             Parent parent = FXMLLoader.load(getClass().getResource(nameResurce));
             borderPane.setCenter(parent);
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

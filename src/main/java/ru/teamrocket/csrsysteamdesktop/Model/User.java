@@ -1,5 +1,8 @@
 package ru.teamrocket.csrsysteamdesktop.Model;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 /**
  * Created by Alexander Shreyner on 07.11.2016.
  */
@@ -57,6 +60,10 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public UserProperty composUserToProppery(){
+        return new UserProperty(this);
     }
 
     @Override

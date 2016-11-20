@@ -15,7 +15,7 @@ public class Main extends ApplicationCSRSystem {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        BorderPane root = FXMLLoader.load(getClass().getResource("/layout/RootLayout.fxml"));
+        BorderPane root = FXMLLoader.load(getClass().getResource("/template/layout/RootLayout.fxml"));
 
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 800, 600));

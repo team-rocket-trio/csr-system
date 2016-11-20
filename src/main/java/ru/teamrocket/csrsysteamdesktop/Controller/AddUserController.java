@@ -29,6 +29,12 @@ public class AddUserController implements Initializable {
     @FXML
     private TextField address;
 
+    private RootController rootController;
+
+    public void setRootController(RootController rootController) {
+        this.rootController = rootController;
+    }
+
     //TODO-Alexander: добавить возможность передачи сцены в контроллер.
     //http://code.makery.ch/library/javafx-8-tutorial/ru/part3/#-
     public void initialize(URL location, ResourceBundle resources) {
@@ -94,7 +100,7 @@ public class AddUserController implements Initializable {
             );
 
             new UserServiceImpl().save(user);
-            handlerClear();
+            rootController.handlerOnUsers(event);
         }
     }
 

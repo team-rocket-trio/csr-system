@@ -14,7 +14,7 @@ public class UserProperty {
     private final StringProperty firstName;
     private final StringProperty middleName;
     private final StringProperty lastName;
-    private final IntegerProperty phoneNumber;
+    private final StringProperty phoneNumber;
     private final StringProperty address;
 
 //    private final ObjectProperty<T>[] product;
@@ -24,15 +24,22 @@ public class UserProperty {
             String firstName,
             String middleName,
             String lastName,
-            Integer phoneNumber,
+            String phoneNumber,
             String address
     ) {
-
         this.firstName = new SimpleStringProperty(firstName);
         this.middleName = new SimpleStringProperty(middleName);
         this.lastName = new SimpleStringProperty(lastName);
-        this.phoneNumber = new SimpleIntegerProperty(phoneNumber);
+        this.phoneNumber = new SimpleStringProperty(phoneNumber);
         this.address = new SimpleStringProperty(address);
+    }
+
+    public UserProperty(User user) {
+        this.firstName = new SimpleStringProperty(user.getFirstName());
+        this.middleName = new SimpleStringProperty(user.getMiddleName());
+        this.lastName = new SimpleStringProperty(user.getLastName());
+        this.phoneNumber = new SimpleStringProperty(user.getPhoneNumber());
+        this.address = new SimpleStringProperty(user.getAddress());
     }
 
     public String getFirstName() {
@@ -71,15 +78,15 @@ public class UserProperty {
         this.lastName.set(lastName);
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber.get();
     }
 
-    public IntegerProperty phoneNumberProperty() {
+    public StringProperty phoneNumberProperty() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber.set(phoneNumber);
     }
 
@@ -93,5 +100,9 @@ public class UserProperty {
 
     public void setAddress(String address) {
         this.address.set(address);
+    }
+
+    public StringProperty getAllName(){
+        return new SimpleStringProperty(this.firstName.get() + " " + this.middleName.get() + " " + this.lastName.get());
     }
 }

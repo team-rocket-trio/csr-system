@@ -66,8 +66,14 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
     public void save(User user) {
         userList.add(user);
         writeFile(userList);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userList;
     }
 }
