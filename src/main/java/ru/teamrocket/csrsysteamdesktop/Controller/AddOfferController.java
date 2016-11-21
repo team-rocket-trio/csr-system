@@ -4,18 +4,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Window;
 import ru.teamrocket.csrsysteamdesktop.Model.Characteristic;
 import ru.teamrocket.csrsysteamdesktop.Model.Offer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
-import ru.teamrocket.csrsysteamdesktop.Model.OfferProperty;
-import ru.teamrocket.csrsysteamdesktop.Model.User;
 import ru.teamrocket.csrsysteamdesktop.Service.OfferServiceImpl;
-import ru.teamrocket.csrsysteamdesktop.Service.UserServiceImpl;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -25,6 +20,7 @@ import java.util.ResourceBundle;
 /**
  * Created by Alexander on 07.11.2016.
  */
+
 public class AddOfferController implements Initializable {
     @FXML
     private TextField nameField;
@@ -34,43 +30,57 @@ public class AddOfferController implements Initializable {
     private TextField monPriceField;
     @FXML
     private TextArea descriptionArea;
+
     @FXML
-    private Button addCharacteristicButton;
+    private TableView<Characteristic> characteristicTableView;
     @FXML
-    private ComboBox characteristicsComboBox;
+    private TableColumn<Characteristic, String> nameColumn;
     @FXML
-    private TextField nameCharField;
-    @FXML
-    private TextField valueCharField;
+    private TableColumn<Characteristic, String> valueColumn;
+
 
     private RootController rootController;
 
+
+    private ObservableList<Characteristic> observableCharacteristics;
+    private List<Characteristic> characteristics;
+
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
 
-  public void setRootController(RootController rootController) {
+    public void setCharacteristics(List<Characteristic> characteristics) {
+        this.characteristics = characteristics;
+
+        observableCharacteristics = FXCollections.observableArrayList(characteristics);
+
+        characteristicTableView.setItems(observableCharacteristics);
+
+        nameColumn.setCellValueFactory(cellDate -> cellDate.getValue().composCharacteristicToProppery().nameProperty());
+        valueColumn.setCellValueFactory(cellDate -> cellDate.getValue().composCharacteristicToProppery().valueProperty());
+    }
+
+    public void setRootController(RootController rootController) {
         this.rootController = rootController;
     }
 
-  @FXML
-  private void createAction(ActionEvent event) {
-      Window window = ((Node) event.getTarget()).getScene().getWindow();
+    @FXML
+    private void createAction(ActionEvent event) {
+        Window window = ((Node) event.getTarget()).getScene().getWindow();
 
-      if(inputValidate(window)){
-          List<Characteristic> characteristics = new ArrayList<>();
-          characteristics.add(new Characteristic(nameCharField.getText(), valueCharField.getText()));
+        if (inputValidate(window)) {
+            Offer offer = new Offer(
+                    nameField.getText(),
+                    Integer.parseInt(actPriceField.getText()),
+                    Integer.parseInt(monPriceField.getText()),
+                    descriptionArea.getText(),
+                    characteristics
+            );
+            new OfferServiceImpl().save(offer);
 
-          Offer offer = new Offer(
-                  nameField.getText(),
-                  Integer.parseInt(actPriceField.getText()),
-                  Integer.parseInt(monPriceField.getText()),
-                  descriptionArea.getText(),
-                  characteristics
-          );
-          new OfferServiceImpl().save(offer);
-          clearAction();
-      }
-  }
+            rootController.handlerOnOffers(event);
+        }
+    }
 
     @FXML
     private void clearAction() {
@@ -83,29 +93,29 @@ public class AddOfferController implements Initializable {
     private boolean inputValidate(Window window) {
         String errorMessage = "";
 
-        if (nameField.getText() == null){
+        if (nameField.getText() == null) {
             errorMessage += "Invalid name\n";
         }
-        if (actPriceField.getText() == null){
+        if (actPriceField.getText() == null) {
             errorMessage += "Invalid activation price.\n";
-        }else{
-            try{
+        } else {
+            try {
                 Integer.parseInt(actPriceField.getText());
-            } catch (NumberFormatException e){
-                errorMessage +="Invalid activation price.\n";
+            } catch (NumberFormatException e) {
+                errorMessage += "Invalid activation price.\n";
             }
         }
 
-        if (monPriceField.getText() == null){
+        if (monPriceField.getText() == null) {
             errorMessage += "Invalid monthly price.\n";
-        }else{
-        try{
-            Integer.parseInt(monPriceField.getText());
-        } catch (NumberFormatException e){
-            errorMessage +="Invalid monthly price.\n";
+        } else {
+            try {
+                Integer.parseInt(monPriceField.getText());
+            } catch (NumberFormatException e) {
+                errorMessage += "Invalid monthly price.\n";
+            }
         }
-    }
-        if(descriptionArea.getText() == null){
+        if (descriptionArea.getText() == null) {
             errorMessage += "Invalid description.\n";
         }
 
@@ -124,8 +134,9 @@ public class AddOfferController implements Initializable {
             return false;
         }
     }
+
     @FXML
-    private void addCharacteristicAction(ActionEvent event){
-        rootController.handlerOnAddCharacteristic(event);
+    private void addCharacteristicAction(ActionEvent event) {
+        rootController.handlerOnAddCharacteristic(characteristics);
     }
 }

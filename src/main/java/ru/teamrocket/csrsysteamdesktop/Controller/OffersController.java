@@ -18,6 +18,7 @@ import ru.teamrocket.csrsysteamdesktop.Service.CharacteristicServiceImpl;
 import ru.teamrocket.csrsysteamdesktop.Service.OfferServiceImpl;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -42,8 +43,6 @@ public class OffersController implements Initializable{
 
     private OfferServiceImpl offersService;
 
-    @FXML
-    private Button addOfferButton;
 
     private RootController rootController;
 
@@ -66,6 +65,6 @@ public class OffersController implements Initializable{
 
     @FXML
     private void handleOnCreateOffer(ActionEvent event){
-        rootController.handlerOnAddOffer(event);
+        rootController.handlerOnAddOffer(new ArrayList<Characteristic>());
     }
 }

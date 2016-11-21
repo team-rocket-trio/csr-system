@@ -11,22 +11,29 @@ import ru.teamrocket.csrsysteamdesktop.Model.Characteristic;
 import ru.teamrocket.csrsysteamdesktop.Service.CharacteristicServiceImpl;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
  * Created by Kate on 21.11.2016.
  */
-public class AddCharacteristicController  implements Initializable {
+public class AddCharacteristicController implements Initializable {
     @FXML
     private TextField charNameField;
     @FXML
     private TextField charValueField;
+
+    private List<Characteristic> characteristicsList;
 
     private RootController rootController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    public void setCharacteristicsList(List<Characteristic> characteristicsList) {
+        this.characteristicsList = characteristicsList;
     }
 
     public void setRootController(RootController rootController) {
@@ -37,10 +44,9 @@ public class AddCharacteristicController  implements Initializable {
     private void createAction(ActionEvent event) {
         Window window = ((Node) event.getTarget()).getScene().getWindow();
 
-        if(inputValidate(window)){
-            Characteristic characteristic = new Characteristic(charNameField.getText(),charValueField.getText());
-            new CharacteristicServiceImpl().save(characteristic);
-            clearAction();
+        if (inputValidate(window)) {
+            characteristicsList.add(new Characteristic(charNameField.getText(), charValueField.getText()));
+            rootController.handlerOnAddOffer(this.characteristicsList);
         }
     }
 
@@ -50,13 +56,18 @@ public class AddCharacteristicController  implements Initializable {
         charValueField.setText(null);
     }
 
+    @FXML
+    private void handlerOnBack(ActionEvent event) {
+        rootController.handlerOnAddOffer(this.characteristicsList);
+    }
+
     private boolean inputValidate(Window window) {
         String errorMessage = "";
 
-        if (charNameField.getText() == null){
+        if (charNameField.getText() == null) {
             errorMessage += "Invalid name\n";
         }
-        if (charValueField.getText() == null){
+        if (charValueField.getText() == null) {
             errorMessage += "Invalid value\n";
         }
         if (errorMessage.length() == 0) {

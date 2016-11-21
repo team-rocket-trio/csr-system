@@ -7,6 +7,7 @@ import java.util.List;
 /**
  * Created by Alexander on 16.11.2016.
  */
+
 public interface UserService {
 
     void save(User user);

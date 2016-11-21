@@ -7,9 +7,8 @@ import java.util.List;
 /**
  * Created by Kate on 13.11.2016.
  */
+
 public interface OfferService {
-    void writeFile(List<Offer> offerList);
-    String readFile();
     List<Offer> findAll();
     void save(Offer user);
 }

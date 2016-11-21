@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
         String userFile = readFile();
 
         if (userFile == null) {
-            userList = new ArrayList();
+            userList = new ArrayList<User>();
         } else {
             userList = new Gson().fromJson(userFile, listType);
         }

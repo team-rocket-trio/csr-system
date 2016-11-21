@@ -16,9 +16,6 @@
                 <TableColumn fx:id="actPriceColumn" prefWidth="160.0" text="Activation Price" />
                 <TableColumn fx:id="monPriceColumn" prefWidth="160.0" text="Monthly Price" />
                 <TableColumn fx:id="descriptionColumn" prefWidth="160.0" text="Description" />
-                <TableColumn fx:id="characteristicsColumn" prefWidth="160.0" text="Characteristics">
-
-                </TableColumn>
             </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

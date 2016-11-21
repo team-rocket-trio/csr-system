@@ -6,9 +6,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
+import ru.teamrocket.csrsysteamdesktop.Model.Characteristic;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class RootController implements Initializable {
@@ -21,9 +23,9 @@ public class RootController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("location = [" + location + "], resources = [" + resources + "]");
     }
-    @FXML
-    public void handlerOnAddUser(ActionEvent event) {
-//        setScene("/template/AddUser.fxml");
+
+
+    public void handlerOnAddUser() {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/template/AddUser.fxml"));
@@ -41,25 +43,7 @@ public class RootController implements Initializable {
     }
 
     @FXML
-    public void handlerOnAddOffer(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/template/AddOffer.fxml"));
-
-            Parent parent = loader.load();
-            borderPane.setCenter(parent);
-
-            AddOfferController addOfferController = loader.getController();
-            addOfferController.setRootController(this);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
     public void handlerOnUsers(ActionEvent event) {
-//        setScene("/template/Users.fxml");
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/template/Users.fxml"));
@@ -92,8 +76,24 @@ public class RootController implements Initializable {
         }
     }
 
-    @FXML
-    public void handlerOnAddCharacteristic(ActionEvent event) {
+    public void handlerOnAddOffer(List<Characteristic> characteristicList) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/template/AddOffer.fxml"));
+
+            Parent parent = loader.load();
+            borderPane.setCenter(parent);
+
+            AddOfferController addOfferController = loader.getController();
+            addOfferController.setRootController(this);
+            addOfferController.setCharacteristics(characteristicList);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handlerOnAddCharacteristic(List<Characteristic> characteristicList) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/template/AddCharacteristic.fxml"));
@@ -103,6 +103,7 @@ public class RootController implements Initializable {
 
             AddCharacteristicController addCharacteristicController = loader.getController();
             addCharacteristicController.setRootController(this);
+            addCharacteristicController.setCharacteristicsList(characteristicList);
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Kate on 21.11.2016.
  */
-public class CharacteristicServiceImpl {
+public class CharacteristicServiceImpl implements CharacteristicService {
     private List<Characteristic> characteristicList;
 
     public void save(Characteristic characteristic) {

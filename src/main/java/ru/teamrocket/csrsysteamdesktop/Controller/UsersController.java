@@ -58,7 +58,7 @@ public class UsersController implements Initializable {
 
     @FXML
     private void handleOnCreateUser(ActionEvent event){
-        rootController.handlerOnAddUser(event);
+        rootController.handlerOnAddUser();
     }
 
 }

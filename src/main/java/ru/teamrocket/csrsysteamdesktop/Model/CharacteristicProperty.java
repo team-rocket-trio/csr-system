@@ -19,6 +19,13 @@ public class CharacteristicProperty {
 
     }
 
+    public CharacteristicProperty(Characteristic characteristic) {
+
+        this.name = new SimpleStringProperty(characteristic.getName());
+        this.value = new SimpleStringProperty(characteristic.getValue());
+
+    }
+
     public String getName() {
         return name.get();
     }

@@ -31,7 +31,6 @@ public class OfferServiceImpl implements OfferService{
         }
     }
 
-    @Override
     public String readFile() {
         try {
             return new String(Files.readAllBytes(pathFile));
@@ -42,7 +41,6 @@ public class OfferServiceImpl implements OfferService{
     }
 
     //TODO-Alexander: Вынести в Util класс
-    @Override
     public void writeFile(List<Offer> offerList) {
         File file = new File(pathFile.toString());
         String content = new Gson().toJson(offerList);

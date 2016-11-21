@@ -29,8 +29,12 @@ public class Characteristic {
         this.value = value;
     }
 
+    public CharacteristicProperty composCharacteristicToProppery() {
+        return new CharacteristicProperty(this);
+    }
+
     @Override
     public String toString() {
-        return  "Name:'" + name + ", Value:'" + value;
+        return "Name:'" + name + ", Value:'" + value;
     }
 }

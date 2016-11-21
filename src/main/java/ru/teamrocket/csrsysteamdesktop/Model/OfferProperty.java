@@ -14,7 +14,6 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.omg.PortableInterceptor.INACTIVE;
 
 import java.util.List;
 
