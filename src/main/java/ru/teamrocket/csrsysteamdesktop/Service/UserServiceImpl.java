@@ -80,9 +80,15 @@ public class UserServiceImpl implements UserService {
         writeFile(userList);
     }
 
-    public void edit(User user, int index){
+    @Override
+    public void update(int index, User user) {
         userList.set(index, user);
         writeFile(userList);
+    }
+
+    @Override
+    public User findId(int id) {
+        return userList.get(id);
     }
 
     @Override

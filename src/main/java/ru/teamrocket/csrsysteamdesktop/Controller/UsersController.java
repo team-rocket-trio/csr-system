@@ -53,9 +53,9 @@ public class UsersController implements Initializable {
                     .getItems()
                     .get(data.getTablePosition().getRow())
                     .setPhoneNumber(data.getNewValue());
-                int index = data.getTableView().getSelectionModel().getSelectedIndex();
-                User editedUser = data.getTableView().getItems().get(index);
-                new UserServiceImpl().edit(editedUser, index);
+//                int index = data.getTableView().getSelectionModel().getSelectedIndex();
+//                User editedUser = data.getTableView().getItems().get(index);
+//                new UserServiceImpl().edit(editedUser, index);
         });
     }
 
@@ -84,7 +84,10 @@ public class UsersController implements Initializable {
     @FXML
     private void handleOnProducts(){
         if(userTableView.getSelectionModel().getSelectedItem() != null) {
-            rootController.handlerOnProducts(userTableView.getSelectionModel().getSelectedItem());
+            rootController.handlerOnProducts(
+                    userTableView.getSelectionModel().getSelectedIndex(),
+                    userTableView.getSelectionModel().getSelectedItem()
+            );
         }
     }
 

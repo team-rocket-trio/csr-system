@@ -70,6 +70,14 @@ public class User {
         return products;
     }
 
+    public void setProduct(Product product){
+        products.add(product);
+    }
+
+    public void deleteProduct(int id){
+        products.remove(id);
+    }
+
     public void setProducts(List<Product> product) {
         this.products = products;
     }

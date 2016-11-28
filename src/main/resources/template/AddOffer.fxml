@@ -51,7 +51,7 @@
                 <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clearAction" text="Clear" />
             </buttons>
         </ButtonBar>
-      <Label layoutX="15.0" layoutY="214.0" text="Characteristic">
+      <Label layoutX="15.0" layoutY="214.0" text="Characteristics">
          <font>
             <Font size="14.0" />
          </font>
@@ -67,6 +67,6 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button onAction="#addCharacteristicAction" layoutX="673.0" layoutY="212.0" mnemonicParsing="false" text="Add Characteristic" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="212.0" />
+      <Button layoutX="673.0" layoutY="212.0" mnemonicParsing="false" onAction="#addCharacteristicAction" text="Add Characteristic" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="212.0" />
     </children>
 </AnchorPane>

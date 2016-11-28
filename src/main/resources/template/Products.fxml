@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.teamrocket.csrsysteamdesktop.Controller.ProductController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.teamrocket.csrsysteamdesktop.Controller.ProductController">
     <children>
         <Label layoutX="14.0" layoutY="14.0" text="User Details" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
         <TableView fx:id="productsTableView" editable="true" layoutX="14.0" layoutY="216.0" prefHeight="168.0" prefWidth="572.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="216.0">
@@ -22,8 +22,8 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
         </TableView>
-        <Button fx:id="addProductButton" layoutX="523.0" layoutY="184.0" mnemonicParsing="false" onAction="#handleOnAddProduct" prefHeight="25.0" prefWidth="63.0" text="Add" />
-        <Button fx:id="deleteProductButton" layoutX="450.0" layoutY="184.0" mnemonicParsing="false" onAction="#handleOnDeleteProduct" prefWidth="63.0" text="Delete" />
+        <Button fx:id="addProductButton" layoutX="718.0" layoutY="184.0" mnemonicParsing="false" onAction="#handleOnAddProduct" prefHeight="25.0" prefWidth="63.0" text="Add" />
+        <Button fx:id="deleteProductButton" layoutX="646.0" layoutY="184.0" mnemonicParsing="false" onAction="#handleOnDeleteProduct" prefWidth="63.0" text="Delete" />
         <Label layoutX="14.0" layoutY="47.0" text="First Name: " />
         <Label layoutX="14.0" layoutY="74.0" text="Middle Name" />
         <Label layoutX="14.0" layoutY="100.0" text="Last Name" />
@@ -34,6 +34,7 @@
       <Label fx:id="lNameLabel" layoutX="151.0" layoutY="100.0" text="Label" />
       <Label fx:id="phoneNumberLabel" layoutX="151.0" layoutY="127.0" text="Label" />
       <Label fx:id="addressLabel" layoutX="151.0" layoutY="156.0" text="Label" />
-      <Button fx:id="saveButton" layoutX="523.0" layoutY="393.0" mnemonicParsing="false" onAction="#handleOnSave" prefHeight="25.0" prefWidth="63.0" text="Save" />
+      <Button fx:id="saveButton" layoutX="723.0" layoutY="561.0" mnemonicParsing="false" onAction="#handleOnSave" prefHeight="25.0" prefWidth="63.0" text="Save" />
+      <Button layoutX="749.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleOnEditUser" text="Edit" />
     </children>
 </AnchorPane>

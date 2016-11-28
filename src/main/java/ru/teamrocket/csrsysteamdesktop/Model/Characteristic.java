@@ -6,6 +6,8 @@ package ru.teamrocket.csrsysteamdesktop.Model;
 public class Characteristic {
 
     private String name;
+    private String activationPrice;
+    private String monthtyPrice;
     private String value;
 
     public Characteristic(String name, String value) {
@@ -15,6 +17,22 @@ public class Characteristic {
 
     public String getName() {
         return name;
+    }
+
+    public String getActivationPrice() {
+        return activationPrice;
+    }
+
+    public void setActivationPrice(String activationPrice) {
+        this.activationPrice = activationPrice;
+    }
+
+    public String getMonthtyPrice() {
+        return monthtyPrice;
+    }
+
+    public void setMonthtyPrice(String monthtyPrice) {
+        this.monthtyPrice = monthtyPrice;
     }
 
     public void setName(String name) {

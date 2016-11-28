@@ -19,42 +19,29 @@ import java.util.List;
  * Created by Kate on 28.11.2016.
  */
 public class ProductServiceImpl implements ProductService{
-    private final Path pathFile = Paths.get(Main.pathData + "/Users.json");
-    private final Type listType = new TypeToken<List<Product>>() {}.getType();
-    private List<Product> productsList;
+
+    private int idUser;
     private User user;
 
-    public ProductServiceImpl(){
-        String userFile = readFile();
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        if (userFile == null) {
-            productsList = new ArrayList();
-        } else {
-            productsList = gson.fromJson(userFile, listType);
-        }
-    }
+    public ProductServiceImpl(int idUser) {
+        this.idUser = idUser;
 
-    public String readFile() {
-        try {
-            return new String(Files.readAllBytes(pathFile));
-        } catch (IOException e) {
-            System.out.print("Could not read file.");
-            return null;
-        }
+        this.user = new UserServiceImpl().findId(this.idUser);
     }
 
     @Override
     public List<Product> findAll() {
-        return productsList;
+        return this.user.getProducts();
     }
 
     @Override
     public void save(Product product) {
-
+        this.user.setProduct(product);
+        new UserServiceImpl().update(this.idUser, this.user);
     }
 
     @Override
-    public void delete(int index) {
-
+    public void delete(int idUser) {
+        this.user.deleteProduct(idUser);
     }
 }

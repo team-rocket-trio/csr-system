@@ -17,27 +17,35 @@ import java.util.ResourceBundle;
  * Created by Kate on 28.11.2016.
  */
 public class ProductController implements Initializable {
+
+    private User user;
+    private int idUser;
+
     private RootController rootController;
     private ProductServiceImpl productService;
-    private User user;
     private ObservableList<Product> products;
 
-    @FXML private TableView<Product> productsTableView;
-    @FXML Label fNameLabel;
-    @FXML Label mNameLabel;
-    @FXML Label lNameLabel;
-    @FXML Label phoneNumberLabel;
-    @FXML Label addressLabel;
+    @FXML
+    private TableView<Product> productsTableView;
+    @FXML
+    private Label fNameLabel;
+    @FXML
+    private Label mNameLabel;
+    @FXML
+    private Label lNameLabel;
+    @FXML
+    private Label phoneNumberLabel;
+    @FXML
+    private Label addressLabel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        productService = new ProductServiceImpl();
 
-        productsTableView.setItems(products);
     }
 
-    public void setUser(User user) {
+    public void setUserForUpdate(int idUser, User user) {
         this.user = user;
+        this.idUser = idUser;
 
         fNameLabel.setText(user.getFirstName());
         mNameLabel.setText(user.getMiddleName());
@@ -46,6 +54,8 @@ public class ProductController implements Initializable {
         addressLabel.setText(user.getAddress());
 
         products = FXCollections.observableArrayList(user.getProducts());
+
+        productsTableView.setItems(products);
     }
 
     public void setRootController(RootController rootController) {
@@ -54,16 +64,22 @@ public class ProductController implements Initializable {
 
     @FXML
     private void handleOnDeleteProduct(){
-
+        System.out.println("handleOnDeleteProduct");
     }
 
     @FXML
     private void handleOnAddProduct(){
+        System.out.println("handleOnAddProduct");
+    }
 
+    @FXML
+    private void handleOnEditUser(){
+        this.rootController.handletOnEditUser(this.idUser, this.user);
     }
 
     @FXML
     private void handleOnSave(ActionEvent event){
+        rootController.handlerOnProducts(this.idUser, this.user);
         rootController.handlerOnUsers(event);
     }
 

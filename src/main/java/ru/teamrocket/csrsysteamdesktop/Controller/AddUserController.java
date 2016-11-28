@@ -32,6 +32,9 @@ public class AddUserController implements Initializable {
 
     private RootController rootController;
 
+    private int idUser;
+    private User user;
+
     public void setRootController(RootController rootController) {
         this.rootController = rootController;
     }
@@ -40,6 +43,17 @@ public class AddUserController implements Initializable {
     //http://code.makery.ch/library/javafx-8-tutorial/ru/part3/#-
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    public void setActionUpdate(int idUser, User user){
+        this.idUser = idUser;
+        this.user = user;
+
+        firstName.setText(this.user.getFirstName());
+        middleName.setText(this.user.getMiddleName());
+        lastName.setText(this.user.getLastName());
+        phoneNumber.setText(this.user.getPhoneNumber());
+        address.setText(this.user.getAddress());
     }
 
     private boolean inputValidate(Window window) {
@@ -87,22 +101,32 @@ public class AddUserController implements Initializable {
     }
 
     @FXML
-    private void handlerCreate(ActionEvent event) {
+    private void handlerSave(ActionEvent event) {
         Window window = ((Node) event.getTarget()).getScene().getWindow();
 
         if(inputValidate(window)){
 
-            User user = new User(
-                    firstName.getText(),
-                    middleName.getText(),
-                    lastName.getText(),
-                    phoneNumber.getText(),
-                    address.getText(),
-                    new ArrayList<>()
-            );
+            if(this.user == null){
+                User user = new User(
+                        firstName.getText(),
+                        middleName.getText(),
+                        lastName.getText(),
+                        phoneNumber.getText(),
+                        address.getText(),
+                        new ArrayList<>()
+                );
+                new UserServiceImpl().save(user);
+                rootController.handlerOnUsers(event);
+            }else{
+                this.user.setFirstName(this.firstName.getText());
+                this.user.setMiddleName(this.middleName.getText());
+                this.user.setLastName(this.lastName.getText());
+                this.user.setPhoneNumber(this.phoneNumber.getText());
+                this.user.setAddress(this.address.getText());
 
-            new UserServiceImpl().save(user);
-            rootController.handlerOnUsers(event);
+                new UserServiceImpl().update(this.idUser, this.user);
+                rootController.handlerOnProducts(this.idUser, this.user);
+            }
         }
     }
 

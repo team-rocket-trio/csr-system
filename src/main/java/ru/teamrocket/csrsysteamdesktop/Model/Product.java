@@ -1,21 +1,28 @@
 package ru.teamrocket.csrsysteamdesktop.Model;
 
+import java.util.List;
+
 /**
  * Created by Alexander on 07.11.2016.
  */
 public class Product {
-    private CharacteristicValue characteristicValue;
+    private Offer offer;
+    private List<Characteristic> characteristics;
 
-    public Product(CharacteristicValue characteristicValue){
 
-        this.characteristicValue = characteristicValue;
+    public Offer getOffer() {
+        return offer;
     }
 
-    public CharacteristicValue getCharacteristicValue() {
-        return characteristicValue;
+    public void setOffer(Offer offer) {
+        this.offer = offer;
     }
 
-    public void setCharacteristicValue(CharacteristicValue characteristicValue) {
-        this.characteristicValue = characteristicValue;
+    public List<Characteristic> getCharacteristics() {
+        return characteristics;
+    }
+
+    public void setCharacteristics(List<Characteristic> characteristics) {
+        this.characteristics = characteristics;
     }
 }

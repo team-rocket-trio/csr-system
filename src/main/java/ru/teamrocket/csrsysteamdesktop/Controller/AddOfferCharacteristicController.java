@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 /**
  * Created by Kate on 21.11.2016.
  */
-public class AddCharacteristicController implements Initializable {
+public class AddOfferCharacteristicController implements Initializable {
     @FXML
     private TextField charNameField;
     @FXML
@@ -44,22 +44,6 @@ public class AddCharacteristicController implements Initializable {
     @FXML
     private void createAction(ActionEvent event) {
         Window window = ((Node) event.getTarget()).getScene().getWindow();
-
-       /* if (inputValidate(window)) {
-            Iterator<Characteristic> iterator = characteristicsList.iterator();
-            if(!characteristicsList.isEmpty())
-            while (iterator.hasNext()) {
-                Characteristic characteristic = iterator.next();
-                if (characteristic.getName().equals(charNameField.getText())) {
-                    characteristic.setValue(characteristic.getValue() + ", " + charValueField.getText());
-                } else {
-                    characteristicsList.add(new Characteristic(charNameField.getText(), charValueField.getText()));
-                    break;
-                }
-            }
-            else
-                characteristicsList.add(new Characteristic(charNameField.getText(), charValueField.getText()));
-        }*/
 
         if (inputValidate(window)) {
             characteristicsList.add(new Characteristic(charNameField.getText(), charValueField.getText()));

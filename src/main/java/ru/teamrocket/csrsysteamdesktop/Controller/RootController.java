@@ -77,6 +77,42 @@ public class RootController implements Initializable {
         }
     }
 
+
+    @FXML
+    public void handlerOnCharacteristics() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/template/Characteristics.fxml"));
+
+            Parent parent = loader.load();
+            borderPane.setCenter(parent);
+
+            CharacteristicsController characteristicsController = loader.getController();
+            characteristicsController.setRootController(this);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handlerOnAddGlobalCharacteristics() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/template/AddGlobalCharacteristics.fxml"));
+
+            Parent parent = loader.load();
+            borderPane.setCenter(parent);
+
+            AddGlobalCharacteristicsController addGlobalCharacteristicsController = loader.getController();
+            addGlobalCharacteristicsController.setRootController(this);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
     public void handlerOnAddOffer(List<Characteristic> characteristicList) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -97,21 +133,21 @@ public class RootController implements Initializable {
     public void handlerOnAddCharacteristic(List<Characteristic> characteristicList) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/template/AddCharacteristic.fxml"));
+            loader.setLocation(getClass().getResource("/template/AddOfferCharacteristic.fxml"));
 
             Parent parent = loader.load();
             borderPane.setCenter(parent);
 
-            AddCharacteristicController addCharacteristicController = loader.getController();
-            addCharacteristicController.setRootController(this);
-            addCharacteristicController.setCharacteristicsList(characteristicList);
+            AddOfferCharacteristicController addOfferCharacteristicController = loader.getController();
+            addOfferCharacteristicController.setRootController(this);
+            addOfferCharacteristicController.setCharacteristicsList(characteristicList);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void handlerOnProducts(User user){
+    public void handlerOnProducts(int idUser, User user){
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/template/Products.fxml"));
@@ -121,7 +157,24 @@ public class RootController implements Initializable {
 
             ProductController productController = loader.getController();
             productController.setRootController(this);
-            productController.setUser(user);
+            productController.setUserForUpdate(idUser, user);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handletOnEditUser(int idUser, User user){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/template/AddUser.fxml"));
+
+            Parent parent = loader.load();
+            borderPane.setCenter(parent);
+
+            AddUserController addUserController = loader.getController();
+            addUserController.setRootController(this);
+            addUserController.setActionUpdate(idUser, user);
 
         } catch (IOException e) {
             e.printStackTrace();

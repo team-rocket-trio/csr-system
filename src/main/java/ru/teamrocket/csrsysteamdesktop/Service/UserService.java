@@ -9,7 +9,9 @@ import java.util.List;
  */
 
 public interface UserService {
-    void save(User user);
     List<User> findAll();
+    User findId(int id);
+    void save(User user);
     void delete(int index);
+    void update(int index, User user);
 }

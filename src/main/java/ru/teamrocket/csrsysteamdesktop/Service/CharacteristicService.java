@@ -5,7 +5,7 @@ import ru.teamrocket.csrsysteamdesktop.Model.Characteristic;
 import java.util.List;
 
 /**
- * Created by Alexander on 21.11.2016.
+ * Created by Alexander on 28.11.2016.
  */
 public interface CharacteristicService {
 

@@ -17,6 +17,7 @@
               <items>
                     <Button mnemonicParsing="false" onAction="#handlerOnUsers" prefHeight="25.0" prefWidth="190.0" text="Users" />
                     <Button mnemonicParsing="false" onAction="#handlerOnOffers" prefHeight="25.0" prefWidth="190.0" text="Offers" />
+                    <Button mnemonicParsing="false" onAction="#handlerOnCharacteristics" prefHeight="25.0" prefWidth="190.0" text="Characteristics" />
               </items>
             </ToolBar>
          </children>
