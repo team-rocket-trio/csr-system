@@ -3,8 +3,9 @@ package ru.teamrocket.csrsysteamdesktop.Model;
 /**
  * Created by Alexander Shreyner on 07.11.2016.
  */
-public class Characteristic {
+public class Characteristic implements SimpleModel {
 
+    private int id;
     private String name;
     private String activationPrice;
     private String monthtyPrice;
@@ -13,6 +14,19 @@ public class Characteristic {
     public Characteristic(String name, String value) {
         this.name = name;
         this.value = value;
+    }
+
+    @Override
+    public int getIdLocal() {
+        return this.id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
