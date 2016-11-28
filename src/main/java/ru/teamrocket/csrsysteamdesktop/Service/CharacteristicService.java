@@ -11,4 +11,6 @@ public interface CharacteristicService {
 
     List<Characteristic> findAll();
     void save(Characteristic characteristic);
+    void delete(int id);
+    void update(int id, Characteristic characteristic);
 }

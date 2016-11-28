@@ -53,7 +53,7 @@ public class ProductController implements Initializable {
         phoneNumberLabel.setText(user.getPhoneNumber());
         addressLabel.setText(user.getAddress());
 
-        products = FXCollections.observableArrayList(user.getProducts());
+        products = FXCollections.observableArrayList(user.getProduct());
 
         productsTableView.setItems(products);
     }

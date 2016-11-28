@@ -8,7 +8,6 @@ import java.util.List;
  * Created by Kate on 28.11.2016.
  */
 public interface ProductService{
-    List<Product> findAll();
+    Product findAll();
     void save(Product product);
-    void delete(int index);
 }

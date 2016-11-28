@@ -67,12 +67,26 @@ public class CharacteristicServiceImpl implements CharacteristicService {
         }
     }
 
+    @Override
     public void save(Characteristic characteristic) {
         characteristicList.add(characteristic);
         writeFile(characteristicList);
     }
 
+    @Override
     public List<Characteristic> findAll() {
         return characteristicList;
+    }
+
+    @Override
+    public void delete(int id) {
+        characteristicList.remove(id);
+        writeFile(characteristicList);
+    }
+
+    @Override
+    public void update(int id, Characteristic characteristic) {
+        characteristicList.set(id, characteristic);
+        writeFile(characteristicList);
     }
 }

@@ -15,9 +15,9 @@ public class User {
     private String lastName;
     private String phoneNumber;
     private String address;
-    private List<Product> products;
+    private Product products;
 
-    public User(String firstName, String middleName, String lastName, String phoneNumber, String address, List<Product> products) {
+    public User(String firstName, String middleName, String lastName, String phoneNumber, String address, Product products) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -66,20 +66,16 @@ public class User {
         this.address = address;
     }
 
-    public List<Product> getProducts() {
+    public Product getProduct() {
         return products;
     }
 
-    public void setProduct(Product product){
-        products.add(product);
+    public void setProduct(Product product) {
+        this.products = product;
     }
 
-    public void deleteProduct(int id){
-        products.remove(id);
-    }
-
-    public void setProducts(List<Product> product) {
-        this.products = products;
+    public void setProducts(Product product) {
+        this.products = product;
     }
 
     public UserProperty composUserToProppery(){

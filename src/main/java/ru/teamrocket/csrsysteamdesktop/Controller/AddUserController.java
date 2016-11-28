@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Window;
+import ru.teamrocket.csrsysteamdesktop.Model.Product;
 import ru.teamrocket.csrsysteamdesktop.Model.User;
 import ru.teamrocket.csrsysteamdesktop.Service.UserServiceImpl;
 
@@ -113,7 +114,8 @@ public class AddUserController implements Initializable {
                         lastName.getText(),
                         phoneNumber.getText(),
                         address.getText(),
-                        new ArrayList<>()
+                        new Product()
+
                 );
                 new UserServiceImpl().save(user);
                 rootController.handlerOnUsers(event);
