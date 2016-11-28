@@ -46,10 +46,7 @@ public class CharacteristicServiceImpl extends AbstractSimpleService implements 
 
     @Override
     public void save(Characteristic characteristic) {
-        Characteristic newCharacteristic = characteristic;
         characteristic.setId(characteristicList.size());
-
-        System.out.println(generateId());
 
         characteristicList.add(characteristic);
         writeFile(characteristicList);

@@ -5,7 +5,6 @@ package ru.teamrocket.csrsysteamdesktop.Model;
  */
 public interface SimpleModel {
 
-    int getIdLocal();
     public int getId();
 
 }

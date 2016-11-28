@@ -16,11 +16,6 @@ public class Characteristic implements SimpleModel {
         this.value = value;
     }
 
-    @Override
-    public int getIdLocal() {
-        return this.id;
-    }
-
     public int getId() {
         return id;
     }
