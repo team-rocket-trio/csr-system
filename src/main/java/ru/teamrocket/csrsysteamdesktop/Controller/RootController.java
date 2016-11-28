@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
 import ru.teamrocket.csrsysteamdesktop.Model.Characteristic;
+import ru.teamrocket.csrsysteamdesktop.Model.User;
 
 import java.io.IOException;
 import java.net.URL;
@@ -104,6 +105,23 @@ public class RootController implements Initializable {
             AddCharacteristicController addCharacteristicController = loader.getController();
             addCharacteristicController.setRootController(this);
             addCharacteristicController.setCharacteristicsList(characteristicList);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handlerOnProducts(User user){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/template/Products.fxml"));
+
+            Parent parent = loader.load();
+            borderPane.setCenter(parent);
+
+            ProductController productController = loader.getController();
+            productController.setRootController(this);
+            productController.setUser(user);
 
         } catch (IOException e) {
             e.printStackTrace();

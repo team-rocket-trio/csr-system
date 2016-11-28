@@ -3,6 +3,8 @@ package ru.teamrocket.csrsysteamdesktop.Model;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.util.List;
+
 /**
  * Created by Alexander Shreyner on 07.11.2016.
  */
@@ -13,13 +15,15 @@ public class User {
     private String lastName;
     private String phoneNumber;
     private String address;
+    private List<Product> products;
 
-    public User(String firstName, String middleName, String lastName, String phoneNumber, String address) {
+    public User(String firstName, String middleName, String lastName, String phoneNumber, String address, List<Product> products) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.address = address;
+        this.products = products;
     }
 
     public String getFirstName() {
@@ -60,6 +64,14 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> product) {
+        this.products = products;
     }
 
     public UserProperty composUserToProppery(){

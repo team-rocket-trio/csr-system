@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.teamrocket.csrsysteamdesktop.Controller.ProductController">
+    <children>
+        <Label layoutX="14.0" layoutY="14.0" text="User Details" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+        <TableView fx:id="productsTableView" editable="true" layoutX="14.0" layoutY="183.0" prefHeight="162.0" prefWidth="572.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="183.0">
+            <columns>
+                <TableColumn fx:id="nameColumn" prefWidth="160.0" text="Name" />
+                <TableColumn fx:id="actPriceColumn" prefWidth="160.0" text="Activation Price" />
+                <TableColumn fx:id="monPriceColumn" prefWidth="160.0" text="Monthly Price" />
+                <TableColumn fx:id="descriptionColumn" prefWidth="160.0" text="Description" />
+                <TableColumn fx:id="characteristicsColumn" prefWidth="160.0" text="Characteristics" />
+                <TableColumn fx:id="statusColumn" prefWidth="160.0" text="Status" />
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+        </TableView>
+        <Button fx:id="addProductButton" layoutX="535.0" layoutY="352.0" mnemonicParsing="false" onAction="#handleOnAddProduct" text="Add" />
+        <Button fx:id="deleteProductButton" layoutX="473.0" layoutY="352.0" mnemonicParsing="false" onAction="#handleOnDeleteProduct" text="Delete" />
+        <Label layoutX="14.0" layoutY="47.0" text="First Name: " />
+        <Label layoutX="14.0" layoutY="74.0" text="Middle Name" />
+        <Label layoutX="14.0" layoutY="100.0" text="Last Name" />
+        <Label layoutX="14.0" layoutY="127.0" text="Phone Number" />
+        <Label layoutX="14.0" layoutY="156.0" text="Address" />
+      <Label fx:id="fNameLabel" layoutX="151.0" layoutY="47.0" text="Label" />
+      <Label fx:id="mNameLabel" layoutX="151.0" layoutY="74.0" text="Label" />
+      <Label fx:id="lNameLabel" layoutX="151.0" layoutY="100.0" text="Label" />
+      <Label fx:id="phoneNumberLabel" layoutX="151.0" layoutY="127.0" text="Label" />
+      <Label fx:id="addressLabel" layoutX="151.0" layoutY="156.0" text="Label" />
+    </children>
+</AnchorPane>

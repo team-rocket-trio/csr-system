@@ -1,12 +1,12 @@
 package ru.teamrocket.csrsysteamdesktop.Controller;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -26,23 +26,16 @@ import java.util.ResourceBundle;
  * Created by Kate on 20.11.2016.
  */
 public class OffersController implements Initializable{
-    @FXML
-    private TableView<Offer> offersTableView;
-    @FXML
-    private TableColumn<Offer, String> nameColumn;
-    @FXML
-    private TableColumn<Offer, String> descriptionColumn;
-    @FXML
-    private TableColumn<Offer, Integer> actPriceColumn;
-    @FXML
-    private TableColumn<Offer, Integer> monPriceColumn;
-    @FXML
-    private TableColumn<Offer, Characteristic> characteristicsColumn;
+    @FXML private TableView<Offer> offersTableView;
+    @FXML private TableColumn<Offer, String> nameColumn;
+    @FXML private TableColumn<Offer, String> descriptionColumn;
+    @FXML private TableColumn<Offer, Integer> actPriceColumn;
+    @FXML private TableColumn<Offer, Integer> monPriceColumn;
+    @FXML private TableColumn<Offer, String> characteristicsColumn;
 
     private ObservableList<Offer> offers;
 
     private OfferServiceImpl offersService;
-
 
     private RootController rootController;
 
@@ -57,14 +50,39 @@ public class OffersController implements Initializable{
 
         offersTableView.setItems(offers);
 
-        nameColumn.setCellValueFactory(cellData -> cellData.getValue().composeOfferProperty().nameProperty());
-        actPriceColumn.setCellValueFactory(cellData -> cellData.getValue().composeOfferProperty().activationPriceProperty().asObject());
-        monPriceColumn.setCellValueFactory(cellData -> cellData.getValue().composeOfferProperty().monthlyPriceProperty().asObject());
-        descriptionColumn.setCellValueFactory(cellData -> cellData.getValue().composeOfferProperty().descriptionProperty());
+        nameColumn.setCellValueFactory(data -> data.getValue().composeOfferProperty().nameProperty());
+        actPriceColumn.setCellValueFactory(data -> data.getValue().composeOfferProperty().activationPriceProperty().asObject());
+        monPriceColumn.setCellValueFactory(data -> data.getValue().composeOfferProperty().monthlyPriceProperty().asObject());
+        descriptionColumn.setCellValueFactory(data -> data.getValue().composeOfferProperty().descriptionProperty());
+        characteristicsColumn.setCellValueFactory((TableColumn.CellDataFeatures<Offer, String> data) -> {
+                List<Characteristic> characteristics = data.getValue().getCharacteristics();
+                String characteristic = characteristics
+                        .stream()
+                        .map(item -> item.toString())
+                        .reduce("", (acc, item) -> acc + item + "; ");
+                return new ReadOnlyStringWrapper(characteristic);
+            });
     }
 
     @FXML
-    private void handleOnCreateOffer(ActionEvent event){
+    private void handleOnCreateOffer(){
         rootController.handlerOnAddOffer(new ArrayList<Characteristic>());
+    }
+
+    @FXML
+    private void handleOnDeleteOffer(){
+        if(offersTableView.getSelectionModel().getSelectedItem() != null) {
+            Offer selectedOffer = offersTableView.getSelectionModel().getSelectedItem();
+            int index = offersTableView.getSelectionModel().getSelectedIndex();
+            offersTableView.getItems().remove(selectedOffer);
+            new OfferServiceImpl().delete(index);
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error deleting offer");
+            alert.setHeaderText("Offer is not selected.");
+            alert.setContentText("Please select an offer.");
+            alert.showAndWait();
+        }
     }
 }

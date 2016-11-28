@@ -1,6 +1,8 @@
 package ru.teamrocket.csrsysteamdesktop.Service;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import ru.teamrocket.csrsysteamdesktop.Main;
 import ru.teamrocket.csrsysteamdesktop.Model.Offer;
@@ -12,6 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -24,10 +27,11 @@ public class OfferServiceImpl implements OfferService{
 
     public OfferServiceImpl() {
         String offerFile = readFile();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         if (offerFile == null) {
             offerList = new ArrayList();
         } else {
-            offerList = new Gson().fromJson(offerFile, listType);
+            offerList = gson.fromJson(offerFile, listType);
         }
     }
 
@@ -43,7 +47,8 @@ public class OfferServiceImpl implements OfferService{
     //TODO-Alexander: Вынести в Util класс
     public void writeFile(List<Offer> offerList) {
         File file = new File(pathFile.toString());
-        String content = new Gson().toJson(offerList);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String content = gson.toJson(offerList);
 
         try (FileOutputStream fop = new FileOutputStream(file)) {
             if (!file.exists()) {
@@ -60,9 +65,17 @@ public class OfferServiceImpl implements OfferService{
         }
     }
 
+
+
     @Override
     public void save(Offer offer) {
         offerList.add(offer);
+        writeFile(offerList);
+    }
+
+    @Override
+    public void delete(int index) {
+        offerList.remove(index);
         writeFile(offerList);
     }
 

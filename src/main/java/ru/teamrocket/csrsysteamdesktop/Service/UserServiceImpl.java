@@ -1,6 +1,7 @@
 package ru.teamrocket.csrsysteamdesktop.Service;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import ru.teamrocket.csrsysteamdesktop.Main;
 import ru.teamrocket.csrsysteamdesktop.Model.User;
@@ -47,9 +48,9 @@ public class UserServiceImpl implements UserService {
 
     //TODO-Alexander: Вынести в Util класс
     private void writeFile(List<User> userList) {
-
         File file = new File(pathFile.toString());
-        String content = new Gson().toJson(userList);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String content = gson.toJson(userList);
 
         try (FileOutputStream fop = new FileOutputStream(file)) {
             if (!file.exists()) {
@@ -70,6 +71,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(User user) {
         userList.add(user);
+        writeFile(userList);
+    }
+
+    @Override
+    public void delete(int index){
+        userList.remove(index);
+        writeFile(userList);
+    }
+
+    public void edit(User user, int index){
+        userList.set(index, user);
         writeFile(userList);
     }
 

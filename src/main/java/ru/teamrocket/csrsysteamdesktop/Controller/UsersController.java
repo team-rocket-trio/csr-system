@@ -4,22 +4,15 @@ import javafx.event.ActionEvent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.stage.Stage;
+import javafx.scene.control.cell.TextFieldTableCell;
 import ru.teamrocket.csrsysteamdesktop.Model.User;
 import ru.teamrocket.csrsysteamdesktop.Service.UserServiceImpl;
-
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.function.Function;
 
 /**
  * Created by Alexander on 20.11.2016.
@@ -32,9 +25,6 @@ public class UsersController implements Initializable {
     private TableColumn<User, String> nameColumn;
     @FXML
     private TableColumn<User, String> phoneColumn;
-
-    @FXML
-    private Button buttonAddUser;
 
     private ObservableList<User> users;
     private UserServiceImpl userService;
@@ -52,13 +42,50 @@ public class UsersController implements Initializable {
 
         userTableView.setItems(users);
 
-        nameColumn.setCellValueFactory(cellDate -> cellDate.getValue().composUserToProppery().getAllName());
-        phoneColumn.setCellValueFactory(cellDate -> cellDate.getValue().composUserToProppery().phoneNumberProperty());
+        nameColumn.setCellValueFactory(cellData -> cellData.getValue().composUserToProppery().getAllName());
+        phoneColumn.setCellValueFactory(cellData -> cellData.getValue().composUserToProppery().phoneNumberProperty());
+
+        nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        phoneColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        phoneColumn.setOnEditCommit((TableColumn.CellEditEvent<User, String> data) -> {
+                data.getTableView()
+                    .getItems()
+                    .get(data.getTablePosition().getRow())
+                    .setPhoneNumber(data.getNewValue());
+                int index = data.getTableView().getSelectionModel().getSelectedIndex();
+                User editedUser = data.getTableView().getItems().get(index);
+                new UserServiceImpl().edit(editedUser, index);
+        });
     }
 
     @FXML
     private void handleOnCreateUser(ActionEvent event){
         rootController.handlerOnAddUser();
+    }
+
+    @FXML
+    private void handleOnDeleteUser(){
+        if(userTableView.getSelectionModel().getSelectedItem() != null) {
+            User selectedUser = userTableView.getSelectionModel().getSelectedItem();
+            int index = userTableView.getSelectionModel().getSelectedIndex();
+            userTableView.getItems().remove(selectedUser);
+            new UserServiceImpl().delete(index);
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error deleting user");
+            alert.setHeaderText("User is not selected.");
+            alert.setContentText("Please select a user.");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void handleOnProducts(){
+        if(userTableView.getSelectionModel().getSelectedItem() != null) {
+            rootController.handlerOnProducts(userTableView.getSelectionModel().getSelectedItem());
+        }
     }
 
 }

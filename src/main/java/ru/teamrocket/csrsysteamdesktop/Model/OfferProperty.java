@@ -15,6 +15,7 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OfferProperty {
@@ -23,7 +24,7 @@ public class OfferProperty {
     private final IntegerProperty activationPrice;
     private final IntegerProperty monthlyPrice;
     private final StringProperty description;
-    private final SimpleListProperty<Characteristic> characteristics;
+    private final List<Characteristic> characteristics;
 
     public OfferProperty(
             String name,
@@ -36,7 +37,7 @@ public class OfferProperty {
         this.activationPrice = new SimpleIntegerProperty(activationPrice);
         this.monthlyPrice = new SimpleIntegerProperty(monthlyPrice);
         this.description = new SimpleStringProperty(description);
-        this.characteristics = new SimpleListProperty<Characteristic>((ObservableList<Characteristic>) characteristics);
+        this.characteristics = new ArrayList<>(characteristics);
     }
 
     public OfferProperty(Offer offer) {
@@ -44,7 +45,7 @@ public class OfferProperty {
         this.activationPrice = new SimpleIntegerProperty(offer.getActivationPrice());
         this.monthlyPrice = new SimpleIntegerProperty(offer.getMonthlyPrice());
         this.description = new SimpleStringProperty(offer.getDescription());
-        this.characteristics = new SimpleListProperty<Characteristic>(FXCollections.observableArrayList(offer.getCharacteristics()));
+        this.characteristics = new ArrayList<>(FXCollections.observableArrayList(offer.getCharacteristics()));
     }
 
     public String getName() {
@@ -95,5 +96,6 @@ public class OfferProperty {
         this.description.set(description);
     }
 
-    public ObservableList<Characteristic> getCharacteristics() {return characteristics;}
+    public List<Characteristic> getCharacteristics() {return characteristics;}
+
 }

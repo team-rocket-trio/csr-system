@@ -11,6 +11,7 @@ import ru.teamrocket.csrsysteamdesktop.Model.User;
 import ru.teamrocket.csrsysteamdesktop.Service.UserServiceImpl;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -96,7 +97,8 @@ public class AddUserController implements Initializable {
                     middleName.getText(),
                     lastName.getText(),
                     phoneNumber.getText(),
-                    address.getText()
+                    address.getText(),
+                    new ArrayList<>()
             );
 
             new UserServiceImpl().save(user);
