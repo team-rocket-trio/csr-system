@@ -128,6 +128,7 @@ public class RootController implements Initializable {
         }
     }
 
+
     private void setScene(String nameResurce) {
         try {
             Parent parent = FXMLLoader.load(getClass().getResource(nameResurce));

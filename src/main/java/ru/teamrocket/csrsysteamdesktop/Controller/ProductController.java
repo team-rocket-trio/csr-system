@@ -2,6 +2,7 @@ package ru.teamrocket.csrsysteamdesktop.Controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -59,6 +60,11 @@ public class ProductController implements Initializable {
     @FXML
     private void handleOnAddProduct(){
 
+    }
+
+    @FXML
+    private void handleOnSave(ActionEvent event){
+        rootController.handlerOnUsers(event);
     }
 
 }
