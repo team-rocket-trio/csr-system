@@ -48,7 +48,7 @@ public class OffersController implements Initializable{
         monPriceColumn.setCellValueFactory(data -> data.getValue().composeOfferProperty().monthlyPriceProperty().asObject());
         descriptionColumn.setCellValueFactory(data -> data.getValue().composeOfferProperty().descriptionProperty());
         characteristicsColumn.setCellValueFactory((TableColumn.CellDataFeatures<Offer, String> data) -> {
-                List<Characteristic> characteristics = data.getValue().getCharacteristic();
+                List<Characteristic> characteristics = data.getValue().getCharacteristics();
                 String c = characteristics
                         .stream()
                         .map(item -> item.toString())
@@ -60,6 +60,11 @@ public class OffersController implements Initializable{
     @FXML
     private void handleOnCreateOffer(){
         rootController.handlerOnAddOffer(new ArrayList<Characteristic>());
+    }
+
+    @FXML
+    private void handleOnEditOffer(){
+
     }
 
     @FXML

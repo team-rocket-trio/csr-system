@@ -1,6 +1,8 @@
 package ru.teamrocket.csrsysteamdesktop.Controller;
 
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -36,13 +38,20 @@ public class AddGlobalCharacteristicsController implements Initializable {
     private ChoiceBox<String> choiceBox;
     @FXML
     private AnchorPane anchorPane;
+    @FXML
+    private Label labelChar;
 
     private Button addButton;
+    private Button deleteButton;
     private ListView<String> list;
+
+    private Characteristic characteristic;
+    private int idCharacteristic;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         addButton = new Button("+");
+        addButton.setPrefWidth(30);
         addButton.setLayoutX(valueField.getLayoutX() + valueField.getPrefWidth() + 10);
         addButton.setLayoutY(valueField.getLayoutY());
         addButton.setOnAction((event -> {
@@ -62,6 +71,16 @@ public class AddGlobalCharacteristicsController implements Initializable {
                 list.getItems().set(t.getIndex(), t.getNewValue());
                 });
 
+        deleteButton = new Button("-");
+        deleteButton.setPrefWidth(30);
+        deleteButton.setLayoutX(valueField.getLayoutX() + valueField.getPrefWidth() + 10);
+        deleteButton.setLayoutY(list.getLayoutY());
+        deleteButton.setOnAction((event -> {
+                    if(list.getSelectionModel().getSelectedItem() != null){
+                        list.getItems().remove(list.getSelectionModel().getSelectedIndex());
+                    }
+                })
+        );
         choiceBox.getSelectionModel()
                 .selectedItemProperty()
                 .addListener( (ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
@@ -69,14 +88,17 @@ public class AddGlobalCharacteristicsController implements Initializable {
                          case "Text":
                              anchorPane.getChildren().remove(addButton);
                              anchorPane.getChildren().remove(list);
+                             anchorPane.getChildren().remove(deleteButton);
                              break;
                          case "Number":
                              anchorPane.getChildren().remove(addButton);
                              anchorPane.getChildren().remove(list);
+                             anchorPane.getChildren().remove(deleteButton);
                              break;
                          case "List":
                              anchorPane.getChildren().add(list);
                              anchorPane.getChildren().add(addButton);
+                             anchorPane.getChildren().add(deleteButton);
                              break;
                      }
                  });
@@ -91,35 +113,57 @@ public class AddGlobalCharacteristicsController implements Initializable {
         Window window = ((Node) event.getTarget()).getScene().getWindow();
         Characteristic characteristic = null;
         if (inputValidate(window)) {
-            switch (choiceBox.getSelectionModel().getSelectedItem()) {
-                case "Text":
-                    characteristic = new CharacteristicText(
-                            nameField.getText(),
-                            valueField.getText()
-                    );
-                    characteristic.setActivationPrice(activationPriceField.getText());
-                    characteristic.setMonthlyPrice(monthlyPriceField.getText());
+            if (this.characteristic == null) {
+                switch (choiceBox.getSelectionModel().getSelectedItem()) {
+                    case "Text":
+                        characteristic = new CharacteristicText(
+                                nameField.getText(),
+                                valueField.getText()
+                        );
+                        characteristic.setActivationPrice(activationPriceField.getText());
+                        characteristic.setMonthlyPrice(monthlyPriceField.getText());
 
-                    break;
-                case "Number":
-                    characteristic = new CharacteristicNumber(
-                            nameField.getText(),
-                            Integer.valueOf(valueField.getText())
-                    );
-                    characteristic.setActivationPrice(activationPriceField.getText());
-                    characteristic.setMonthlyPrice(monthlyPriceField.getText());
-                    break;
-                case "List":
-                    characteristic = new CharacteristicList(
-                            nameField.getText(),
-                            new ArrayList<>(list.getItems())
-                    );
-                    characteristic.setActivationPrice(activationPriceField.getText());
-                    characteristic.setMonthlyPrice(monthlyPriceField.getText());
-                    break;
+                        break;
+                    case "Number":
+                        characteristic = new CharacteristicNumber(
+                                nameField.getText(),
+                                Integer.valueOf(valueField.getText())
+                        );
+                        characteristic.setActivationPrice(activationPriceField.getText());
+                        characteristic.setMonthlyPrice(monthlyPriceField.getText());
+                        break;
+                    case "List":
+                        characteristic = new CharacteristicList(
+                                nameField.getText(),
+                                new ArrayList<>(list.getItems())
+                        );
+                        characteristic.setActivationPrice(activationPriceField.getText());
+                        characteristic.setMonthlyPrice(monthlyPriceField.getText());
+                        break;
+                }
+                new CharacteristicServiceImpl().save(characteristic);
+                rootController.handlerOnCharacteristics();
+            } else {
+                switch (choiceBox.getSelectionModel().getSelectedItem()) {
+                    case "Text":
+                        this.characteristic = new CharacteristicText(this.nameField.getText(), this.valueField.getText());
+                        this.characteristic.setActivationPrice(this.activationPriceField.getText());
+                        this.characteristic.setMonthlyPrice(this.monthlyPriceField.getText());
+                        break;
+                    case "Number":
+                        this.characteristic = new CharacteristicNumber(this.nameField.getText(), Integer.valueOf(this.valueField.getText()));
+                        this.characteristic.setActivationPrice(this.activationPriceField.getText());
+                        this.characteristic.setMonthlyPrice(this.monthlyPriceField.getText());
+                        break;
+                    case "List":
+                        this.characteristic = new CharacteristicList(this.nameField.getText(), new ArrayList<>(list.getItems()));
+                        this.characteristic.setActivationPrice(this.activationPriceField.getText());
+                        this.characteristic.setMonthlyPrice(this.monthlyPriceField.getText());
+                        break;
+                }
+                new CharacteristicServiceImpl().update(this.idCharacteristic, this.characteristic);
+                rootController.handlerOnCharacteristics();
             }
-            new CharacteristicServiceImpl().save(characteristic);
-            rootController.handlerOnCharacteristics();
         }
     }
 
@@ -173,6 +217,31 @@ public class AddGlobalCharacteristicsController implements Initializable {
         activationPriceField.setText("");
         monthlyPriceField.setText("");
         valueField.setText("");
+    }
+
+    public void setActionUpdate(int idCharacteristic, Characteristic characteristic) {
+        this.characteristic = characteristic;
+        this.idCharacteristic = idCharacteristic;
+
+        nameField.setText(characteristic.getName());
+        activationPriceField.setText(characteristic.getActivationPrice());
+        monthlyPriceField.setText(characteristic.getMonthlyPrice());
+        choiceBox.setValue(characteristic.getType());
+        if(characteristic instanceof CharacteristicText){
+            CharacteristicText characteristicText = (CharacteristicText) characteristic;
+            valueField.setText(characteristicText.getValue());
+        }
+        else
+            if(characteristic instanceof CharacteristicNumber){
+                CharacteristicNumber characteristicNumber = (CharacteristicNumber) characteristic;
+                valueField.setText(Integer.toString(characteristicNumber.getValue()));
+            }
+            else
+                if(characteristic instanceof CharacteristicList){
+                    CharacteristicList characteristicList = (CharacteristicList) characteristic;
+                    list.setItems(FXCollections.observableArrayList(characteristicList.getValues()));
+                }
+        labelChar.setText("Edit global characteristic");
     }
 
 }

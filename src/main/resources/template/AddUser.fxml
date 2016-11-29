@@ -13,7 +13,7 @@
 
 <AnchorPane prefHeight="319.0" prefWidth="395.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.teamrocket.csrsysteamdesktop.Controller.AddUserController">
    <children>
-      <Text layoutX="14.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add User" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="13.0">
+      <Text fx:id="textUser" layoutX="14.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add User" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="13.0">
          <font>
             <Font size="14.0" />
          </font>

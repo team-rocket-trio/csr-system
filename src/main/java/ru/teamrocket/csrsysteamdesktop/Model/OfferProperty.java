@@ -40,7 +40,7 @@ public class OfferProperty {
         this.activationPrice = new SimpleIntegerProperty(offer.getActivationPrice());
         this.monthlyPrice = new SimpleIntegerProperty(offer.getMonthlyPrice());
         this.description = new SimpleStringProperty(offer.getDescription());
-        this.characteristic = new ArrayList<>(FXCollections.observableArrayList(offer.getCharacteristic()));
+        this.characteristic = new ArrayList<>(FXCollections.observableArrayList(offer.getCharacteristics()));
     }
 
     public String getName() {

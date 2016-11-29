@@ -1,6 +1,5 @@
 package ru.teamrocket.csrsysteamdesktop.Model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,20 +12,20 @@ public class Offer implements SimpleModel {
     private Integer activationPrice;
     private Integer monthlyPrice;
     private String description;
-    private List<Characteristic> characteristic;
+    private List<Characteristic> characteristics;
 
     public Offer(
             String name,
             Integer activationPrice,
             Integer monthlyPrice,
             String description,
-            List<Characteristic> characteristic
+            List<Characteristic> characteristics
     ) {
         this.name = name;
         this.activationPrice = activationPrice;
         this.monthlyPrice = monthlyPrice;
         this.description = description;
-        this.characteristic = characteristic;
+        this.characteristics = characteristics;
     }
 
     @Override
@@ -70,11 +69,11 @@ public class Offer implements SimpleModel {
         this.description = description;
     }
 
-    public List<Characteristic> getCharacteristic() {
-        return characteristic;
+    public List<Characteristic> getCharacteristics() {
+        return characteristics;
     }
 
-    public void setCharacteristic(List<Characteristic> characteristic) {
-        this.characteristic = characteristic;
+    public void setCharacteristics(List<Characteristic> characteristics) {
+        this.characteristics = characteristics;
     }
 }

@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Window;
 import ru.teamrocket.csrsysteamdesktop.Model.Product;
 import ru.teamrocket.csrsysteamdesktop.Model.User;
@@ -29,6 +30,8 @@ public class AddUserController implements Initializable {
     private TextField phoneNumber;
     @FXML
     private TextField address;
+    @FXML
+    private Text textUser;
     private RootController rootController;
     private int idUser;
     private User user;
@@ -52,6 +55,8 @@ public class AddUserController implements Initializable {
         lastName.setText(this.user.getLastName());
         phoneNumber.setText(this.user.getPhoneNumber());
         address.setText(this.user.getAddress());
+
+        textUser.setText("Edit User");
     }
 
     private boolean inputValidate(Window window) {

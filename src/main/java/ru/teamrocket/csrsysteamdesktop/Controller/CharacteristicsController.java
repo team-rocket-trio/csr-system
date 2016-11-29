@@ -33,6 +33,9 @@ public class CharacteristicsController implements Initializable {
     private ObservableList<Characteristic> characteristicObservableList;
     private CharacteristicServiceImpl characteristicService;
 
+    private Characteristic characteristic;
+    private int idCharacteristic;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         characteristicService = new CharacteristicServiceImpl();
@@ -50,6 +53,11 @@ public class CharacteristicsController implements Initializable {
         this.rootController = rootController;
     }
 
+    public void setCharacteristicForUpdate(int idCharacteristic, Characteristic characteristic) {
+        this.characteristic = characteristic;
+        this.idCharacteristic = idCharacteristic;
+    }
+
     @FXML
     private void handleDelete(ActionEvent event){
         if(characteristicTableView.getSelectionModel().getSelectedItem() != null) {
@@ -61,7 +69,11 @@ public class CharacteristicsController implements Initializable {
 
     @FXML
     private void handleEdit(ActionEvent event){
-        System.out.println("handleEdit");
+        if(characteristicTableView.getSelectionModel().getSelectedItem() != null) {
+            rootController.handlerOnEditCharacteristic(
+                    characteristicTableView.getSelectionModel().getSelectedIndex(),
+                    characteristicTableView.getSelectionModel().getSelectedItem());
+        }
     }
 
     @FXML

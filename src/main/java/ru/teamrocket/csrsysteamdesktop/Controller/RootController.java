@@ -179,6 +179,22 @@ public class RootController implements Initializable {
         }
     }
 
+    public void handlerOnEditCharacteristic(int idCharacteristic, Characteristic characteristic){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/template/AddGlobalCharacteristics.fxml"));
+
+            Parent parent = loader.load();
+            borderPane.setCenter(parent);
+
+            AddGlobalCharacteristicsController addGlobalCharacteristicsController = loader.getController();
+            addGlobalCharacteristicsController.setRootController(this);
+            addGlobalCharacteristicsController.setActionUpdate(idCharacteristic, characteristic);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void setScene(String nameResurce) {
         try {

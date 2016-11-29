@@ -17,7 +17,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.teamrocket.csrsysteamdesktop.Controller.AddOfferController">
     <children>
-        <Text layoutX="14.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Offer" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="13.0">
+        <Text fx:id="textOffer" layoutX="14.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Offer" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="13.0">
             <font>
                 <Font size="14.0" />
             </font>
