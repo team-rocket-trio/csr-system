@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import ru.teamrocket.csrsysteamdesktop.Main;
 import ru.teamrocket.csrsysteamdesktop.Model.Offer;
+import ru.teamrocket.csrsysteamdesktop.Model.SimpleModel;
 import ru.teamrocket.csrsysteamdesktop.Model.User;
 
 import java.io.*;
@@ -20,7 +21,7 @@ import java.util.List;
 /**
  * Created by Kate on 13.11.2016.
  */
-public class OfferServiceImpl implements OfferService{
+public class OfferServiceImpl extends AbstractSimpleService implements OfferService{
     private final Path pathFile = Paths.get(Main.pathData + "/Offers.json");
     private final Type listType = new TypeToken<List<Offer>>() {}.getType();
     private List<Offer> offerList;
@@ -35,37 +36,15 @@ public class OfferServiceImpl implements OfferService{
         }
     }
 
-    public String readFile() {
-        try {
-            return new String(Files.readAllBytes(pathFile));
-        } catch (IOException e) {
-            System.out.print("Could not read file.");
-            return null;
-        }
+    @Override
+    public Path getPathFile() {
+        return this.pathFile;
     }
 
-    //TODO-Alexander: Вынести в Util класс
-    public void writeFile(List<Offer> offerList) {
-        File file = new File(pathFile.toString());
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String content = gson.toJson(offerList);
-
-        try (FileOutputStream fop = new FileOutputStream(file)) {
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-
-            byte[] contentInByte = content.getBytes();
-
-            fop.write(contentInByte);
-            fop.flush();
-            fop.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @Override
+    public List<Offer> getLocalList() {
+        return this.offerList;
     }
-
-
 
     @Override
     public void save(Offer offer) {

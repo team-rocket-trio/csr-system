@@ -1,28 +1,25 @@
 package ru.teamrocket.csrsysteamdesktop.Service;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import ru.teamrocket.csrsysteamdesktop.Main;
 import ru.teamrocket.csrsysteamdesktop.Model.User;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.lang.reflect.Type;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Created by Alexander on 16.11.2016.
  */
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends AbstractSimpleService implements UserService {
 
     private final Path pathFile = Paths.get(Main.pathData + "/Users.json");
-    private final Type listType = new TypeToken<List<User>>() {}.getType();
+    private final Type listType = new TypeToken<List<User>>() {
+    }.getType();
     private List<User> userList;
 
 
@@ -37,35 +34,14 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    private String readFile() {
-        try {
-            return new String(Files.readAllBytes(pathFile));
-        } catch (IOException e) {
-            System.out.println("Create User.json");
-            return null;
-        }
+    @Override
+    public Path getPathFile() {
+        return this.pathFile;
     }
 
-    //TODO-Alexander: Вынести в Util класс
-    private void writeFile(List<User> userList) {
-        File file = new File(pathFile.toString());
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String content = gson.toJson(userList);
-
-        try (FileOutputStream fop = new FileOutputStream(file)) {
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-
-            byte[] contentInByte = content.getBytes();
-
-            fop.write(contentInByte);
-            fop.flush();
-            fop.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+    @Override
+    public List<User> getLocalList() {
+        return userList;
     }
 
     @Override
@@ -75,20 +51,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(int index){
-        userList.remove(index);
+    public void delete(int id) {
+        User findUser = userList.stream().filter(user -> user.getId() == id).findFirst().get();
+        userList.remove(findUser);
+
         writeFile(userList);
     }
 
     @Override
     public void update(int index, User user) {
-        userList.set(index, user);
+        this.delete(index);
+        
+        userList.add(user);
         writeFile(userList);
     }
 
     @Override
     public User findId(int id) {
-        return userList.get(id);
+        return userList.stream()
+                .filter(user -> user.getId() == id)
+                .findFirst()
+                .get();
     }
 
     @Override

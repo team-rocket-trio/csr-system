@@ -8,8 +8,9 @@ import java.util.List;
 /**
  * Created by Alexander Shreyner on 07.11.2016.
  */
-public class User {
+public class User implements SimpleModel{
 
+    private int id;
     private String firstName;
     private String middleName;
     private String lastName;
@@ -24,6 +25,11 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.products = products;
+    }
+
+    @Override
+    public int getId() {
+        return this.id;
     }
 
     public String getFirstName() {

@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import ru.teamrocket.csrsysteamdesktop.Main;
 import ru.teamrocket.csrsysteamdesktop.Model.Characteristic;
+import ru.teamrocket.csrsysteamdesktop.Model.SimpleModel;
 import ru.teamrocket.csrsysteamdesktop.Model.CharacteristicList;
 import ru.teamrocket.csrsysteamdesktop.Model.CharacteristicNumber;
 import ru.teamrocket.csrsysteamdesktop.Model.CharacteristicText;
@@ -22,7 +23,8 @@ import java.util.List;
 /**
  * Created by Alexander on 28.11.2016.
  */
-public class CharacteristicServiceImpl implements CharacteristicService {
+public class CharacteristicServiceImpl extends AbstractSimpleService implements CharacteristicService {
+
     private final Path pathFile = Paths.get(Main.pathData + "/Characteristics.json");
     private  Type listType = new TypeToken<ArrayList<Characteristic>>(){}.getType();
     private List<Characteristic> characteristicList;
@@ -41,6 +43,16 @@ public class CharacteristicServiceImpl implements CharacteristicService {
         } else {
             characteristicList = gson.fromJson(characteristicFile, listType);
         }
+    }
+
+    @Override
+    public Path getPathFile() {
+        return this.pathFile;
+    }
+
+    @Override
+    public List<Characteristic> getLocalList() {
+        return this.characteristicList;
     }
 
     public String readFile() {
@@ -81,6 +93,8 @@ public class CharacteristicServiceImpl implements CharacteristicService {
 
     @Override
     public void save(Characteristic characteristic) {
+        characteristic.setId(characteristicList.size());
+
         characteristicList.add(characteristic);
         writeFile(characteristicList);
     }

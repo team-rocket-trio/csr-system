@@ -1,13 +1,22 @@
 package ru.teamrocket.csrsysteamdesktop.Model;
 
 /**
- * Created by Kate on 29.11.2016.
+ * Created by Alexander Shreyner on 07.11.2016.
  */
 public class Characteristic {
     protected String name;
     protected String activationPrice;
     protected String monthlyPrice;
     protected String type;
+
+public class Characteristic implements SimpleModel {
+
+    public Characteristic(String name, String type) {
+    private int id;
+    private String name;
+    private String activationPrice;
+    private String monthtyPrice;
+    private String type;
 
     public Characteristic(String name, String type) {
         this.name = name;
@@ -19,6 +28,14 @@ public class Characteristic {
         this.activationPrice = activationPrice;
         this.monthlyPrice = monthlyPrice;
         this.type = type;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

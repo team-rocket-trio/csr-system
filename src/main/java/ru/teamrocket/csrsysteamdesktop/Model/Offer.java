@@ -6,8 +6,9 @@ import java.util.List;
 /**
  * Created by Alexander Shreyner on 07.11.2016.
  */
-public class Offer {
+public class Offer implements SimpleModel {
 
+    private int id;
     private String name;
     private Integer activationPrice;
     private Integer monthlyPrice;
@@ -26,6 +27,11 @@ public class Offer {
         this.monthlyPrice = monthlyPrice;
         this.description = description;
         this.characteristic = characteristic;
+    }
+
+    @Override
+    public int getId() {
+        return this.id;
     }
 
     public OfferProperty composeOfferProperty(){
