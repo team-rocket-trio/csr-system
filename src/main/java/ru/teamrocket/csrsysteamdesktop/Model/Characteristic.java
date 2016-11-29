@@ -3,19 +3,12 @@ package ru.teamrocket.csrsysteamdesktop.Model;
 /**
  * Created by Alexander Shreyner on 07.11.2016.
  */
-public class Characteristic {
-    protected String name;
-    protected String activationPrice;
-    protected String monthlyPrice;
-    protected String type;
 
 public class Characteristic implements SimpleModel {
-
-    public Characteristic(String name, String type) {
     private int id;
     private String name;
     private String activationPrice;
-    private String monthtyPrice;
+    private String monthlyPrice;
     private String type;
 
     public Characteristic(String name, String type) {

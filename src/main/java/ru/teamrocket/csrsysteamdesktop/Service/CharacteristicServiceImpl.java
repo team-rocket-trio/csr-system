@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * Created by Alexander on 28.11.2016.
  */
-public class CharacteristicServiceImpl extends AbstractSimpleService implements CharacteristicService {
+public class CharacteristicServiceImpl implements CharacteristicService {
 
     private final Path pathFile = Paths.get(Main.pathData + "/Characteristics.json");
     private  Type listType = new TypeToken<ArrayList<Characteristic>>(){}.getType();
@@ -45,15 +45,6 @@ public class CharacteristicServiceImpl extends AbstractSimpleService implements 
         }
     }
 
-    @Override
-    public Path getPathFile() {
-        return this.pathFile;
-    }
-
-    @Override
-    public List<Characteristic> getLocalList() {
-        return this.characteristicList;
-    }
 
     public String readFile() {
         try {
@@ -64,7 +55,6 @@ public class CharacteristicServiceImpl extends AbstractSimpleService implements 
         }
     }
 
-    //TODO-Alexander: Вынести в Util класс
     public void writeFile(List<Characteristic> characteristicList) {
         File file = new File(pathFile.toString());
         RuntimeTypeAdapterFactory<Characteristic> runtimeTypeAdapterFactory = RuntimeTypeAdapterFactory
