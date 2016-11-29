@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class RootController implements Initializable {
-
     @FXML
     private BorderPane borderPane;
 
@@ -24,7 +23,6 @@ public class RootController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("location = [" + location + "], resources = [" + resources + "]");
     }
-
 
     public void handlerOnAddUser() {
         try {
@@ -123,7 +121,7 @@ public class RootController implements Initializable {
 
             AddOfferController addOfferController = loader.getController();
             addOfferController.setRootController(this);
-            addOfferController.setCharacteristics(characteristicList);
+            addOfferController.setCharacteristic(characteristicList);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -133,14 +131,14 @@ public class RootController implements Initializable {
     public void handlerOnAddCharacteristic(List<Characteristic> characteristicList) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/template/AddOfferCharacteristic.fxml"));
+            loader.setLocation(getClass().getResource("/template/SelectionCharacteristic.fxml"));
 
             Parent parent = loader.load();
             borderPane.setCenter(parent);
 
-            AddOfferCharacteristicController addOfferCharacteristicController = loader.getController();
-            addOfferCharacteristicController.setRootController(this);
-            addOfferCharacteristicController.setCharacteristicsList(characteristicList);
+            SelectionCharacteristicController selectionCharacteristicController = loader.getController();
+            selectionCharacteristicController.setRootController(this);
+            selectionCharacteristicController.setCharacteristicsList(characteristicList);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -164,7 +162,7 @@ public class RootController implements Initializable {
         }
     }
 
-    public void handletOnEditUser(int idUser, User user){
+    public void handlerOnEditUser(int idUser, User user){
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/template/AddUser.fxml"));

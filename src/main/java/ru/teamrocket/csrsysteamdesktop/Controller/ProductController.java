@@ -74,7 +74,7 @@ public class ProductController implements Initializable {
 
     @FXML
     private void handleOnEditUser(){
-        this.rootController.handletOnEditUser(this.idUser, this.user);
+        this.rootController.handlerOnEditUser(this.idUser, this.user);
     }
 
     @FXML

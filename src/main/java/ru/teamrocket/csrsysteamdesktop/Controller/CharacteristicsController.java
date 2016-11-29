@@ -7,7 +7,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import ru.teamrocket.csrsysteamdesktop.Model.Characteristic;
+import ru.teamrocket.csrsysteamdesktop.Model.CharacteristicText;
 import ru.teamrocket.csrsysteamdesktop.Service.CharacteristicServiceImpl;
 
 import java.net.URL;
@@ -17,9 +19,7 @@ import java.util.ResourceBundle;
  * Created by Alexander on 28.11.2016.
  */
 public class CharacteristicsController implements Initializable {
-
     private RootController rootController;
-
     @FXML
     private TableView<Characteristic> characteristicTableView;
     @FXML
@@ -27,15 +27,11 @@ public class CharacteristicsController implements Initializable {
     @FXML
     private TableColumn<Characteristic, String> activationPriceColumn;
     @FXML
-    private TableColumn<Characteristic, String> monthtyPriceColumn;
+    private TableColumn<Characteristic, String> monthlyPriceColumn;
     @FXML
     private TableColumn<Characteristic, String> valueColumn;
-
     private ObservableList<Characteristic> characteristicObservableList;
     private CharacteristicServiceImpl characteristicService;
-
-
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -44,11 +40,10 @@ public class CharacteristicsController implements Initializable {
 
         characteristicTableView.setItems(characteristicObservableList);
 
-        nameColumn.setCellValueFactory(cellData -> cellData.getValue().composCharacteristicToProppery().nameProperty());
-        activationPriceColumn.setCellValueFactory(cellData -> cellData.getValue().composCharacteristicToProppery().activationPriceProperty());
-        monthtyPriceColumn.setCellValueFactory(cellDate -> cellDate.getValue().composCharacteristicToProppery().monthtyPriceProperty());
-        valueColumn.setCellValueFactory(cellData -> cellData.getValue().composCharacteristicToProppery().valueProperty());
-
+        nameColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).nameProperty());
+        activationPriceColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).activationPriceProperty());
+        monthlyPriceColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).monthlyPriceProperty());
+        valueColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).valueProperty());
     }
 
     public void setRootController(RootController rootController) {

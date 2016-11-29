@@ -3,18 +3,14 @@ package ru.teamrocket.csrsysteamdesktop.Controller;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import ru.teamrocket.csrsysteamdesktop.Model.Characteristic;
+import ru.teamrocket.csrsysteamdesktop.Model.CharacteristicText;
 import ru.teamrocket.csrsysteamdesktop.Model.Offer;
-import ru.teamrocket.csrsysteamdesktop.Model.OfferProperty;
-import ru.teamrocket.csrsysteamdesktop.Service.CharacteristicServiceImpl;
 import ru.teamrocket.csrsysteamdesktop.Service.OfferServiceImpl;
 
 import java.net.URL;
@@ -32,11 +28,8 @@ public class OffersController implements Initializable{
     @FXML private TableColumn<Offer, Integer> actPriceColumn;
     @FXML private TableColumn<Offer, Integer> monPriceColumn;
     @FXML private TableColumn<Offer, String> characteristicsColumn;
-
     private ObservableList<Offer> offers;
-
     private OfferServiceImpl offersService;
-
     private RootController rootController;
 
     public void setRootController(RootController rootController) {
@@ -55,7 +48,7 @@ public class OffersController implements Initializable{
         monPriceColumn.setCellValueFactory(data -> data.getValue().composeOfferProperty().monthlyPriceProperty().asObject());
         descriptionColumn.setCellValueFactory(data -> data.getValue().composeOfferProperty().descriptionProperty());
         characteristicsColumn.setCellValueFactory((TableColumn.CellDataFeatures<Offer, String> data) -> {
-                List<Characteristic> characteristics = data.getValue().getCharacteristics();
+                List<Characteristic> characteristics = data.getValue().getCharacteristic();
                 String characteristic = characteristics
                         .stream()
                         .map(item -> item.toString())

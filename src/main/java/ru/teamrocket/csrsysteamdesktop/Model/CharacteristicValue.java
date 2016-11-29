@@ -4,17 +4,17 @@ package ru.teamrocket.csrsysteamdesktop.Model;
  * Created by Kate on 28.11.2016.
  */
 public class CharacteristicValue {
-    private Characteristic characteristic;
+    private CharacteristicText characteristicText;
 
-    public CharacteristicValue(Characteristic characteristic){
-        this.characteristic = characteristic;
+    public CharacteristicValue(CharacteristicText characteristicText){
+        this.characteristicText = characteristicText;
     }
 
-    public Characteristic getCharacteristic() {
-        return characteristic;
+    public CharacteristicText getCharacteristicText() {
+        return characteristicText;
     }
 
-    public void setCharacteristic(Characteristic characteristic) {
-        this.characteristic = characteristic;
+    public void setCharacteristicText(CharacteristicText characteristicText) {
+        this.characteristicText = characteristicText;
     }
 }

@@ -6,14 +6,9 @@ package ru.teamrocket.csrsysteamdesktop.Model;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,20 +19,20 @@ public class OfferProperty {
     private final IntegerProperty activationPrice;
     private final IntegerProperty monthlyPrice;
     private final StringProperty description;
-    private final List<Characteristic> characteristics;
+    private final List<Characteristic> characteristic;
 
     public OfferProperty(
             String name,
             Integer activationPrice,
             Integer monthlyPrice,
             String description,
-            List<Characteristic> characteristics
+            List<Characteristic> characteristic
     ) {
         this.name = new SimpleStringProperty(name);
         this.activationPrice = new SimpleIntegerProperty(activationPrice);
         this.monthlyPrice = new SimpleIntegerProperty(monthlyPrice);
         this.description = new SimpleStringProperty(description);
-        this.characteristics = new ArrayList<>(characteristics);
+        this.characteristic = new ArrayList<>(characteristic);
     }
 
     public OfferProperty(Offer offer) {
@@ -45,7 +40,7 @@ public class OfferProperty {
         this.activationPrice = new SimpleIntegerProperty(offer.getActivationPrice());
         this.monthlyPrice = new SimpleIntegerProperty(offer.getMonthlyPrice());
         this.description = new SimpleStringProperty(offer.getDescription());
-        this.characteristics = new ArrayList<>(FXCollections.observableArrayList(offer.getCharacteristics()));
+        this.characteristic = new ArrayList<>(FXCollections.observableArrayList(offer.getCharacteristic()));
     }
 
     public String getName() {
@@ -96,6 +91,6 @@ public class OfferProperty {
         this.description.set(description);
     }
 
-    public List<Characteristic> getCharacteristics() {return characteristics;}
+    public List<Characteristic> getCharacteristic() {return characteristic;}
 
 }

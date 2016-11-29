@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.Window;
 import ru.teamrocket.csrsysteamdesktop.Model.Characteristic;
+import ru.teamrocket.csrsysteamdesktop.Model.CharacteristicText;
 import ru.teamrocket.csrsysteamdesktop.Model.Offer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,7 +14,6 @@ import javafx.fxml.Initializable;
 import ru.teamrocket.csrsysteamdesktop.Service.OfferServiceImpl;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -30,34 +30,29 @@ public class AddOfferController implements Initializable {
     private TextField monPriceField;
     @FXML
     private TextArea descriptionArea;
-
     @FXML
     private TableView<Characteristic> characteristicTableView;
     @FXML
     private TableColumn<Characteristic, String> nameColumn;
     @FXML
     private TableColumn<Characteristic, String> valueColumn;
-
-
     private RootController rootController;
-
-
-    private ObservableList<Characteristic> observableCharacteristics;
-    private List<Characteristic> characteristics;
+    private ObservableList<Characteristic> observableCharacteristic;
+    private List<Characteristic> characteristic;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
 
-    public void setCharacteristics(List<Characteristic> characteristics) {
-        this.characteristics = characteristics;
+    public void setCharacteristic(List<Characteristic> characteristic) {
+        this.characteristic = characteristic;
 
-        observableCharacteristics = FXCollections.observableArrayList(characteristics);
+        observableCharacteristic = FXCollections.observableArrayList(characteristic);
 
-        characteristicTableView.setItems(observableCharacteristics);
+        characteristicTableView.setItems(observableCharacteristic);
 
-        nameColumn.setCellValueFactory(cellDate -> cellDate.getValue().composCharacteristicToProppery().nameProperty());
-        valueColumn.setCellValueFactory(cellDate -> cellDate.getValue().composCharacteristicToProppery().valueProperty());
+        //nameColumn.setCellValueFactory(cellDate -> cellDate.getValue().composCharacteristicToProperty().nameProperty());
+        //valueColumn.setCellValueFactory(cellDate -> cellDate.getValue().composCharacteristicToProperty().valueProperty());
     }
 
     public void setRootController(RootController rootController) {
@@ -74,7 +69,7 @@ public class AddOfferController implements Initializable {
                     Integer.parseInt(actPriceField.getText()),
                     Integer.parseInt(monPriceField.getText()),
                     descriptionArea.getText(),
-                    characteristics
+                    characteristic
             );
             new OfferServiceImpl().save(offer);
 
@@ -137,6 +132,6 @@ public class AddOfferController implements Initializable {
 
     @FXML
     private void addCharacteristicAction(ActionEvent event) {
-        rootController.handlerOnAddCharacteristic(characteristics);
+        rootController.handlerOnAddCharacteristic(characteristic);
     }
 }

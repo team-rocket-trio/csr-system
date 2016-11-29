@@ -1,8 +1,5 @@
 package ru.teamrocket.csrsysteamdesktop.Model;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,29 +12,20 @@ public class Offer {
     private Integer activationPrice;
     private Integer monthlyPrice;
     private String description;
-    private List<Characteristic> characteristics;
-
-    public Offer(){
-        this.name = "Offer";
-        this.activationPrice = 50;
-        this.monthlyPrice = 100;
-        this.description = "A brick to build the wall";
-        this.characteristics = new ArrayList<Characteristic>();
-        this.characteristics.add(new Characteristic("Color","brick-red"));
-    }
+    private List<Characteristic> characteristic;
 
     public Offer(
             String name,
             Integer activationPrice,
             Integer monthlyPrice,
             String description,
-            List<Characteristic> characteristics
+            List<Characteristic> characteristic
     ) {
         this.name = name;
         this.activationPrice = activationPrice;
         this.monthlyPrice = monthlyPrice;
         this.description = description;
-        this.characteristics = characteristics;
+        this.characteristic = characteristic;
     }
 
     public OfferProperty composeOfferProperty(){
@@ -76,11 +64,11 @@ public class Offer {
         this.description = description;
     }
 
-    public List<Characteristic> getCharacteristics() {
-        return characteristics;
+    public List<Characteristic> getCharacteristic() {
+        return characteristic;
     }
 
-    public void setCharacteristics(List<Characteristic> characteristics) {
-        this.characteristics = characteristics;
+    public void setCharacteristic(List<Characteristic> characteristic) {
+        this.characteristic = characteristic;
     }
 }

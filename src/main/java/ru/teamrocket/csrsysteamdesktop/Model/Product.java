@@ -7,8 +7,7 @@ import java.util.List;
  */
 public class Product {
     private Offer offer;
-    private List<Characteristic> characteristics;
-
+    private List<CharacteristicText> characteristicTexts;
 
     public Offer getOffer() {
         return offer;
@@ -18,11 +17,11 @@ public class Product {
         this.offer = offer;
     }
 
-    public List<Characteristic> getCharacteristics() {
-        return characteristics;
+    public List<CharacteristicText> getCharacteristicTexts() {
+        return characteristicTexts;
     }
 
-    public void setCharacteristics(List<Characteristic> characteristics) {
-        this.characteristics = characteristics;
+    public void setCharacteristicTexts(List<CharacteristicText> characteristicTexts) {
+        this.characteristicTexts = characteristicTexts;
     }
 }

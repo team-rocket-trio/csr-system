@@ -8,24 +8,37 @@ import javafx.beans.property.StringProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class CharacteristicProperty {
-
     private final StringProperty name;
     private final StringProperty activationPrice;
-    private final StringProperty monthtyPrice;
+    private final StringProperty monthlyPrice;
     private final StringProperty value;
 
     public CharacteristicProperty(String name, String value) {
         this.name = new SimpleStringProperty(name);
         this.value = new SimpleStringProperty(value);
         this.activationPrice = new SimpleStringProperty(null);
-        this.monthtyPrice = new SimpleStringProperty(null);
+        this.monthlyPrice = new SimpleStringProperty(null);
     }
 
-    public CharacteristicProperty(Characteristic characteristic) {
-        this.name = new SimpleStringProperty(characteristic.getName());
-        this.activationPrice = new SimpleStringProperty(characteristic.getActivationPrice());
-        this.monthtyPrice = new SimpleStringProperty(characteristic.getMonthtyPrice());
-        this.value = new SimpleStringProperty(characteristic.getValue());
+    public CharacteristicProperty(CharacteristicText characteristicText) {
+        this.name = new SimpleStringProperty(characteristicText.getName());
+        this.activationPrice = new SimpleStringProperty(characteristicText.getActivationPrice());
+        this.monthlyPrice = new SimpleStringProperty(characteristicText.getMonthlyPrice());
+        this.value = new SimpleStringProperty(characteristicText.getValue());
+    }
+
+    public CharacteristicProperty(CharacteristicNumber characteristicNumber) {
+        this.name = new SimpleStringProperty(characteristicNumber.getName());
+        this.activationPrice = new SimpleStringProperty(characteristicNumber.getActivationPrice());
+        this.monthlyPrice = new SimpleStringProperty(characteristicNumber.getMonthlyPrice());
+        this.value = new SimpleStringProperty(Integer.toString(characteristicNumber.getValue()));
+    }
+
+    public CharacteristicProperty(CharacteristicList characteristicList) {
+        this.name = new SimpleStringProperty(characteristicList.getName());
+        this.activationPrice = new SimpleStringProperty(characteristicList.getActivationPrice());
+        this.monthlyPrice = new SimpleStringProperty(characteristicList.getMonthlyPrice());
+        this.value = new SimpleStringProperty(characteristicList.getValuesString());
     }
 
     public String getActivationPrice() {
@@ -40,16 +53,16 @@ public class CharacteristicProperty {
         this.activationPrice.set(activationPrice);
     }
 
-    public String getMonthtyPrice() {
-        return monthtyPrice.get();
+    public String getMonthlyPrice() {
+        return monthlyPrice.get();
     }
 
-    public StringProperty monthtyPriceProperty() {
-        return monthtyPrice;
+    public StringProperty monthlyPriceProperty() {
+        return monthlyPrice;
     }
 
-    public void setMonthtyPrice(String monthtyPrice) {
-        this.monthtyPrice.set(monthtyPrice);
+    public void setMonthlyPrice(String monthlyPrice) {
+        this.monthlyPrice.set(monthlyPrice);
     }
 
     public String getName() {

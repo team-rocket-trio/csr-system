@@ -19,7 +19,6 @@ import java.util.ResourceBundle;
  * Created by Alexander on 07.11.2016.
  */
 public class AddUserController implements Initializable {
-
     @FXML
     private TextField firstName;
     @FXML
@@ -30,9 +29,7 @@ public class AddUserController implements Initializable {
     private TextField phoneNumber;
     @FXML
     private TextField address;
-
     private RootController rootController;
-
     private int idUser;
     private User user;
 

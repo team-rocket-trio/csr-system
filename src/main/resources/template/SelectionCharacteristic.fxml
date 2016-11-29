@@ -21,7 +21,7 @@
          <columns>
             <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
             <TableColumn fx:id="activationPriceColumn" prefWidth="217.0" text="ActivationPrice" />
-            <TableColumn fx:id="monthtyPriceColumn" prefWidth="159.0" text="MonthtyPrice" />
+            <TableColumn fx:id="monthlyPriceColumn" prefWidth="159.0" text="MonthtyPrice" />
             <TableColumn fx:id="valueColumn" prefWidth="123.0" text="Value" />
          </columns>
          <columnResizePolicy>
