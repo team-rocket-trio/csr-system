@@ -25,7 +25,7 @@ public class CharacteristicList extends Characteristic{
         StringBuilder stringBuilder = new StringBuilder();
 
         for (String s : value)
-            stringBuilder.append(s +"; ");
+            stringBuilder.append(s +", ");
 
         return stringBuilder.toString();
     }

@@ -44,11 +44,10 @@ public class SelectionCharacteristicController implements Initializable {
         characteristicObservableList = FXCollections.observableArrayList(characteristicService.findAll());
 
         characteristicTableView.setItems(characteristicObservableList);
-
-        /*nameColumn.setCellValueFactory(cellData -> cellData.getValue().composCharacteristicToProperty().nameProperty());
-        activationPriceColumn.setCellValueFactory(cellData -> cellData.getValue().composCharacteristicToProperty().activationPriceProperty());
-        monthlyPriceColumn.setCellValueFactory(cellDate -> cellDate.getValue().composCharacteristicToProperty().monthlyPriceProperty());
-        valueColumn.setCellValueFactory(cellData -> cellData.getValue().composCharacteristicToProperty().valueProperty());*/
+        nameColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).nameProperty());
+        activationPriceColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).activationPriceProperty());
+        monthlyPriceColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).monthlyPriceProperty());
+        valueColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).valueProperty());
     }
 
     public void setRootController(RootController rootController) {

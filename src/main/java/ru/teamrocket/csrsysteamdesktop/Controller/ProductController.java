@@ -64,12 +64,12 @@ public class ProductController implements Initializable {
 
     @FXML
     private void handleOnDeleteProduct(){
-        System.out.println("handleOnDeleteProduct");
+
     }
 
     @FXML
     private void handleOnAddProduct(){
-        System.out.println("handleOnAddProduct");
+        this.rootController.handlerOnAddProduct(this.idUser, this.user);
     }
 
     @FXML

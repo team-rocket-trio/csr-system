@@ -49,11 +49,11 @@ public class OffersController implements Initializable{
         descriptionColumn.setCellValueFactory(data -> data.getValue().composeOfferProperty().descriptionProperty());
         characteristicsColumn.setCellValueFactory((TableColumn.CellDataFeatures<Offer, String> data) -> {
                 List<Characteristic> characteristics = data.getValue().getCharacteristic();
-                String characteristic = characteristics
+                String c = characteristics
                         .stream()
                         .map(item -> item.toString())
                         .reduce("", (acc, item) -> acc + item + "; ");
-                return new ReadOnlyStringWrapper(characteristic);
+                return new ReadOnlyStringWrapper(c);
             });
     }
 

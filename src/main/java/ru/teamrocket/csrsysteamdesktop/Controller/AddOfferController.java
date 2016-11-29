@@ -38,21 +38,21 @@ public class AddOfferController implements Initializable {
     private TableColumn<Characteristic, String> valueColumn;
     private RootController rootController;
     private ObservableList<Characteristic> observableCharacteristic;
-    private List<Characteristic> characteristic;
+    private List<Characteristic> characteristics;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
 
-    public void setCharacteristic(List<Characteristic> characteristic) {
-        this.characteristic = characteristic;
+    public void setCharacteristic(List<Characteristic> characteristics) {
+        this.characteristics = characteristics;
 
-        observableCharacteristic = FXCollections.observableArrayList(characteristic);
+        observableCharacteristic = FXCollections.observableArrayList(characteristics);
 
         characteristicTableView.setItems(observableCharacteristic);
 
-        //nameColumn.setCellValueFactory(cellDate -> cellDate.getValue().composCharacteristicToProperty().nameProperty());
-        //valueColumn.setCellValueFactory(cellDate -> cellDate.getValue().composCharacteristicToProperty().valueProperty());
+        nameColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).nameProperty());
+        valueColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).valueProperty());
     }
 
     public void setRootController(RootController rootController) {
@@ -69,7 +69,7 @@ public class AddOfferController implements Initializable {
                     Integer.parseInt(actPriceField.getText()),
                     Integer.parseInt(monPriceField.getText()),
                     descriptionArea.getText(),
-                    characteristic
+                    characteristics
             );
             new OfferServiceImpl().save(offer);
 
@@ -132,6 +132,6 @@ public class AddOfferController implements Initializable {
 
     @FXML
     private void addCharacteristicAction(ActionEvent event) {
-        rootController.handlerOnAddCharacteristic(characteristic);
+        rootController.handlerOnAddCharacteristic(characteristics);
     }
 }

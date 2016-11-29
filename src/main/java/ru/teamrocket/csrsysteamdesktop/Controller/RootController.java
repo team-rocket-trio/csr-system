@@ -188,4 +188,20 @@ public class RootController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    public void handlerOnAddProduct(int idUser, User user) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/template/Offers.fxml"));
+
+            Parent parent = loader.load();
+            borderPane.setCenter(parent);
+
+            SelectionOffersController selectionOffersController = loader.getController();
+            selectionOffersController.setRootController(this);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
