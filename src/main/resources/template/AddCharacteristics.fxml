@@ -14,7 +14,7 @@
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.teamrocket.csrsysteamdesktop.Controller.AddCharacteristicsController">
    <children>
-      <Label fx:id="labelChar" layoutX="44.0" layoutY="14.0" text="Add global characteristic" AnchorPane.leftAnchor="44.0" AnchorPane.topAnchor="14.0">
+      <Label fx:id="labelChar" layoutX="44.0" layoutY="14.0" text="Add global characteristicId" AnchorPane.leftAnchor="44.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font size="14.0" />
          </font>

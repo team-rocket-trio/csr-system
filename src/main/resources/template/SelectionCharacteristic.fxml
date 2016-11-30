@@ -8,7 +8,6 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.teamrocket.csrsysteamdesktop.Controller.SelectionCharacteristicController">
    <children>
       <Label layoutX="14.0" layoutY="14.0" text="Selection Characteristic">
@@ -20,6 +19,7 @@
       <TableView fx:id="characteristicTableView" layoutX="16.0" layoutY="60.0" prefHeight="445.0" prefWidth="654.0" AnchorPane.bottomAnchor="105.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="50.0">
          <columns>
             <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
+            <TableColumn fx:id="typeColumn" prefWidth="75.0" text="Type" />
             <TableColumn fx:id="activationPriceColumn" prefWidth="217.0" text="ActivationPrice" />
             <TableColumn fx:id="monthlyPriceColumn" prefWidth="159.0" text="MonthtyPrice" />
             <TableColumn fx:id="valueColumn" prefWidth="123.0" text="Value" />
@@ -28,7 +28,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button onAction="#handleSelect" layoutX="729.0" layoutY="503.0" mnemonicParsing="false" text="Select">
+      <Button layoutX="729.0" layoutY="503.0" mnemonicParsing="false" onAction="#handleSelect" text="Select">
          <font>
             <Font size="14.0" />
          </font>

@@ -12,20 +12,20 @@ public class Offer implements SimpleModel {
     private Integer activationPrice;
     private Integer monthlyPrice;
     private String description;
-    private List<Characteristic> characteristics;
+    private List<Integer> characteristicsId;
 
     public Offer(
             String name,
             Integer activationPrice,
             Integer monthlyPrice,
             String description,
-            List<Characteristic> characteristics
+            List<Integer> characteristicsId
     ) {
         this.name = name;
         this.activationPrice = activationPrice;
         this.monthlyPrice = monthlyPrice;
         this.description = description;
-        this.characteristics = characteristics;
+        this.characteristicsId = characteristicsId;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class Offer implements SimpleModel {
         return this.id;
     }
 
-    public OfferProperty composeOfferProperty(){
+    public OfferProperty composeOfferProperty() {
         return new OfferProperty(this);
     }
 
@@ -69,11 +69,11 @@ public class Offer implements SimpleModel {
         this.description = description;
     }
 
-    public List<Characteristic> getCharacteristics() {
-        return characteristics;
+    public List<Integer> getCharacteristicsId() {
+        return characteristicsId;
     }
 
-    public void setCharacteristics(List<Characteristic> characteristics) {
-        this.characteristics = characteristics;
+    public void setCharacteristicsId(List<Integer> characteristicsId) {
+        this.characteristicsId = characteristicsId;
     }
 }

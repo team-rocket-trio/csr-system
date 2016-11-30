@@ -54,6 +54,7 @@ public class CharacteristicsController implements Initializable {
 
     }
 
+    //TODO-Alexander: Вынести в Util
     public StringProperty getValueProppery(Characteristic characteristic) {
         switch (characteristic.getType()) {
             case Number:

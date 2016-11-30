@@ -18,7 +18,7 @@ public class CharacteristicProperty {
     private final StringProperty type;
     private final StringProperty valueText;
     private final IntegerProperty valueNumber;
-    private final SimpleListProperty valueListProperty;
+    private final SimpleListProperty<String> valueListProperty;
 
     public CharacteristicProperty(String name) {
 
@@ -40,7 +40,7 @@ public class CharacteristicProperty {
 
         this.valueText = new SimpleStringProperty(characteristic.getValueText());
         this.valueNumber = new SimpleIntegerProperty(characteristic.getValueNumber());
-        this.valueListProperty = new SimpleListProperty(FXCollections.observableArrayList(characteristic.getValueList()));
+        this.valueListProperty = new SimpleListProperty<String>(FXCollections.observableArrayList(characteristic.getValueList()));
     }
 
     public String getName() {

@@ -11,16 +11,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import ru.teamrocket.csrsysteamdesktop.Service.OfferServiceImpl;
+import ru.teamrocket.csrsysteamdesktop.Utils.ErrorValidateAlert;
 
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 /**
  * Created by Alexander on 07.11.2016.
  */
 
 public class AddOfferController implements Initializable {
+
     @FXML
     private TextField nameField;
     @FXML
@@ -35,8 +38,11 @@ public class AddOfferController implements Initializable {
     private TableColumn<Characteristic, String> nameColumn;
     @FXML
     private TableColumn<Characteristic, String> valueColumn;
+
     private RootController rootController;
+
     private ObservableList<Characteristic> observableCharacteristic;
+
     private List<Characteristic> characteristics;
 
     @Override
@@ -50,7 +56,7 @@ public class AddOfferController implements Initializable {
 
         characteristicTableView.setItems(observableCharacteristic);
 
-//        nameColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).nameProperty());
+        nameColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty().nameProperty());
 //        valueColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).valueProperty());
     }
 
@@ -68,7 +74,7 @@ public class AddOfferController implements Initializable {
                     Integer.parseInt(actPriceField.getText()),
                     Integer.parseInt(monPriceField.getText()),
                     descriptionArea.getText(),
-                    characteristics
+                    characteristics.stream().map(characteristic -> characteristic.getId()).collect(Collectors.toList())
             );
             new OfferServiceImpl().save(offer);
 
@@ -116,14 +122,7 @@ public class AddOfferController implements Initializable {
         if (errorMessage.length() == 0) {
             return true;
         } else {
-
-            //TODO-Alexander: Вынести в отдельный класс
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(window);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
-            alert.setContentText(errorMessage);
-            alert.showAndWait();
+            new ErrorValidateAlert(window, errorMessage).show();
 
             return false;
         }

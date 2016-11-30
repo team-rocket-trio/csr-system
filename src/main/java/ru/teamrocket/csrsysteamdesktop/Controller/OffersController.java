@@ -46,14 +46,14 @@ public class OffersController implements Initializable{
         actPriceColumn.setCellValueFactory(data -> data.getValue().composeOfferProperty().activationPriceProperty().asObject());
         monPriceColumn.setCellValueFactory(data -> data.getValue().composeOfferProperty().monthlyPriceProperty().asObject());
         descriptionColumn.setCellValueFactory(data -> data.getValue().composeOfferProperty().descriptionProperty());
-        characteristicsColumn.setCellValueFactory((TableColumn.CellDataFeatures<Offer, String> data) -> {
-                List<Characteristic> characteristics = data.getValue().getCharacteristics();
-                String c = characteristics
-                        .stream()
-                        .map(item -> item.toString())
-                        .reduce("", (acc, item) -> acc + item + "; ");
-                return new ReadOnlyStringWrapper(c);
-            });
+//        characteristicsColumn.setCellValueFactory((TableColumn.CellDataFeatures<Offer, String> data) -> {
+//                List<Characteristic> characteristics = data.getValue().getCharacteristicsId();
+//                String c = characteristics
+//                        .stream()
+//                        .map(item -> item.toString())
+//                        .reduce("", (acc, item) -> acc + item + "; ");
+//                return new ReadOnlyStringWrapper(c);
+//            });
     }
 
     @FXML
