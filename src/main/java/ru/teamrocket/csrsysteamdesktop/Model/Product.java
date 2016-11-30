@@ -1,49 +1,36 @@
 package ru.teamrocket.csrsysteamdesktop.Model;
 
-import java.util.List;
-
 /**
  * Created by Alexander on 07.11.2016.
  */
-//public class Product {
-//    private Offer offer;
-//    private List<CharacteristicText> characteristicTexts;
-//
-//    public Offer getOffer() {
-//        return offer;
-//    }
-//
-//    public void setOffer(Offer offer) {
-//        this.offer = offer;
-//    }
-//
-//    public List<CharacteristicText> getCharacteristicTexts() {
-//        return characteristicTexts;
-//    }
-//
-//    public void setCharacteristicTexts(List<CharacteristicText> characteristicTexts) {
-//        this.characteristicTexts = characteristicTexts;
-//    }
-//}
+public class Product implements SimpleModel {
 
-public class Product {
-    private Offer offer;
-    private List<Characteristic> characteristics;
+    private int id;
+    private int characteristicsId;
+    private int characteristicsValueId;
 
-
-    public Offer getOffer() {
-        return offer;
+    @Override
+    public int getId() {
+        return id;
     }
 
-    public void setOffer(Offer offer) {
-        this.offer = offer;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public List<Characteristic> getCharacteristics() {
-        return characteristics;
+    public int getCharacteristicsId() {
+        return characteristicsId;
     }
 
-    public void setCharacteristics(List<Characteristic> characteristics) {
-        this.characteristics = characteristics;
+    public void setCharacteristicsId(int characteristicsId) {
+        this.characteristicsId = characteristicsId;
+    }
+
+    public int getCharacteristicsValueId() {
+        return characteristicsValueId;
+    }
+
+    public void setCharacteristicsValueId(int characteristicsValueId) {
+        this.characteristicsValueId = characteristicsValueId;
     }
 }

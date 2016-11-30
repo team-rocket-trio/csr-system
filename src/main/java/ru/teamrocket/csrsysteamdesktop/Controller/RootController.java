@@ -153,9 +153,9 @@ public class RootController implements Initializable {
             Parent parent = loader.load();
             borderPane.setCenter(parent);
 
-            ProductController productController = loader.getController();
-            productController.setRootController(this);
-            productController.setUserForUpdate(idUser, user);
+            DetailsUsersController detailsUsersController = loader.getController();
+            detailsUsersController.setRootController(this);
+            detailsUsersController.setUserForUpdate(idUser, user);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -205,16 +205,16 @@ public class RootController implements Initializable {
         }
     }
 
-    public void handlerOnAddProduct(int idUser, User user) {
+    public void handlerOnAddProduct() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/template/Offers.fxml"));
+            loader.setLocation(getClass().getResource("/template/SelectionProducts.fxml"));
 
             Parent parent = loader.load();
             borderPane.setCenter(parent);
 
-            SelectionOffersController selectionOffersController = loader.getController();
-            selectionOffersController.setRootController(this);
+            SelectionProductsController selectionProductsController = loader.getController();
+            selectionProductsController.setRootController(this);
 
         } catch (IOException e) {
             e.printStackTrace();

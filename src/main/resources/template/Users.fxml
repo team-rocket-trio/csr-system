@@ -20,6 +20,6 @@
       </TableView>
        <Button fx:id="addUserButton" layoutX="735.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleOnCreateUser" text="Create" />
        <Button fx:id="deleteUserButton" layoutX="676.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleOnDeleteUser" text="Delete" />
-       <Button fx:id="detailsButton" layoutX="582.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleOnProducts" text="Show Details" />
+       <Button fx:id="detailsButton" layoutX="582.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleOnDetailsUsers" text="Show Details" />
        </children>
 </AnchorPane>

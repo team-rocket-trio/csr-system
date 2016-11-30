@@ -10,7 +10,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * Created by Alexander on 16.11.2016.
@@ -46,15 +45,15 @@ public class UserServiceImpl extends AbstractSimpleService implements UserServic
 
     @Override
     public void save(User user) {
+        user.setId(this.generateId());
+
         userList.add(user);
         writeFile(userList);
     }
 
     @Override
     public void delete(int id) {
-        User findUser = userList.stream().filter(user -> user.getId() == id).findFirst().get();
-        userList.remove(findUser);
-
+        userList.remove(this.findId(id));
         writeFile(userList);
     }
 
@@ -68,7 +67,8 @@ public class UserServiceImpl extends AbstractSimpleService implements UserServic
 
     @Override
     public User findId(int id) {
-        return userList.stream()
+        return userList
+                .stream()
                 .filter(user -> user.getId() == id)
                 .findFirst()
                 .get();

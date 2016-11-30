@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 /**
  * Created by Kate on 28.11.2016.
  */
-public class ProductController implements Initializable {
+public class DetailsUsersController implements Initializable {
 
     private User user;
     private int idUser;
@@ -69,7 +69,7 @@ public class ProductController implements Initializable {
 
     @FXML
     private void handleOnAddProduct(){
-        this.rootController.handlerOnAddProduct(this.idUser, this.user);
+        this.rootController.handlerOnAddProduct();
     }
 
     @FXML

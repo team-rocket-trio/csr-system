@@ -48,15 +48,15 @@ public class UsersController implements Initializable {
         nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         phoneColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        phoneColumn.setOnEditCommit((TableColumn.CellEditEvent<User, String> data) -> {
-                data.getTableView()
-                    .getItems()
-                    .get(data.getTablePosition().getRow())
-                    .setPhoneNumber(data.getNewValue());
+//        phoneColumn.setOnEditCommit((TableColumn.CellEditEvent<User, String> data) -> {
+//                data.getTableView()
+//                    .getItems()
+//                    .get(data.getTablePosition().getRow())
+//                    .setPhoneNumber(data.getNewValue());
 //                int index = data.getTableView().getSelectionModel().getSelectedIndex();
 //                User editedUser = data.getTableView().getItems().get(index);
 //                new UserServiceImpl().edit(editedUser, index);
-        });
+//        });
     }
 
     @FXML
@@ -82,7 +82,7 @@ public class UsersController implements Initializable {
     }
 
     @FXML
-    private void handleOnProducts(){
+    private void handleOnDetailsUsers(){
         if(userTableView.getSelectionModel().getSelectedItem() != null) {
             rootController.handlerOnProducts(
                     userTableView.getSelectionModel().getSelectedIndex(),
