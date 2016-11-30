@@ -9,7 +9,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import ru.teamrocket.csrsysteamdesktop.Model.Characteristic;
-import ru.teamrocket.csrsysteamdesktop.Model.CharacteristicText;
 import ru.teamrocket.csrsysteamdesktop.Service.CharacteristicServiceImpl;
 
 import java.net.URL;
@@ -40,14 +39,14 @@ public class SelectionCharacteristicController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        characteristicService = new CharacteristicServiceImpl();
-        characteristicObservableList = FXCollections.observableArrayList(characteristicService.findAll());
-
-        characteristicTableView.setItems(characteristicObservableList);
-        nameColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).nameProperty());
-        activationPriceColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).activationPriceProperty());
-        monthlyPriceColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).monthlyPriceProperty());
-        valueColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).valueProperty());
+//        characteristicService = new CharacteristicServiceImpl();
+//        characteristicObservableList = FXCollections.observableArrayList(characteristicService.findAll());
+//
+//        characteristicTableView.setItems(characteristicObservableList);
+//        nameColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).nameProperty());
+//        activationPriceColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).activationPriceProperty());
+//        monthlyPriceColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).monthlyPriceProperty());
+//        valueColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).valueProperty());
     }
 
     public void setRootController(RootController rootController) {
@@ -60,17 +59,17 @@ public class SelectionCharacteristicController implements Initializable {
 
     @FXML
     private void handleSelect(ActionEvent event){
-        if(characteristicTableView.getSelectionModel().getSelectedItem() != null) {
-            characteristicsList.add(characteristicTableView.getSelectionModel().getSelectedItem());
-            rootController.handlerOnAddOffer(this.characteristicsList);
-        }
-        else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error deleting user");
-            alert.setHeaderText("User is not selected.");
-            alert.setContentText("Please select a user.");
-            alert.showAndWait();
-        }
+//        if(characteristicTableView.getSelectionModel().getSelectedItem() != null) {
+//            characteristicsList.add(characteristicTableView.getSelectionModel().getSelectedItem());
+//            rootController.handlerOnAddOffer(this.characteristicsList);
+//        }
+//        else{
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setTitle("Error deleting user");
+//            alert.setHeaderText("User is not selected.");
+//            alert.setContentText("Please select a user.");
+//            alert.showAndWait();
+//        }
     }
 
 }

@@ -1,22 +1,35 @@
 package ru.teamrocket.csrsysteamdesktop.Model;
 
+import ru.teamrocket.csrsysteamdesktop.Utils.TypeCharacteristic;
+
+import java.util.List;
+
 /**
  * Created by Alexander Shreyner on 07.11.2016.
  */
 
 public class Characteristic implements SimpleModel {
+
     private int id;
     private String name;
-    private String activationPrice;
-    private String monthlyPrice;
-    private String type;
+    private int activationPrice;
+    private int monthlyPrice;
+    private TypeCharacteristic type;
+    private int valueNumber;
+    private String valueText;
+    private List<String> valueList;
 
-    public Characteristic(String name, String type) {
+    public Characteristic(String name, TypeCharacteristic type) {
         this.name = name;
         this.type = type;
     }
 
-    public Characteristic(String name, String activationPrice, String monthlyPrice, String type) {
+    public Characteristic(
+            String name,
+            int activationPrice,
+            int monthlyPrice,
+            TypeCharacteristic type
+    ) {
         this.name = name;
         this.activationPrice = activationPrice;
         this.monthlyPrice = monthlyPrice;
@@ -39,47 +52,56 @@ public class Characteristic implements SimpleModel {
         this.name = name;
     }
 
-    public String getActivationPrice() {
+    public int getActivationPrice() {
         return activationPrice;
     }
 
-    public void setActivationPrice(String activationPrice) {
+    public void setActivationPrice(int activationPrice) {
         this.activationPrice = activationPrice;
     }
 
-    public String getMonthlyPrice() {
+    public int getMonthlyPrice() {
         return monthlyPrice;
     }
 
-    public void setMonthlyPrice(String monthlyPrice) {
+    public void setMonthlyPrice(int monthlyPrice) {
         this.monthlyPrice = monthlyPrice;
     }
 
-    public String getType() {
+    public int getValueNumber() {
+        return valueNumber;
+    }
+
+    public void setValueNumber(int valueNumber) {
+        this.valueNumber = valueNumber;
+    }
+
+    public TypeCharacteristic getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(TypeCharacteristic type) {
         this.type = type;
     }
 
-    public CharacteristicProperty composeCharacteristicProperty(Characteristic c){
-        CharacteristicProperty characteristicProperty = null;
-        if (c instanceof CharacteristicText){
-            CharacteristicText characteristicText = (CharacteristicText) c;
-            characteristicProperty = new CharacteristicProperty(characteristicText);
-        }
-        else
-            if(c instanceof CharacteristicNumber){
-                CharacteristicNumber characteristicNumber = (CharacteristicNumber) c;
-                characteristicProperty = new CharacteristicProperty(characteristicNumber);
-            }
-            else
-                if(c instanceof CharacteristicList){
-                    CharacteristicList characteristicList = (CharacteristicList) c;
-                    characteristicProperty = new CharacteristicProperty(characteristicList);
-                }
-        return characteristicProperty;
+    public String getValueText() {
+        return valueText;
+    }
+
+    public void setValueText(String valueText) {
+        this.valueText = valueText;
+    }
+
+    public List<String> getValueList() {
+        return valueList;
+    }
+
+    public void setValueList(List<String> valueList) {
+        this.valueList = valueList;
+    }
+
+    public CharacteristicProperty composeCharacteristicProperty() {
+        return new CharacteristicProperty(this);
     }
 
 }

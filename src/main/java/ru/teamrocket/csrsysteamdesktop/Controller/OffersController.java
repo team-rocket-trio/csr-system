@@ -9,7 +9,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import ru.teamrocket.csrsysteamdesktop.Model.Characteristic;
-import ru.teamrocket.csrsysteamdesktop.Model.CharacteristicText;
 import ru.teamrocket.csrsysteamdesktop.Model.Offer;
 import ru.teamrocket.csrsysteamdesktop.Service.OfferServiceImpl;
 

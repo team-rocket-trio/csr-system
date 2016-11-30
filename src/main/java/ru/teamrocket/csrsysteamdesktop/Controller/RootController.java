@@ -101,8 +101,8 @@ public class RootController implements Initializable {
             Parent parent = loader.load();
             borderPane.setCenter(parent);
 
-            AddGlobalCharacteristicsController addGlobalCharacteristicsController = loader.getController();
-            addGlobalCharacteristicsController.setRootController(this);
+            AddCharacteristicsController addCharacteristicsController = loader.getController();
+            addCharacteristicsController.setRootController(this);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -187,9 +187,9 @@ public class RootController implements Initializable {
             Parent parent = loader.load();
             borderPane.setCenter(parent);
 
-            AddGlobalCharacteristicsController addGlobalCharacteristicsController = loader.getController();
-            addGlobalCharacteristicsController.setRootController(this);
-            addGlobalCharacteristicsController.setActionUpdate(idCharacteristic, characteristic);
+            AddCharacteristicsController addCharacteristicsController = loader.getController();
+            addCharacteristicsController.setRootController(this);
+            addCharacteristicsController.setActionUpdate(idCharacteristic, characteristic);
 
         } catch (IOException e) {
             e.printStackTrace();

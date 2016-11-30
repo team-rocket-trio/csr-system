@@ -22,10 +22,10 @@ public abstract class AbstractSimpleService {
     public abstract <T extends SimpleModel> List<T> getLocalList();
 
     public int generateId() {
-        if(getLocalList().size() == 0) {
+        if (getLocalList().size() == 0) {
             return 0;
         } else {
-            return getLocalList().get(getLocalList().size() - 1 ).getId() + 1;
+            return getLocalList().get(getLocalList().size() - 1).getId() + 1;
         }
     }
 

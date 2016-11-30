@@ -7,9 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import ru.teamrocket.csrsysteamdesktop.Model.Characteristic;
-import ru.teamrocket.csrsysteamdesktop.Model.CharacteristicText;
 import ru.teamrocket.csrsysteamdesktop.Service.CharacteristicServiceImpl;
 
 import java.net.URL;
@@ -30,6 +28,7 @@ public class CharacteristicsController implements Initializable {
     private TableColumn<Characteristic, String> monthlyPriceColumn;
     @FXML
     private TableColumn<Characteristic, String> valueColumn;
+
     private ObservableList<Characteristic> characteristicObservableList;
     private CharacteristicServiceImpl characteristicService;
 
@@ -43,10 +42,10 @@ public class CharacteristicsController implements Initializable {
 
         characteristicTableView.setItems(characteristicObservableList);
 
-        nameColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).nameProperty());
-        activationPriceColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).activationPriceProperty());
-        monthlyPriceColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).monthlyPriceProperty());
-        valueColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).valueProperty());
+//        nameColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).nameProperty());
+//        activationPriceColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).activationPriceProperty());
+//        monthlyPriceColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).monthlyPriceProperty());
+//        valueColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).valueProperty());
     }
 
     public void setRootController(RootController rootController) {

@@ -6,7 +6,6 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.Window;
 import ru.teamrocket.csrsysteamdesktop.Model.Characteristic;
-import ru.teamrocket.csrsysteamdesktop.Model.CharacteristicText;
 import ru.teamrocket.csrsysteamdesktop.Model.Offer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -51,8 +50,8 @@ public class AddOfferController implements Initializable {
 
         characteristicTableView.setItems(observableCharacteristic);
 
-        nameColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).nameProperty());
-        valueColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).valueProperty());
+//        nameColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).nameProperty());
+//        valueColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).valueProperty());
     }
 
     public void setRootController(RootController rootController) {
