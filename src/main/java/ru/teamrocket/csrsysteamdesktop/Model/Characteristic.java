@@ -2,6 +2,7 @@ package ru.teamrocket.csrsysteamdesktop.Model;
 
 import ru.teamrocket.csrsysteamdesktop.Utils.TypeCharacteristic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -84,6 +85,10 @@ public class Characteristic implements SimpleModel {
         this.type = type;
     }
 
+    public String getTypeString(){
+        return type.name();
+    }
+
     public String getValueText() {
         return valueText;
     }
@@ -93,7 +98,11 @@ public class Characteristic implements SimpleModel {
     }
 
     public List<String> getValueList() {
-        return valueList;
+        if (this.valueList != null) {
+            return valueList;
+        } else {
+            return new ArrayList<String>();
+        }
     }
 
     public void setValueList(List<String> valueList) {

@@ -1,5 +1,7 @@
 package ru.teamrocket.csrsysteamdesktop.Controller;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,6 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import ru.teamrocket.csrsysteamdesktop.Model.Characteristic;
 import ru.teamrocket.csrsysteamdesktop.Service.CharacteristicServiceImpl;
+import ru.teamrocket.csrsysteamdesktop.Utils.TypeCharacteristic;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,22 +21,22 @@ import java.util.ResourceBundle;
  */
 public class CharacteristicsController implements Initializable {
     private RootController rootController;
+
     @FXML
     private TableView<Characteristic> characteristicTableView;
     @FXML
     private TableColumn<Characteristic, String> nameColumn;
     @FXML
-    private TableColumn<Characteristic, String> activationPriceColumn;
+    private TableColumn<Characteristic, Integer> activationPriceColumn;
     @FXML
-    private TableColumn<Characteristic, String> monthlyPriceColumn;
+    private TableColumn<Characteristic, Integer> monthlyPriceColumn;
     @FXML
     private TableColumn<Characteristic, String> valueColumn;
+    @FXML
+    private TableColumn<Characteristic, String> typeColumn;
 
     private ObservableList<Characteristic> characteristicObservableList;
     private CharacteristicServiceImpl characteristicService;
-
-    private Characteristic characteristic;
-    private int idCharacteristic;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -42,10 +45,29 @@ public class CharacteristicsController implements Initializable {
 
         characteristicTableView.setItems(characteristicObservableList);
 
-//        nameColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).nameProperty());
-//        activationPriceColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).activationPriceProperty());
-//        monthlyPriceColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).monthlyPriceProperty());
-//        valueColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty(cellData.getValue()).valueProperty());
+        nameColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty().nameProperty());
+        typeColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty().typeProperty());
+        activationPriceColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty().activationPriceProperty().asObject());
+        monthlyPriceColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty().monthlyPriceProperty().asObject());
+
+        valueColumn.setCellValueFactory(cellData -> this.getValueProppery(cellData.getValue()));
+
+    }
+
+    public StringProperty getValueProppery(Characteristic characteristic) {
+        switch (characteristic.getType()) {
+            case Number:
+                return new SimpleStringProperty(Integer.toString(characteristic.getValueNumber()));
+            case Text:
+                return new SimpleStringProperty(characteristic.getValueText());
+            case List:
+                String string = characteristic.getValueList()
+                        .stream()
+                        .reduce("", (s, s2) -> s + s2 + "; ");
+                return new SimpleStringProperty(string);
+            default:
+                return new SimpleStringProperty("");
+        }
     }
 
     public void setRootController(RootController rootController) {
@@ -53,30 +75,33 @@ public class CharacteristicsController implements Initializable {
     }
 
     public void setCharacteristicForUpdate(int idCharacteristic, Characteristic characteristic) {
-        this.characteristic = characteristic;
-        this.idCharacteristic = idCharacteristic;
+//        this.characteristic = characteristic;
+//        this.idCharacteristic = idCharacteristic;
     }
 
     @FXML
-    private void handleDelete(ActionEvent event){
-        if(characteristicTableView.getSelectionModel().getSelectedItem() != null) {
-            int idCharacteristic = characteristicTableView.getSelectionModel().getSelectedIndex();
+    private void handleDelete(ActionEvent event) {
+        if (characteristicTableView.getSelectionModel().getSelectedItem() != null) {
+            int idCharacteristic = characteristicTableView.getSelectionModel().getSelectedItem().getId();
+
             characteristicTableView.getItems().remove(idCharacteristic);
+
             new CharacteristicServiceImpl().delete(idCharacteristic);
         }
     }
 
     @FXML
-    private void handleEdit(ActionEvent event){
-        if(characteristicTableView.getSelectionModel().getSelectedItem() != null) {
-            rootController.handlerOnEditCharacteristic(
-                    characteristicTableView.getSelectionModel().getSelectedIndex(),
-                    characteristicTableView.getSelectionModel().getSelectedItem());
-        }
+    private void handleEdit(ActionEvent event) {
+        //TODO-Alexander: Добавить редактирование
+//        if (characteristicTableView.getSelectionModel().getSelectedItem() != null) {
+//            rootController.handlerOnEditCharacteristic(
+//                    characteristicTableView.getSelectionModel().getSelectedIndex(),
+//                    characteristicTableView.getSelectionModel().getSelectedItem());
+//        }
     }
 
     @FXML
-    private void handleOnCreate(ActionEvent event){
+    private void handleOnCreate(ActionEvent event) {
         rootController.handlerOnAddGlobalCharacteristics();
     }
 

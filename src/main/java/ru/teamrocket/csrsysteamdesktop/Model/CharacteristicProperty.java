@@ -15,7 +15,7 @@ public class CharacteristicProperty {
     private final StringProperty name;
     private final IntegerProperty activationPrice;
     private final IntegerProperty monthlyPrice;
-    private final TypeCharacteristic type;
+    private final StringProperty type;
     private final StringProperty valueText;
     private final IntegerProperty valueNumber;
     private final SimpleListProperty valueListProperty;
@@ -36,7 +36,7 @@ public class CharacteristicProperty {
         this.name = new SimpleStringProperty(characteristic.getName());
         this.activationPrice = new SimpleIntegerProperty(characteristic.getActivationPrice());
         this.monthlyPrice = new SimpleIntegerProperty(characteristic.getMonthlyPrice());
-        this.type = characteristic.getType();
+        this.type = new SimpleStringProperty(characteristic.getTypeString());
 
         this.valueText = new SimpleStringProperty(characteristic.getValueText());
         this.valueNumber = new SimpleIntegerProperty(characteristic.getValueNumber());
@@ -55,7 +55,11 @@ public class CharacteristicProperty {
         this.name.set(name);
     }
 
-    public TypeCharacteristic getType() {
+    public String getType() {
+        return type.get();
+    }
+
+    public StringProperty typeProperty() {
         return type;
     }
 

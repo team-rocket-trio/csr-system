@@ -96,7 +96,7 @@ public class RootController implements Initializable {
     public void handlerOnAddGlobalCharacteristics() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/template/AddGlobalCharacteristics.fxml"));
+            loader.setLocation(getClass().getResource("/template/AddCharacteristics.fxml"));
 
             Parent parent = loader.load();
             borderPane.setCenter(parent);
@@ -182,7 +182,7 @@ public class RootController implements Initializable {
     public void handlerOnEditCharacteristic(int idCharacteristic, Characteristic characteristic){
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/template/AddGlobalCharacteristics.fxml"));
+            loader.setLocation(getClass().getResource("/template/AddCharacteristics.fxml"));
 
             Parent parent = loader.load();
             borderPane.setCenter(parent);
