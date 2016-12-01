@@ -115,8 +115,7 @@ public class AddUserController implements Initializable {
                         middleName.getText(),
                         lastName.getText(),
                         phoneNumber.getText(),
-                        address.getText(),
-                        new Product()
+                        address.getText()
 
                 );
                 new UserServiceImpl().save(user);

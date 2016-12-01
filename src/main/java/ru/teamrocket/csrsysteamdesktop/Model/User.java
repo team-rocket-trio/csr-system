@@ -18,13 +18,12 @@ public class User implements SimpleModel{
     private String address;
     private Product products;
 
-    public User(String firstName, String middleName, String lastName, String phoneNumber, String address, Product products) {
+    public User(String firstName, String middleName, String lastName, String phoneNumber, String address) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.address = address;
-        this.products = products;
     }
 
     @Override
