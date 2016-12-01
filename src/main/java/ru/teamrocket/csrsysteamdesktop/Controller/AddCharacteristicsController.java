@@ -44,10 +44,16 @@ public class AddCharacteristicsController implements Initializable {
     private AnchorPane anchorPaneForList;
     @FXML
     private AnchorPane anchorPaneForButtom;
+    @FXML
+    private Label labelChar;
 
     private Button addButton;
     private Button deleteButton;
     private ListView<String> listViewForValue;
+
+    private Characteristic characteristic;
+    private int idCharacteristic;
+
 
 
     @Override
@@ -127,29 +133,51 @@ public class AddCharacteristicsController implements Initializable {
         Window window = ((Node) event.getTarget()).getScene().getWindow();
 
         if (inputValidate(window)) {
-            Characteristic characteristic = new Characteristic(
-                    this.nameField.getText(),
-                    Integer.parseInt(this.activationPriceField.getText()),
-                    Integer.parseInt(this.monthlyPriceField.getText()),
-                    this.choiceBoxTypeChar.getValue()
-            );
+            if(this.characteristic == null) {
+                Characteristic characteristic = new Characteristic(
+                        this.nameField.getText(),
+                        Integer.parseInt(this.activationPriceField.getText()),
+                        Integer.parseInt(this.monthlyPriceField.getText()),
+                        this.choiceBoxTypeChar.getValue()
+                );
 
-            switch (this.choiceBoxTypeChar.getValue()) {
-                case Number:
-                    characteristic.setValueNumber(Integer.parseInt(this.valueField.getText()));
-                    break;
-                case Text:
-                    characteristic.setValueText(this.valueField.getText());
-                    break;
-                case List:
-                    characteristic.setValueList(this.listViewForValue.getItems());
-                    break;
-                default:
-                    break;
+                switch (this.choiceBoxTypeChar.getValue()) {
+                    case Number:
+                        characteristic.setValueNumber(Integer.parseInt(this.valueField.getText()));
+                        break;
+                    case Text:
+                        characteristic.setValueText(this.valueField.getText());
+                        break;
+                    case List:
+                        characteristic.setValueList(this.listViewForValue.getItems());
+                        break;
+                    default:
+                        break;
+                }
+                new CharacteristicServiceImpl().save(characteristic);
+                rootController.handlerOnCharacteristics();
             }
-
-            new CharacteristicServiceImpl().save(characteristic);
-            rootController.handlerOnCharacteristics();
+            else{
+                this.characteristic.setName(this.nameField.getText());
+                this.characteristic.setActivationPrice(Integer.valueOf(this.activationPriceField.getText()));
+                this.characteristic.setMonthlyPrice(Integer.valueOf(this.monthlyPriceField.getText()));
+                this.characteristic.setType(this.choiceBoxTypeChar.getValue());
+                switch (this.choiceBoxTypeChar.getValue()) {
+                    case Number:
+                        this.characteristic.setValueNumber(Integer.parseInt(this.valueField.getText()));
+                        break;
+                    case Text:
+                        this.characteristic.setValueText(this.valueField.getText());
+                        break;
+                    case List:
+                        this.characteristic.setValueList(this.listViewForValue.getItems());
+                        break;
+                    default:
+                        break;
+                }
+                new CharacteristicServiceImpl().update(idCharacteristic, characteristic);
+                rootController.handlerOnCharacteristics();
+            }
         }
 
     }
@@ -224,28 +252,25 @@ public class AddCharacteristicsController implements Initializable {
     }
 
     public void setActionUpdate(int idCharacteristic, Characteristic characteristic) {
-//        this.characteristic = characteristic;
-//        this.idCharacteristic = idCharacteristic;
-//
-//        nameField.setText(characteristic.getName());
-//        activationPriceField.setText(characteristic.getActivationPrice());
-//        monthlyPriceField.setText(characteristic.getMonthlyPrice());
-//        choiceBox.setValue(characteristic.getType());
-//        if(characteristic instanceof CharacteristicText){
-//            CharacteristicText characteristicText = (CharacteristicText) characteristic;
-//            valueField.setText(characteristicText.getValue());
-//        }
-//        else
-//            if(characteristic instanceof CharacteristicNumber){
-//                CharacteristicNumber characteristicNumber = (CharacteristicNumber) characteristic;
-//                valueField.setText(Integer.toString(characteristicNumber.getValue()));
-//            }
-//            else
-//                if(characteristic instanceof CharacteristicList){
-//                    CharacteristicList characteristicList = (CharacteristicList) characteristic;
-//                    list.setItems(FXCollections.observableArrayList(characteristicList.getValues()));
-//                }
-//        labelChar.setText("Edit global characteristic");
+        this.characteristic = characteristic;
+        this.idCharacteristic = idCharacteristic;
+
+        nameField.setText(characteristic.getName());
+        activationPriceField.setText(Integer.toString(characteristic.getActivationPrice()));
+        monthlyPriceField.setText(Integer.toString(characteristic.getMonthlyPrice()));
+        choiceBoxTypeChar.setValue(characteristic.getType());
+        if(characteristic.getType().equals(TypeCharacteristic.Text)){
+            valueField.setText(characteristic.getValueText());
+        }
+        else
+            if(characteristic.getType().equals(TypeCharacteristic.Number)){
+                valueField.setText(Integer.toString(characteristic.getValueNumber()));
+            }
+            else
+                if(characteristic.getType().equals(TypeCharacteristic.List)){
+                    listViewForValue.setItems(FXCollections.observableArrayList(characteristic.getValueList()));
+                }
+        labelChar.setText("Edit global characteristic");
     }
 
 }

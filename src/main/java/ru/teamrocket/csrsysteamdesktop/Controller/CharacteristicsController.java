@@ -94,11 +94,11 @@ public class CharacteristicsController implements Initializable {
     @FXML
     private void handleEdit(ActionEvent event) {
         //TODO-Alexander: Добавить редактирование
-//        if (characteristicTableView.getSelectionModel().getSelectedItem() != null) {
-//            rootController.handlerOnEditCharacteristic(
-//                    characteristicTableView.getSelectionModel().getSelectedIndex(),
-//                    characteristicTableView.getSelectionModel().getSelectedItem());
-//        }
+       if (characteristicTableView.getSelectionModel().getSelectedItem() != null) {
+           rootController.handlerOnEditCharacteristic(
+                   characteristicTableView.getSelectionModel().getSelectedItem().getId(),
+                   characteristicTableView.getSelectionModel().getSelectedItem());
+       }
     }
 
     @FXML
