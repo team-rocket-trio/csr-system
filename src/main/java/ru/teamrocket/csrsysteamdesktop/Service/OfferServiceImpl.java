@@ -21,9 +21,10 @@ import java.util.List;
 /**
  * Created by Kate on 13.11.2016.
  */
-public class OfferServiceImpl extends AbstractSimpleService implements OfferService{
+public class OfferServiceImpl extends AbstractSimpleService implements OfferService {
     private final Path pathFile = Paths.get(Main.pathData + "/Offers.json");
-    private final Type listType = new TypeToken<List<Offer>>() {}.getType();
+    private final Type listType = new TypeToken<List<Offer>>() {
+    }.getType();
     private List<Offer> offerList;
 
     public OfferServiceImpl() {
@@ -48,13 +49,33 @@ public class OfferServiceImpl extends AbstractSimpleService implements OfferServ
 
     @Override
     public void save(Offer offer) {
+        offer.setId(this.generateId());
+
         offerList.add(offer);
         writeFile(offerList);
     }
 
     @Override
-    public void delete(int index) {
-        offerList.remove(index);
+    public void delete(int id) {
+        offerList.remove(this.findId(id));
+
+        writeFile(offerList);
+    }
+
+    @Override
+    public Offer findId(int id) {
+        return offerList
+                .stream()
+                .filter(offer -> offer.getId() == id)
+                .findFirst()
+                .get();
+    }
+
+    @Override
+    public void update(int id, Offer offer) {
+        this.delete(id);
+
+        offerList.add(offer);
         writeFile(offerList);
     }
 

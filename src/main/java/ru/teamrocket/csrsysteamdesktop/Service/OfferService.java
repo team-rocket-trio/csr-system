@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface OfferService {
     List<Offer> findAll();
+    Offer findId(int id);
     void save(Offer offer);
     void delete(int index);
+    void update(int id, Offer offer);
 }

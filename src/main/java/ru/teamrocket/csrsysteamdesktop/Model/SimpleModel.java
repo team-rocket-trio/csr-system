@@ -6,5 +6,6 @@ package ru.teamrocket.csrsysteamdesktop.Model;
 public interface SimpleModel {
 
     public int getId();
+    public void setId(int id);
 
 }

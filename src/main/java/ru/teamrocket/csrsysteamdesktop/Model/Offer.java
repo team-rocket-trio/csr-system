@@ -33,6 +33,11 @@ public class Offer implements SimpleModel {
         return this.id;
     }
 
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public OfferProperty composeOfferProperty() {
         return new OfferProperty(this);
     }
