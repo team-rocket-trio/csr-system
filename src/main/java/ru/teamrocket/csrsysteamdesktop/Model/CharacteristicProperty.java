@@ -8,7 +8,6 @@ import javafx.beans.property.*;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import ru.teamrocket.csrsysteamdesktop.Utils.TypeCharacteristic;
 
 public class CharacteristicProperty {
 
@@ -17,7 +16,8 @@ public class CharacteristicProperty {
     private final IntegerProperty monthlyPrice;
     private final StringProperty type;
     private final StringProperty valueText;
-    private final IntegerProperty valueNumber;
+    private final IntegerProperty minValueNumber;
+    private final IntegerProperty maxValueNumber;
     private final SimpleListProperty<String> valueListProperty;
 
     public CharacteristicProperty(String name) {
@@ -27,7 +27,8 @@ public class CharacteristicProperty {
         this.monthlyPrice = new SimpleIntegerProperty();
         this.type = null;
         this.valueText = null;
-        this.valueNumber = null;
+        this.minValueNumber = null;
+        this.maxValueNumber = null;
         this.valueListProperty = null;
 
     }
@@ -39,7 +40,8 @@ public class CharacteristicProperty {
         this.type = new SimpleStringProperty(characteristic.getTypeString());
 
         this.valueText = new SimpleStringProperty(characteristic.getValueText());
-        this.valueNumber = new SimpleIntegerProperty(characteristic.getValueNumber());
+        this.minValueNumber = new SimpleIntegerProperty(characteristic.getMinValueNumber());
+        this.maxValueNumber = new SimpleIntegerProperty(characteristic.getMaxValueNumber());
         this.valueListProperty = new SimpleListProperty<String>(FXCollections.observableArrayList(characteristic.getValueList()));
     }
 
@@ -75,16 +77,28 @@ public class CharacteristicProperty {
         this.valueText.set(valueText);
     }
 
-    public int getValueNumber() {
-        return valueNumber.get();
+    public int getMinValueNumber() {
+        return minValueNumber.get();
     }
 
-    public IntegerProperty valueNumberProperty() {
-        return valueNumber;
+    public IntegerProperty minValueNumberProperty() {
+        return minValueNumber;
     }
 
-    public void setValueNumber(int valueNumber) {
-        this.valueNumber.set(valueNumber);
+    public void setMinValueNumber(int minValueNumber) {
+        this.minValueNumber.set(minValueNumber);
+    }
+
+    public int getMaxValueNumber() {
+        return maxValueNumber.get();
+    }
+
+    public IntegerProperty maxValueNumberProperty() {
+        return maxValueNumber;
+    }
+
+    public void setMaxValueNumber(int maxValueNumber) {
+        this.maxValueNumber.set(maxValueNumber);
     }
 
     public int getActivationPrice() {

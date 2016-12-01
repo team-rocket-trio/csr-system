@@ -1,16 +1,13 @@
 package ru.teamrocket.csrsysteamdesktop.Controller;
 
-import javafx.beans.property.SimpleListProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Window;
 import ru.teamrocket.csrsysteamdesktop.Model.Characteristic;
 import ru.teamrocket.csrsysteamdesktop.Service.CharacteristicServiceImpl;
@@ -18,7 +15,6 @@ import ru.teamrocket.csrsysteamdesktop.Utils.ErrorValidateAlert;
 import ru.teamrocket.csrsysteamdesktop.Utils.TypeCharacteristic;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -43,12 +39,13 @@ public class AddCharacteristicsController implements Initializable {
     @FXML
     private AnchorPane anchorPaneForList;
     @FXML
-    private AnchorPane anchorPaneForButtom;
+    private AnchorPane anchorPaneForButton;
     @FXML
     private Label labelChar;
 
     private Button addButton;
     private Button deleteButton;
+    private TextField maxField;
     private ListView<String> listViewForValue;
 
     private Characteristic characteristic;
@@ -71,13 +68,18 @@ public class AddCharacteristicsController implements Initializable {
 
         deleteButton = new Button("-");
         deleteButton.setPrefWidth(30);
-        deleteButton.setLayoutY(anchorPaneForButtom.getLayoutY() + 30);
+        deleteButton.setLayoutY(anchorPaneForButton.getLayoutY() + 30);
         deleteButton.setOnAction((event -> {
                     if (listViewForValue.getSelectionModel().getSelectedItem() != null) {
                         listViewForValue.getItems().remove(listViewForValue.getSelectionModel().getSelectedIndex());
                     }
                 })
         );
+
+        maxField = new TextField();
+
+        anchorPaneForList.setLeftAnchor(maxField, 0.0);
+        anchorPaneForList.setRightAnchor(maxField, 0.0);
 
         this.listViewForValue = new ListView<String>();
         this.listViewForValue.setPrefWidth(270);
@@ -97,25 +99,31 @@ public class AddCharacteristicsController implements Initializable {
 
 
     @FXML
-    private void handleChangeChoiceBox(ActionEvent event) {
+    private void handleChangeChoiceBox() {
 
         switch (choiceBoxTypeChar.getSelectionModel().getSelectedItem()) {
             case List:
 
-                this.anchorPaneForList.getChildren().add(this.listViewForValue);
-                this.anchorPaneForButtom.getChildren().addAll(this.addButton, this.deleteButton);
+                valueField.setPromptText("");
+                this.anchorPaneForList.getChildren().remove(this.maxField);
+                this.anchorPaneForList.getChildren().addAll(this.listViewForValue);
+                this.anchorPaneForButton.getChildren().addAll(this.addButton, this.deleteButton);
 
                 break;
             case Number:
 
-                this.anchorPaneForList.getChildren().remove(this.listViewForValue);
-                this.anchorPaneForButtom.getChildren().removeAll(this.addButton, this.deleteButton);
+                maxField.setPromptText("max");
+                valueField.setPromptText("min");
+                this.anchorPaneForList.getChildren().add(this.maxField);
+                this.anchorPaneForList.getChildren().removeAll(this.listViewForValue);
+                this.anchorPaneForButton.getChildren().removeAll(this.addButton, this.deleteButton);
 
                 break;
             case Text:
 
-                this.anchorPaneForList.getChildren().remove(this.listViewForValue);
-                this.anchorPaneForButtom.getChildren().removeAll(this.addButton, this.deleteButton);
+                valueField.setPromptText("");
+                this.anchorPaneForList.getChildren().removeAll(this.listViewForValue, this.maxField);
+                this.anchorPaneForButton.getChildren().removeAll(this.addButton, this.deleteButton);
 
                 break;
             default:
@@ -143,7 +151,8 @@ public class AddCharacteristicsController implements Initializable {
 
                 switch (this.choiceBoxTypeChar.getValue()) {
                     case Number:
-                        characteristic.setValueNumber(Integer.parseInt(this.valueField.getText()));
+                        characteristic.setMinValueNumber(Integer.parseInt(this.valueField.getText()));
+                        characteristic.setMaxValueNumber(Integer.parseInt(this.maxField.getText()));
                         break;
                     case Text:
                         characteristic.setValueText(this.valueField.getText());
@@ -164,7 +173,8 @@ public class AddCharacteristicsController implements Initializable {
                 this.characteristic.setType(this.choiceBoxTypeChar.getValue());
                 switch (this.choiceBoxTypeChar.getValue()) {
                     case Number:
-                        this.characteristic.setValueNumber(Integer.parseInt(this.valueField.getText()));
+                        this.characteristic.setMinValueNumber(Integer.parseInt(this.valueField.getText()));
+                        this.characteristic.setMaxValueNumber(Integer.parseInt(this.maxField.getText()));
                         break;
                     case Text:
                         this.characteristic.setValueText(this.valueField.getText());
@@ -197,41 +207,45 @@ public class AddCharacteristicsController implements Initializable {
                 break;
             case Text:
                 if (this.valueField.getText().length() == 0) {
-                    errorMessage += "No valid Value\n";
+                    errorMessage += "Invalid Value\n";
                 }
                 break;
             case Number:
-                if (this.valueField.getText() == null || this.valueField.getText().length() == 0) {
-                    errorMessage += "No valid value\n";
+                if (this.valueField.getText() == null || this.maxField.getText() == null) {
+                    errorMessage += "Invalid value\n";
                 } else {
                     try {
                         Long.parseLong(this.valueField.getText());
+                        Long.parseLong(this.maxField.getText());
+                        if(Integer.valueOf(this.valueField.getText()) > Integer.valueOf(this.maxField.getText()))
+                            errorMessage += "Minimum value cannot be greater than maximum value\n";
                     } catch (NumberFormatException e) {
-                        errorMessage += "No valid value\n";
+                        errorMessage += "Invalid value\n";
                     }
                 }
+
                 break;
             default:
                 break;
         }
 
         if (activationPriceField.getText() == null || activationPriceField.getText().length() == 0) {
-            errorMessage += "No valid activation price\n";
+            errorMessage += "Invalid activation price\n";
         } else {
             try {
                 Long.parseLong(activationPriceField.getText());
             } catch (NumberFormatException e) {
-                errorMessage += "No valid activation price\n";
+                errorMessage += "Invalid activation price\n";
             }
         }
 
         if (monthlyPriceField.getText() == null || monthlyPriceField.getText().length() == 0) {
-            errorMessage += "No valid monthty price\n";
+            errorMessage += "Invalid monthly price\n";
         } else {
             try {
                 Long.parseLong(monthlyPriceField.getText());
             } catch (NumberFormatException e) {
-                errorMessage += "No valid monthty price\n";
+                errorMessage += "Invalid monthly price\n";
             }
         }
 
@@ -264,7 +278,9 @@ public class AddCharacteristicsController implements Initializable {
         }
         else
             if(characteristic.getType().equals(TypeCharacteristic.Number)){
-                valueField.setText(Integer.toString(characteristic.getValueNumber()));
+                handleChangeChoiceBox();
+                valueField.setText(Integer.toString(characteristic.getMinValueNumber()));
+                maxField.setText(Integer.toString(characteristic.getMaxValueNumber()));
             }
             else
                 if(characteristic.getType().equals(TypeCharacteristic.List)){

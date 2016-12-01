@@ -70,7 +70,7 @@ public class SelectionCharacteristicController implements Initializable {
     public StringProperty getValueProppery(Characteristic characteristic) {
         switch (characteristic.getType()) {
             case Number:
-                return new SimpleStringProperty(Integer.toString(characteristic.getValueNumber()));
+                return new SimpleStringProperty(Integer.toString(characteristic.getMinValueNumber()));
             case Text:
                 return new SimpleStringProperty(characteristic.getValueText());
             case List:

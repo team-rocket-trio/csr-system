@@ -16,7 +16,8 @@ public class Characteristic implements SimpleModel {
     private int activationPrice;
     private int monthlyPrice;
     private TypeCharacteristic type;
-    private int valueNumber;
+    private int minValueNumber;
+    private int maxValueNumber;
     private String valueText;
     private List<String> valueList;
 
@@ -69,12 +70,20 @@ public class Characteristic implements SimpleModel {
         this.monthlyPrice = monthlyPrice;
     }
 
-    public int getValueNumber() {
-        return valueNumber;
+    public int getMinValueNumber() {
+        return minValueNumber;
     }
 
-    public void setValueNumber(int valueNumber) {
-        this.valueNumber = valueNumber;
+    public void setMinValueNumber(int minValueNumber) {
+        this.minValueNumber = minValueNumber;
+    }
+
+    public int getMaxValueNumber() {
+        return maxValueNumber;
+    }
+
+    public void setMaxValueNumber(int maxValueNumber) {
+        this.maxValueNumber = maxValueNumber;
     }
 
     public TypeCharacteristic getType() {

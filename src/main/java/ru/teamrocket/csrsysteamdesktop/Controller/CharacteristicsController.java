@@ -11,7 +11,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import ru.teamrocket.csrsysteamdesktop.Model.Characteristic;
 import ru.teamrocket.csrsysteamdesktop.Service.CharacteristicServiceImpl;
-import ru.teamrocket.csrsysteamdesktop.Utils.TypeCharacteristic;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -58,7 +57,9 @@ public class CharacteristicsController implements Initializable {
     public StringProperty getValueProppery(Characteristic characteristic) {
         switch (characteristic.getType()) {
             case Number:
-                return new SimpleStringProperty(Integer.toString(characteristic.getValueNumber()));
+
+                return new SimpleStringProperty("min: " + Integer.toString(characteristic.getMinValueNumber()) +
+                                                "; max: " + Integer.toString(characteristic.getMaxValueNumber()));
             case Text:
                 return new SimpleStringProperty(characteristic.getValueText());
             case List:
@@ -73,11 +74,6 @@ public class CharacteristicsController implements Initializable {
 
     public void setRootController(RootController rootController) {
         this.rootController = rootController;
-    }
-
-    public void setCharacteristicForUpdate(int idCharacteristic, Characteristic characteristic) {
-//        this.characteristic = characteristic;
-//        this.idCharacteristic = idCharacteristic;
     }
 
     @FXML
