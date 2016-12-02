@@ -53,7 +53,7 @@ public class DetailsUsersController implements Initializable {
         phoneNumberLabel.setText(user.getPhoneNumber());
         addressLabel.setText(user.getAddress());
 
-        products = FXCollections.observableArrayList(user.getProduct());
+//        products = FXCollections.observableArrayList(user.getProduct());
 
         productsTableView.setItems(products);
     }
