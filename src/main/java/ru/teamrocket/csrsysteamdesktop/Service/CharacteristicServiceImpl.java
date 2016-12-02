@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Alexander on 28.11.2016.
@@ -63,6 +64,13 @@ public class CharacteristicServiceImpl extends AbstractSimpleService implements 
                 .filter(characteristicItem -> characteristicItem.getId() == id)
                 .findFirst()
                 .get();
+    }
+
+    @Override
+    public List<Characteristic> findByIds(List<Integer> ids) {
+        return characteristicList.stream()
+                .filter(characteristic -> ids.contains(characteristic.getId()))
+                .collect(Collectors.toList());
     }
 
     @Override
