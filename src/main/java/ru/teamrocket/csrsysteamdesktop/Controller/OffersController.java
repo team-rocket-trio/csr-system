@@ -10,6 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import ru.teamrocket.csrsysteamdesktop.Model.Characteristic;
 import ru.teamrocket.csrsysteamdesktop.Model.Offer;
+import ru.teamrocket.csrsysteamdesktop.Service.CharacteristicServiceImpl;
 import ru.teamrocket.csrsysteamdesktop.Service.OfferServiceImpl;
 
 import java.net.URL;
@@ -46,15 +47,24 @@ public class OffersController implements Initializable{
         actPriceColumn.setCellValueFactory(data -> data.getValue().composeOfferProperty().activationPriceProperty().asObject());
         monPriceColumn.setCellValueFactory(data -> data.getValue().composeOfferProperty().monthlyPriceProperty().asObject());
         descriptionColumn.setCellValueFactory(data -> data.getValue().composeOfferProperty().descriptionProperty());
-//        characteristicsColumn.setCellValueFactory((TableColumn.CellDataFeatures<Offer, String> data) -> {
-//                List<Characteristic> characteristics = data.getValue().getCharacteristicsId();
-//                String c = characteristics
-//                        .stream()
-//                        .map(item -> item.toString())
-//                        .reduce("", (acc, item) -> acc + item + "; ");
-//                return new ReadOnlyStringWrapper(c);
-//            });
+
+        characteristicsColumn.setCellValueFactory((TableColumn.CellDataFeatures<Offer, String> data) -> {
+            List<Integer> characteristics = data.getValue().getCharacteristicsId();
+            CharacteristicServiceImpl service = new CharacteristicServiceImpl();
+            List<Characteristic> list = new ArrayList<Characteristic>();
+            for (int id: characteristics) {
+                Characteristic c = service.findById(id);
+                list.add(c);
+            }
+            String c = list
+                       .stream()
+                       .map(item -> item.toString())
+                        .reduce("", (acc, item) -> acc + item + "\n");
+            return new ReadOnlyStringWrapper(c);
+        });
     }
+
+
 
     @FXML
     private void handleOnCreateOffer(){
@@ -63,7 +73,12 @@ public class OffersController implements Initializable{
 
     @FXML
     private void handleOnEditOffer(){
-
+        if(offersTableView.getSelectionModel().getSelectedItem() != null){
+            rootController.handlerOnEditOffer(
+                    offersTableView.getSelectionModel().getSelectedItem().getId(),
+                    offersTableView.getSelectionModel().getSelectedItem()
+            );
+        }
     }
 
     @FXML
