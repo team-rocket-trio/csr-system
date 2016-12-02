@@ -1,5 +1,7 @@
 package ru.teamrocket.csrsysteamdesktop.Model;
 
+import java.util.List;
+
 /**
  * Created by Alexander on 07.11.2016.
  */
@@ -8,6 +10,8 @@ public class Product implements SimpleModel {
     private int id;
     private int characteristicsId;
     private int characteristicsValueId;
+    private int maxValueNumber;
+    private int characteristicsValueIdList;
 
     @Override
     public int getId() {
