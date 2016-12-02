@@ -122,4 +122,19 @@ public class Characteristic implements SimpleModel {
         return new CharacteristicProperty(this);
     }
 
+    public String toString(){
+        switch (type){
+            case Text:
+                return this.getName() + ": " + this.getValueText();
+            case Number:
+                return  this.getName() + ": min = " + this.getMinValueNumber()
+                                   + "; max = " + this.getMaxValueNumber();
+            case List:
+                return  this.getName() + ": " + String.join(", ", valueList);
+            default:
+                return "";
+        }
+
+    }
+
 }

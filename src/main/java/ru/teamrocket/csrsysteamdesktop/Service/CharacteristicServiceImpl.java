@@ -57,7 +57,7 @@ public class CharacteristicServiceImpl extends AbstractSimpleService implements 
     }
 
     @Override
-    public Characteristic findId(int id) {
+    public Characteristic findById(int id) {
         return characteristicList
                 .stream()
                 .filter(characteristicItem -> characteristicItem.getId() == id)
@@ -67,7 +67,7 @@ public class CharacteristicServiceImpl extends AbstractSimpleService implements 
 
     @Override
     public void delete(int id) {
-        characteristicList.remove(this.findId(id));
+        characteristicList.remove(this.findById(id));
 
         writeFile(characteristicList);
     }

@@ -10,7 +10,7 @@ import java.util.List;
 public interface CharacteristicService {
 
     List<Characteristic> findAll();
-    Characteristic findId(int id);
+    Characteristic findById(int id);
     void save(Characteristic characteristic);
     void delete(int id);
     void update(int id, Characteristic characteristic);

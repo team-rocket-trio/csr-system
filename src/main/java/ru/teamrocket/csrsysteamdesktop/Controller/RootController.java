@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
 import ru.teamrocket.csrsysteamdesktop.Model.Characteristic;
+import ru.teamrocket.csrsysteamdesktop.Model.Offer;
 import ru.teamrocket.csrsysteamdesktop.Model.User;
 
 import java.io.IOException;
@@ -109,7 +110,23 @@ public class RootController implements Initializable {
         }
     }
 
+    public void handlerOnBackToOffer(Offer offer, List<Characteristic> characteristicList) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/template/AddOffer.fxml"));
 
+            Parent parent = loader.load();
+            borderPane.setCenter(parent);
+
+            AddOfferController addOfferController = loader.getController();
+            addOfferController.setRootController(this);
+            addOfferController.setCharacteristic(characteristicList);
+            addOfferController.setActionSelected(offer.getId(), offer);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void handlerOnAddOffer(List<Characteristic> characteristicList) {
         try {
@@ -139,6 +156,24 @@ public class RootController implements Initializable {
             SelectionCharacteristicController selectionCharacteristicController = loader.getController();
             selectionCharacteristicController.setRootController(this);
             selectionCharacteristicController.setCharacteristicsList(characteristicList);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handlerOnSelectCharacteristic(Offer offer, List<Characteristic> characteristicList) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/template/SelectionCharacteristic.fxml"));
+
+            Parent parent = loader.load();
+            borderPane.setCenter(parent);
+
+            SelectionCharacteristicController selectionCharacteristicController = loader.getController();
+            selectionCharacteristicController.setRootController(this);
+            selectionCharacteristicController.setCharacteristicsList(characteristicList);
+            selectionCharacteristicController.setActionUpdate(offer, characteristicList);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -215,6 +250,23 @@ public class RootController implements Initializable {
 
             SelectionProductsController selectionProductsController = loader.getController();
             selectionProductsController.setRootController(this);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handlerOnEditOffer(int idOffer, Offer offer) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/template/AddOffer.fxml"));
+
+            Parent parent = loader.load();
+            borderPane.setCenter(parent);
+
+            AddOfferController addOfferController = loader.getController();
+            addOfferController.setRootController(this);
+            addOfferController.setActionUpdate(idOffer, offer);
 
         } catch (IOException e) {
             e.printStackTrace();

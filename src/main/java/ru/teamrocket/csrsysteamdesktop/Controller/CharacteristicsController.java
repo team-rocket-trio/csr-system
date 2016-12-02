@@ -49,23 +49,21 @@ public class CharacteristicsController implements Initializable {
         activationPriceColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty().activationPriceProperty().asObject());
         monthlyPriceColumn.setCellValueFactory(cellData -> cellData.getValue().composeCharacteristicProperty().monthlyPriceProperty().asObject());
 
-        valueColumn.setCellValueFactory(cellData -> this.getValueProppery(cellData.getValue()));
+        valueColumn.setCellValueFactory(cellData -> this.getValueProperty(cellData.getValue()));
 
     }
 
     //TODO-Alexander: Вынести в Util
-    public StringProperty getValueProppery(Characteristic characteristic) {
+    public StringProperty getValueProperty(Characteristic characteristic) {
         switch (characteristic.getType()) {
             case Number:
 
-                return new SimpleStringProperty("min: " + Integer.toString(characteristic.getMinValueNumber()) +
-                                                "; max: " + Integer.toString(characteristic.getMaxValueNumber()));
+                return new SimpleStringProperty("min = " + Integer.toString(characteristic.getMinValueNumber()) +
+                                                "; max = " + Integer.toString(characteristic.getMaxValueNumber()));
             case Text:
                 return new SimpleStringProperty(characteristic.getValueText());
             case List:
-                String string = characteristic.getValueList()
-                        .stream()
-                        .reduce("", (s, s2) -> s + s2 + "; ");
+                String string = String.join(", ", characteristic.getValueList());
                 return new SimpleStringProperty(string);
             default:
                 return new SimpleStringProperty("");
