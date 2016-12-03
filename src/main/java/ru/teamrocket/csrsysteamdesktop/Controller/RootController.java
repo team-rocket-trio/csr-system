@@ -25,6 +25,7 @@ public class RootController implements Initializable {
         System.out.println("location = [" + location + "], resources = [" + resources + "]");
     }
 
+    //TODO-Alexander: set name method on setSceneAddUser
     public void handlerOnAddUser() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -240,7 +241,7 @@ public class RootController implements Initializable {
         }
     }
 
-    public void handlerOnAddProduct() {
+    public void handlerOnAddProduct(int idSelectUser) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/template/SelectionProducts.fxml"));
@@ -250,6 +251,7 @@ public class RootController implements Initializable {
 
             SelectionProductsController selectionProductsController = loader.getController();
             selectionProductsController.setRootController(this);
+            selectionProductsController.setIdSelectUser(idSelectUser);
 
         } catch (IOException e) {
             e.printStackTrace();

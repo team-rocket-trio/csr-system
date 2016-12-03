@@ -8,18 +8,34 @@ import java.util.List;
 public class Product implements SimpleModel {
 
     private int id;
+    private int offerId;
     private int characteristicsId;
-    private int characteristicsValueId;
-    private int maxValueNumber;
-    private int characteristicsValueIdList;
+
+    private String textValue;
+    private int numberValue;
+    private String listValue;
+
+    public Product(int offerId, int characteristicsId) {
+        this.offerId = offerId;
+        this.characteristicsId = characteristicsId;
+    }
 
     @Override
     public int getId() {
-        return id;
+        return this.id;
     }
 
+    @Override
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getOfferId() {
+        return offerId;
+    }
+
+    public void setOfferId(int offerId) {
+        this.offerId = offerId;
     }
 
     public int getCharacteristicsId() {
@@ -30,11 +46,27 @@ public class Product implements SimpleModel {
         this.characteristicsId = characteristicsId;
     }
 
-    public int getCharacteristicsValueId() {
-        return characteristicsValueId;
+    public String getTextValue() {
+        return textValue;
     }
 
-    public void setCharacteristicsValueId(int characteristicsValueId) {
-        this.characteristicsValueId = characteristicsValueId;
+    public void setTextValue(String textValue) {
+        this.textValue = textValue;
+    }
+
+    public int getNumberValue() {
+        return numberValue;
+    }
+
+    public void setNumberValue(int numberValue) {
+        this.numberValue = numberValue;
+    }
+
+    public String getListValue() {
+        return listValue;
+    }
+
+    public void setListValue(String listValue) {
+        this.listValue = listValue;
     }
 }

@@ -69,7 +69,7 @@ public class DetailsUsersController implements Initializable {
 
     @FXML
     private void handleOnAddProduct(){
-        this.rootController.handlerOnAddProduct();
+        this.rootController.handlerOnAddProduct(this.idUser);
     }
 
     @FXML

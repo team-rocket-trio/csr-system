@@ -3,12 +3,13 @@ package ru.teamrocket.csrsysteamdesktop.Model;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Alexander Shreyner on 07.11.2016.
  */
-public class User implements SimpleModel{
+public class User implements SimpleModel {
 
     private int id;
     private String firstName;
@@ -83,7 +84,14 @@ public class User implements SimpleModel{
         this.products = products;
     }
 
-    public UserProperty composUserToProppery(){
+    public void addProduct(Product product) {
+        if (this.products == null) {
+            this.products = new ArrayList<Product>();
+        }
+        this.products.add(product);
+    }
+
+    public UserProperty composUserToProppery() {
         return new UserProperty(this);
     }
 

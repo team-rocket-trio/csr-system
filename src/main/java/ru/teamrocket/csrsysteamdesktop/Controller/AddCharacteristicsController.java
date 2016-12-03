@@ -223,7 +223,6 @@ public class AddCharacteristicsController implements Initializable {
                         errorMessage += "Invalid value\n";
                     }
                 }
-
                 break;
             default:
                 break;

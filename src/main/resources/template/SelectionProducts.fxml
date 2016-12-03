@@ -74,7 +74,7 @@
                 <Font size="14.0"/>
             </font>
         </Label>
-        <Button layoutX="27.0" layoutY="336.0" mnemonicParsing="false" text="Select"/>
+        <Button onAction="#handleOnSelect" layoutX="27.0" layoutY="336.0" mnemonicParsing="false" text="Select"/>
         <Label layoutX="400.0" layoutY="49.0" text="Offer">
             <font>
                 <Font size="14.0"/>
