@@ -40,8 +40,8 @@ public class SelectionProductsController implements Initializable {
     @FXML
     private ChoiceBox<Characteristic> choiceBoxCharacteristics;
 
-    private TextField textFieldForNumberAndText;
-    private ChoiceBox<String> choiceBoxForListChar;
+    private TextField textFieldForNumberAndText = new TextField();
+    private ChoiceBox<String> choiceBoxForListChar = new ChoiceBox<>();
 
     @FXML
     private Label offerName;
@@ -235,7 +235,7 @@ public class SelectionProductsController implements Initializable {
                     break;
                 case Text:
                     //TODO-Alexander: написать нормальное описание ошибки
-                    if (this.textFieldForNumberAndText.getText().length() != 0) {
+                    if (this.textFieldForNumberAndText.getText() != null) {
                         errorMessage += "Please textFieldForNumberAndText";
                     }
                     break;
