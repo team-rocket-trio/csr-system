@@ -22,8 +22,6 @@ import ru.teamrocket.csrsysteamdesktop.Service.UserServiceImpl;
 import ru.teamrocket.csrsysteamdesktop.Utils.ErrorValidateAlert;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -34,13 +32,15 @@ public class SelectionProductsController implements Initializable {
 
     private RootController rootController;
     private int idSelectUser;
+    private User selectUser;
 
     @FXML
     private ChoiceBox<Offer> choiceBoxOffer;
     @FXML
     private ChoiceBox<Characteristic> choiceBoxCharacteristics;
 
-    private TextField textFieldForNumberAndText = new TextField();
+    private TextField textField = new TextField();
+    private TextField numberTextField = new TextField();
     private ChoiceBox<String> choiceBoxForListChar = new ChoiceBox<>();
 
     @FXML
@@ -58,6 +58,7 @@ public class SelectionProductsController implements Initializable {
     @FXML
     private AnchorPane getAnchorPaneForChoiceBoxCharValue;
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.initializeChoiceBox(choiceBoxOffer, new OfferServiceImpl());
@@ -67,8 +68,9 @@ public class SelectionProductsController implements Initializable {
         this.rootController = rootController;
     }
 
-    public void setIdSelectUser(int idSelectUser) {
+    public void setIdSelectUser(int idSelectUser, User user) {
         this.idSelectUser = idSelectUser;
+        this.selectUser = user;
     }
 
     private void initializeChoiceBox(ChoiceBox<Offer> choiceBoxOffer, OfferServiceImpl offerService) {
@@ -121,11 +123,13 @@ public class SelectionProductsController implements Initializable {
         switch (selectedCharacteristic.getType()) {
             case Text:
                 this.setLableInAnchorPane(anchorPaneForLableCharValue, "Value Text");
-                this.setInputInnAnchorPane(getAnchorPaneForChoiceBoxCharValue, textFieldForNumberAndText);
+                getAnchorPaneForChoiceBoxCharValue.getChildren().clear();
+                getAnchorPaneForChoiceBoxCharValue.getChildren().add(textField);
                 break;
             case Number:
                 this.setLableInAnchorPane(anchorPaneForLableCharValue, "Value Number");
-                this.setInputInnAnchorPane(getAnchorPaneForChoiceBoxCharValue, textFieldForNumberAndText);
+                getAnchorPaneForChoiceBoxCharValue.getChildren().clear();
+                getAnchorPaneForChoiceBoxCharValue.getChildren().add(numberTextField);
                 break;
             case List:
                 this.setLableInAnchorPane(anchorPaneForLableCharValue, "Select in List");
@@ -161,20 +165,11 @@ public class SelectionProductsController implements Initializable {
         anchorPane.getChildren().add(label);
     }
 
-    private void setInputInnAnchorPane(AnchorPane anchorPane, TextField textFieldFor) {
-        if (textFieldFor == null) {
-            textFieldFor = new TextField();
-        }
-        anchorPane.getChildren().clear();
-
-
-        anchorPane.getChildren().add(textFieldFor);
-    }
 
     private void setChoiceBoxForValue(AnchorPane anchorPane, ChoiceBox<String> stringChoiceBox, List<String> stringList) {
-        if (stringChoiceBox == null) {
-            stringChoiceBox = new ChoiceBox<String>();
-        }
+//        if (stringChoiceBox == null) {
+//            stringChoiceBox = new ChoiceBox<String>();
+//        }
         anchorPane.getChildren().clear();
 
         stringChoiceBox.setItems(FXCollections.observableArrayList(stringList));
@@ -185,35 +180,74 @@ public class SelectionProductsController implements Initializable {
     private void handleOnSelect(ActionEvent event) {
         Window window = ((Node) event.getTarget()).getScene().getWindow();
 
-
         if (inputValidate(window)) {
             Product product = new Product(
                     this.choiceBoxOffer.getSelectionModel().getSelectedItem().getId(),
                     this.choiceBoxCharacteristics.getSelectionModel().getSelectedItem().getId()
             );
             Characteristic currentCharacteristic = this.choiceBoxCharacteristics.getSelectionModel().getSelectedItem();
+            UserServiceImpl userService = new UserServiceImpl();
+            User currentUser = userService.findId(this.idSelectUser);
 
             switch (currentCharacteristic.getType()) {
                 case List:
-                    product.setListValue(this.choiceBoxForListChar.getSelectionModel().getSelectedItem());
+                    if(this.choiceBoxForListChar.getSelectionModel().getSelectedItem() != null) {
+                        product.setListValue(this.choiceBoxForListChar.getSelectionModel().getSelectedItem());
+                        currentUser.addProduct(product);
+                        userService.update(currentUser.getId(), currentUser);
+                    }
+                    else {
+                        product.setListValue(currentCharacteristic.getValueList().get(0));
+                        currentUser.addProduct(product);
+                        userService.update(currentUser.getId(), currentUser);
+                    }
                     break;
                 case Text:
-                    product.setTextValue(this.textFieldForNumberAndText.getText());
+                    if(this.textField.getText() != null) {
+                        product.setTextValue(this.textField.getText());
+                        currentUser.addProduct(product);
+                        userService.update(currentUser.getId(), currentUser);
+                    }
+                    else {
+                        product.setTextValue(currentCharacteristic.getValueText());
+                        currentUser.addProduct(product);
+                        userService.update(currentUser.getId(), currentUser);
+                    }
                     break;
                 case Number:
-                    product.setNumberValue(Integer.parseInt(this.textFieldForNumberAndText.getText()));
+                    if(this.numberTextField.getText() != null &&
+                            (Long.parseLong(this.numberTextField.getText()) > currentCharacteristic.getMinValueNumber() &&
+                            Long.parseLong(this.numberTextField.getText()) < currentCharacteristic.getMaxValueNumber())) {
+                                 product.setNumberValue(Integer.parseInt(this.numberTextField.getText()));
+                                 currentUser.addProduct(product);
+                                 userService.update(currentUser.getId(), currentUser);
+                    }
+                    else if(this.numberTextField.getText() != null &&
+                            (Long.parseLong(this.numberTextField.getText()) < currentCharacteristic.getMinValueNumber() ||
+                            Long.parseLong(this.numberTextField.getText()) > currentCharacteristic.getMaxValueNumber())){
+                                new ErrorValidateAlert(window, "Your number is out of range.").show();
+                    }
+                    else if(this.numberTextField.getText() == null){
+                        product.setNumberValue(currentCharacteristic.getMinValueNumber());
+                        currentUser.addProduct(product);
+                        userService.update(currentUser.getId(), currentUser);
+                    }
                     break;
                 default:
                     break;
             }
-            UserServiceImpl userService = new UserServiceImpl();
-            User currentUser = userService.findId(this.idSelectUser);
-            currentUser.addProduct(product);
-            userService.update(currentUser.getId(), currentUser);
-
-            System.out.println("Success Save");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Value is saved.");
+            alert.setHeaderText("Value is saved");
+            String s ="Your value of " + choiceBoxCharacteristics.getSelectionModel().getSelectedItem().getName() + " is saved.";
+            alert.setContentText(s);
+            alert.showAndWait();
         }
 
+    }
+
+    @FXML
+    private void handleOnSaveAll(){
+        rootController.handlerOnSaveAll(idSelectUser, selectUser);
     }
 
     private boolean inputValidate(Window window) {
@@ -235,16 +269,17 @@ public class SelectionProductsController implements Initializable {
                     break;
                 case Text:
                     //TODO-Alexander: написать нормальное описание ошибки
-                    if (this.textFieldForNumberAndText.getText() != null) {
-                        errorMessage += "Please textFieldForNumberAndText";
+                    if (this.textField.getText() == null) {
+                        errorMessage += "Please textField";
                     }
                     break;
                 case Number:
-                    if (this.textFieldForNumberAndText.getText() == null || this.textFieldForNumberAndText.getText() == null) {
+                    if (this.numberTextField.getText() == null) {
                         errorMessage += "Invalid Number\n";
-                    } else {
+                    }
+                    else {
                         try {
-                            Long.parseLong(this.textFieldForNumberAndText.getText());
+                            Long.parseLong(this.numberTextField.getText());
                         } catch (NumberFormatException e) {
                             errorMessage += "Invalid Number\n";
                         }
