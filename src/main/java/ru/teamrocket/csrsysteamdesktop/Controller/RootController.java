@@ -77,23 +77,6 @@ public class RootController implements Initializable {
         }
     }
 
-    public void handlerOnSaveAll(int idUser, User user){
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/template/Products.fxml"));
-
-            Parent parent = loader.load();
-            borderPane.setCenter(parent);
-
-            DetailsUsersController detailsUsersController = loader.getController();
-            detailsUsersController.setRootController(this);
-            detailsUsersController.setUserForUpdate(idUser, user);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     @FXML
     public void handlerOnCharacteristics() {
         try {
@@ -207,7 +190,7 @@ public class RootController implements Initializable {
 
             DetailsUsersController detailsUsersController = loader.getController();
             detailsUsersController.setRootController(this);
-            detailsUsersController.setUserForUpdate(idUser, user);
+            detailsUsersController.setUserForUpdate(idUser);
 
         } catch (IOException e) {
             e.printStackTrace();

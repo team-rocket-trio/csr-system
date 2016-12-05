@@ -41,7 +41,7 @@ public class SelectionProductsController implements Initializable {
 
     private TextField textField = new TextField();
     private TextField numberTextField = new TextField();
-    private ChoiceBox<String> choiceBoxForListChar = new ChoiceBox<>();
+    private ChoiceBox<String> choiceBoxForListChar = new ChoiceBox<String>();
 
     @FXML
     private Label offerName;
@@ -167,9 +167,6 @@ public class SelectionProductsController implements Initializable {
 
 
     private void setChoiceBoxForValue(AnchorPane anchorPane, ChoiceBox<String> stringChoiceBox, List<String> stringList) {
-//        if (stringChoiceBox == null) {
-//            stringChoiceBox = new ChoiceBox<String>();
-//        }
         anchorPane.getChildren().clear();
 
         stringChoiceBox.setItems(FXCollections.observableArrayList(stringList));
@@ -194,24 +191,20 @@ public class SelectionProductsController implements Initializable {
                     if(this.choiceBoxForListChar.getSelectionModel().getSelectedItem() != null) {
                         product.setListValue(this.choiceBoxForListChar.getSelectionModel().getSelectedItem());
                         currentUser.addProduct(product);
-                        userService.update(currentUser.getId(), currentUser);
                     }
                     else {
                         product.setListValue(currentCharacteristic.getValueList().get(0));
                         currentUser.addProduct(product);
-                        userService.update(currentUser.getId(), currentUser);
                     }
                     break;
                 case Text:
                     if(this.textField.getText() != null) {
                         product.setTextValue(this.textField.getText());
                         currentUser.addProduct(product);
-                        userService.update(currentUser.getId(), currentUser);
                     }
                     else {
                         product.setTextValue(currentCharacteristic.getValueText());
                         currentUser.addProduct(product);
-                        userService.update(currentUser.getId(), currentUser);
                     }
                     break;
                 case Number:
@@ -230,24 +223,23 @@ public class SelectionProductsController implements Initializable {
                     else if(this.numberTextField.getText() == null){
                         product.setNumberValue(currentCharacteristic.getMinValueNumber());
                         currentUser.addProduct(product);
-                        userService.update(currentUser.getId(), currentUser);
                     }
                     break;
                 default:
                     break;
             }
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Value is saved.");
-            alert.setHeaderText("Value is saved");
-            String s ="Your value of " + choiceBoxCharacteristics.getSelectionModel().getSelectedItem().getName() + " is saved.";
-            alert.setContentText(s);
-            alert.showAndWait();
+
+            userService.update(currentUser.getId(), currentUser);
+
+//            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Value is saved.");
+//            alert.setHeaderText("Value is saved");
+//            String s ="Your value of " + choiceBoxCharacteristics.getSelectionModel().getSelectedItem().getName() + " is saved.";
+//            alert.setContentText(s);
+//            alert.showAndWait();
+
+            rootController.handlerOnProducts(idSelectUser, selectUser);
         }
 
-    }
-
-    @FXML
-    private void handleOnSaveAll(){
-        rootController.handlerOnSaveAll(idSelectUser, selectUser);
     }
 
     private boolean inputValidate(Window window) {
