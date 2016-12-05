@@ -1,5 +1,8 @@
 package ru.teamrocket.csrsysteamdesktop.Model;
 
+import ru.teamrocket.csrsysteamdesktop.Service.CharacteristicServiceImpl;
+import ru.teamrocket.csrsysteamdesktop.Service.OfferServiceImpl;
+
 import java.util.List;
 
 /**
@@ -68,5 +71,13 @@ public class Product implements SimpleModel {
 
     public void setListValue(String listValue) {
         this.listValue = listValue;
+    }
+
+    public Offer getOffer(){
+        return new OfferServiceImpl().findId(this.getOfferId());
+    }
+
+    public Characteristic getCharacteristic(){
+        return new CharacteristicServiceImpl().findById(this.getCharacteristicsId());
     }
 }

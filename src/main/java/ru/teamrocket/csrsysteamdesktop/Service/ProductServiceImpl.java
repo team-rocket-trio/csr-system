@@ -12,6 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Kate on 28.11.2016.
@@ -59,11 +60,21 @@ public class ProductServiceImpl extends AbstractSimpleService implements Product
     }
 
     @Override
-    public void save(Product product) {
-        product.setId(this.generateId());
+    public List<Product> findByIds(List<Integer> ids) {
+        return productList.stream()
+                .filter(product -> ids.contains(product.getId()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public int save(Product product) {
+        int idProduct = this.generateId();
+        product.setId(idProduct);
 
         productList.add(product);
         writeFile(productList);
+
+        return idProduct;
     }
 
     @Override

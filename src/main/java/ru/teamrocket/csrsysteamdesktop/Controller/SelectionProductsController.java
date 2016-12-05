@@ -18,6 +18,7 @@ import ru.teamrocket.csrsysteamdesktop.Model.Product;
 import ru.teamrocket.csrsysteamdesktop.Model.User;
 import ru.teamrocket.csrsysteamdesktop.Service.CharacteristicServiceImpl;
 import ru.teamrocket.csrsysteamdesktop.Service.OfferServiceImpl;
+import ru.teamrocket.csrsysteamdesktop.Service.ProductServiceImpl;
 import ru.teamrocket.csrsysteamdesktop.Service.UserServiceImpl;
 import ru.teamrocket.csrsysteamdesktop.Utils.ErrorValidateAlert;
 
@@ -190,21 +191,17 @@ public class SelectionProductsController implements Initializable {
                 case List:
                     if(this.choiceBoxForListChar.getSelectionModel().getSelectedItem() != null) {
                         product.setListValue(this.choiceBoxForListChar.getSelectionModel().getSelectedItem());
-                        currentUser.addProduct(product);
                     }
                     else {
                         product.setListValue(currentCharacteristic.getValueList().get(0));
-                        currentUser.addProduct(product);
                     }
                     break;
                 case Text:
                     if(this.textField.getText() != null) {
                         product.setTextValue(this.textField.getText());
-                        currentUser.addProduct(product);
                     }
                     else {
                         product.setTextValue(currentCharacteristic.getValueText());
-                        currentUser.addProduct(product);
                     }
                     break;
                 case Number:
@@ -212,7 +209,6 @@ public class SelectionProductsController implements Initializable {
                             (Long.parseLong(this.numberTextField.getText()) > currentCharacteristic.getMinValueNumber() &&
                             Long.parseLong(this.numberTextField.getText()) < currentCharacteristic.getMaxValueNumber())) {
                                  product.setNumberValue(Integer.parseInt(this.numberTextField.getText()));
-                                 currentUser.addProduct(product);
                                  userService.update(currentUser.getId(), currentUser);
                     }
                     else if(this.numberTextField.getText() != null &&
@@ -222,13 +218,15 @@ public class SelectionProductsController implements Initializable {
                     }
                     else if(this.numberTextField.getText() == null){
                         product.setNumberValue(currentCharacteristic.getMinValueNumber());
-                        currentUser.addProduct(product);
                     }
                     break;
                 default:
                     break;
             }
 
+            int newIdProduct = new ProductServiceImpl().save(product);
+
+            currentUser.addProduct(newIdProduct);
             userService.update(currentUser.getId(), currentUser);
 
 //            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Value is saved.");

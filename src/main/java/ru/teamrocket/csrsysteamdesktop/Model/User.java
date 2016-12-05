@@ -17,7 +17,7 @@ public class User implements SimpleModel {
     private String lastName;
     private String phoneNumber;
     private String address;
-    private List<Product> products;
+    private List<Integer> products;
 
     public User(String firstName, String middleName, String lastName, String phoneNumber, String address) {
         this.firstName = firstName;
@@ -76,19 +76,19 @@ public class User implements SimpleModel {
         this.address = address;
     }
 
-    public List<Product> getProducts() {
+    public List<Integer> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(List<Integer> products) {
         this.products = products;
     }
 
-    public void addProduct(Product product) {
+    public void addProduct(int productId) {
         if (this.products == null) {
-            this.products = new ArrayList<Product>();
+            this.products = new ArrayList<Integer>();
         }
-        this.products.add(product);
+        this.products.add(productId);
     }
 
     public UserProperty composUserToProppery() {

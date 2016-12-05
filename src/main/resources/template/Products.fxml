@@ -42,7 +42,7 @@
       <ButtonBar layoutX="563.0" layoutY="214.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
             <Button mnemonicParsing="false" onAction="#handleOnAddProduct" text="Add" />
-            <Button mnemonicParsing="false" text="Delete" />
+            <Button mnemonicParsing="false" onAction="#handleOnDeleteProduct" text="Delete" />
         </buttons>
       </ButtonBar>
       <GridPane layoutX="38.0" layoutY="32.0" prefHeight="148.0" prefWidth="308.0">

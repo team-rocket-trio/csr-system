@@ -10,6 +10,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -25,7 +27,20 @@ public abstract class AbstractSimpleService {
         if (getLocalList().size() == 0) {
             return 0;
         } else {
-            return getLocalList().get(getLocalList().size() - 1).getId() + 1;
+            int maxId = Collections.max(getLocalList(), new Comparator<SimpleModel>() {
+                @Override
+                public int compare(SimpleModel o1, SimpleModel o2) {
+                    if (o1.getId() > o2.getId()) {
+                        return 1;
+                    } else if (o1.getId() > o2.getId()) {
+                        return -1;
+                    } else {
+                        return 0;
+                    }
+                }
+            }).getId();
+
+            return maxId + 1;
         }
     }
 

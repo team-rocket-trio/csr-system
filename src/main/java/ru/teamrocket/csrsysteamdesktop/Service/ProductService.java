@@ -11,7 +11,8 @@ public interface ProductService{
 
     List<Product> findAll();
     Product findId(int id);
-    void save(Product product);
+    List<Product> findByIds(List<Integer> ids);
+    int save(Product product);
     void delete(int id);
     void update(int id, Product product);
 

@@ -73,34 +73,29 @@ public class DetailsUsersController implements Initializable {
         phoneNumberLabel.setText(user.getPhoneNumber());
         addressLabel.setText(user.getAddress());
 
-        products = FXCollections.observableArrayList(user.getProducts());
+        products = FXCollections.observableArrayList(new ProductServiceImpl().findByIds(user.getProducts()));
 
         productsTableView.setItems(products);
 
         nameColumn.setCellValueFactory((TableColumn.CellDataFeatures<Product, String> data) -> {
-            OfferServiceImpl offerService = new OfferServiceImpl();
-            Offer offer = offerService.findId(data.getValue().getId());
-            return new ReadOnlyStringWrapper(offer.getName());
+            Product product = new ProductServiceImpl().findId(data.getValue().getId());
+            return new ReadOnlyStringWrapper(product.getOffer().getName());
         });
         actPriceColumn.setCellValueFactory((TableColumn.CellDataFeatures<Product, Integer> data) -> {
-            OfferServiceImpl offerService = new OfferServiceImpl();
-            Offer offer = offerService.findId(data.getValue().getId());
-            return new ReadOnlyObjectWrapper<>(offer.getActivationPrice());
+            Product product = new ProductServiceImpl().findId(data.getValue().getId());
+            return new ReadOnlyObjectWrapper<>(product.getOffer().getActivationPrice());
         });
         monPriceColumn.setCellValueFactory((TableColumn.CellDataFeatures<Product, Integer> data) -> {
-            OfferServiceImpl offerService = new OfferServiceImpl();
-            Offer offer = offerService.findId(data.getValue().getId());
-            return new ReadOnlyObjectWrapper<>(offer.getMonthlyPrice());
+            Product product = new ProductServiceImpl().findId(data.getValue().getId());
+            return new ReadOnlyObjectWrapper<>(product.getOffer().getId());
         });
 
-        characteristicsNameColumn.setCellValueFactory(cellData ->
-                new CharacteristicServiceImpl().findById(cellData.getValue().getCharacteristicsId()).composeCharacteristicProperty().nameProperty()
-        );
+        characteristicsNameColumn.setCellValueFactory(cellData -> {
+            Product product = new ProductServiceImpl().findId(cellData.getValue().getId());
+            return product.getCharacteristic().composeCharacteristicProperty().nameProperty();
+        });
 
         selectCharacteristicsColumn.setCellValueFactory((TableColumn.CellDataFeatures<Product, String> data) -> {
-//            OfferServiceImpl offerService = new OfferServiceImpl();
-//            Offer offer = offerService.findId(data.getValue().getId());
-//            List<Integer> characteristics = offer.getCharacteristicsId();
             if (data.getValue().getNumberValue() != 0) {
                 return new SimpleStringProperty(Integer.toString(data.getValue().getNumberValue()));
             }
@@ -122,7 +117,10 @@ public class DetailsUsersController implements Initializable {
 
     @FXML
     private void handleOnDeleteProduct() {
+        Product product = productsTableView.getSelectionModel().getSelectedItem();
 
+        new ProductServiceImpl().delete(product.getId());
+        productsTableView.getItems().remove(productsTableView.getSelectionModel().getSelectedItem());
     }
 
     @FXML
