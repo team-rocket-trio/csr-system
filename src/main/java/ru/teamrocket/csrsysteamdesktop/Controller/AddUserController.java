@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Window;
@@ -31,7 +32,7 @@ public class AddUserController implements Initializable {
     @FXML
     private TextField address;
     @FXML
-    private Text textUser;
+    private Label textUser;
     private RootController rootController;
     private int idUser;
     private User user;

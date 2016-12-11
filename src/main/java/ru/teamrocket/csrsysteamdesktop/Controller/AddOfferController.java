@@ -43,7 +43,7 @@ public class AddOfferController implements Initializable {
     @FXML
     private TableColumn<Characteristic, String> valueColumn;
     @FXML
-    private Text textOffer;
+    private Label textOffer;
 
     private RootController rootController;
 

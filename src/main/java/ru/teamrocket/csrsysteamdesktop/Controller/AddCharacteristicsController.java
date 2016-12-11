@@ -59,7 +59,7 @@ public class AddCharacteristicsController implements Initializable {
 
         //TODO-Alexander: Вынести это отсюда!
         addButton = new Button("+");
-        addButton.setPrefWidth(30);
+        addButton.setPrefWidth(60);
         addButton.setOnAction((event -> {
                     listViewForValue.getItems().add(valueField.getText());
                     valueField.clear();
@@ -67,7 +67,7 @@ public class AddCharacteristicsController implements Initializable {
         );
 
         deleteButton = new Button("-");
-        deleteButton.setPrefWidth(30);
+        deleteButton.setPrefWidth(60);
         deleteButton.setLayoutY(anchorPaneForButton.getLayoutY() + 30);
         deleteButton.setOnAction((event -> {
                     if (listViewForValue.getSelectionModel().getSelectedItem() != null) {

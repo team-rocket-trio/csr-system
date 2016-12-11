@@ -6,16 +6,12 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.teamrocket.csrsysteamdesktop.Controller.CharacteristicsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.teamrocket.csrsysteamdesktop.Controller.CharacteristicsController">
    <children>
-      <Label layoutX="14.0" layoutY="14.0" text="Characteristics">
-         <font>
-            <Font size="14.0" />
-         </font>
+      <Label layoutX="14.0" layoutY="14.0" styleClass="header" text="Characteristics">
       </Label>
-      <TableView fx:id="characteristicTableView" layoutX="14.0" layoutY="50.0" prefHeight="445.0" prefWidth="646.0" AnchorPane.bottomAnchor="105.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="50.0">
+      <TableView fx:id="characteristicTableView" layoutX="14.0" layoutY="57.0" prefHeight="438.0" prefWidth="772.0" AnchorPane.bottomAnchor="105.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="57.0">
         <columns>
             <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
             <TableColumn fx:id="typeColumn" prefWidth="75.0" text="Type" />
@@ -27,7 +23,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <ButtonBar layoutX="521.0" layoutY="4.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="4.0">
+      <ButtonBar layoutX="475.0" layoutY="16.0" prefHeight="40.0" prefWidth="299.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="16.0">
         <buttons>
             <Button mnemonicParsing="false" onAction="#handleOnCreate" text="Create" />
             <Button mnemonicParsing="false" onAction="#handleDelete" text="Delete" />
